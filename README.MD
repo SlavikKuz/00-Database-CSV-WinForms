@@ -1,4 +1,4 @@
-OBS! Machine translation.
+OBS! Machine translation. Please, see images algorithm1-3.png for clarification. 
 
 It is necessary to develop a software complex for the creation and processing of files used to store information. For effective work, the program should perform the following functions:
 1.	To database the following information:
