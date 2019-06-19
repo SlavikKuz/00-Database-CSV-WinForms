@@ -1,4 +1,7 @@
 ### Program
+
+<img src="/Skjermbilde.png?raw=true" width="320"/>
+
 It is a small library database that serializes data to a file. 
 The task for the program included the following functions:
 - add information to the database:
@@ -13,16 +16,18 @@ The task for the program included the following functions:
 - add new data to the stored file;
 - convenient and user friendly interface.
 
-<img src="/Skjermbilde.png?raw=true" width="320"/>
-
 ### Algorithm
+
 Algorithm *Main*
+
 <img src="/algorithm01.png?raw=true" width="320"/>
 
 Algorithm *Delete*
+
 <img src="/algorithm02.png?raw=true" width="320"/>
 
 Algorithm *Add*
+
 <img src="/algorithm03.png?raw=true" width="320"/>
 
 
