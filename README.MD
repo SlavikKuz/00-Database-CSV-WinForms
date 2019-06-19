@@ -13,16 +13,18 @@ The task for the program included the following functions:
 - add new data to the stored file;
 - convenient and user friendly interface.
 
+<img src="/Skjermbilde.png?raw=true" width="320"/>
+
 ### Algorithm
-```
-<img src="/algorithm01.png?raw=true" width="120"/>
-```
-```
-<img src="/algorithm02.png?raw=true" width="120"/>
-```
-```
-<img src="/algorithm03.png?raw=true" width="120"/>
-```
+Algorithm *Main*
+<img src="/algorithm01.png?raw=true" width="320"/>
+
+Algorithm *Delete*
+<img src="/algorithm02.png?raw=true" width="320"/>
+
+Algorithm *Add*
+<img src="/algorithm03.png?raw=true" width="320"/>
+
 
 ### Data structure
 The following data types were used in the project:
@@ -68,3 +70,5 @@ When user clicks on the button *Add*, the program records all the fields placing
 For filtering, the user enters the letter into *"Please enter filter letter"* and clicks the *"Del"* button. The box allows to enter only the letters. If you entered more than one letters, it is cropped to the first letter. If the field was empty, an alert is displayed to *enter the letter*.
 
 Then the program makes a list of the positions in the array that containe that *letter*. If there is no such *letter*, the program gives a warning and asks to enter a new letter.
+
+Thanks for attention!
