@@ -1,0 +1,8 @@
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\bin\Debug\netcoreapp3.0\SamuraiApp.Domain.deps.json
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\bin\Debug\netcoreapp3.0\SamuraiApp.Domain.dll
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\bin\Debug\netcoreapp3.0\SamuraiApp.Domain.pdb
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\obj\Debug\netcoreapp3.0\SamuraiApp.Domain.csprojAssemblyReference.cache
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\obj\Debug\netcoreapp3.0\SamuraiApp.Domain.AssemblyInfoInputs.cache
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\obj\Debug\netcoreapp3.0\SamuraiApp.Domain.AssemblyInfo.cs
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\obj\Debug\netcoreapp3.0\SamuraiApp.Domain.dll
+d:\Repos\05 - Empty git added\SamuraiApp.Domain\obj\Debug\netcoreapp3.0\SamuraiApp.Domain.pdb

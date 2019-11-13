@@ -1,0 +1,13 @@
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Tests.dll
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Tests.pdb
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+d:\Repos\05 - Empty git added\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+d:\Repos\05 - Empty git added\Tests\obj\Debug\Tests.csprojAssemblyReference.cache
+d:\Repos\05 - Empty git added\Tests\obj\Debug\Tests.csproj.CopyComplete
+d:\Repos\05 - Empty git added\Tests\obj\Debug\Tests.dll
+d:\Repos\05 - Empty git added\Tests\obj\Debug\Tests.pdb
