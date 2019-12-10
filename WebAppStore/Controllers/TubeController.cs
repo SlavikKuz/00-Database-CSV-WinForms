@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAppStore.Models;
+using WebAppStore.ViewModels;
 
 namespace WebAppStore.Controllers
 {
@@ -21,7 +22,11 @@ namespace WebAppStore.Controllers
 
         public ViewResult List()
         {
-            return View(_tubeRepository.Tubes);
+            TubesListViewModel tubesListViewModel = new TubesListViewModel();
+            tubesListViewModel.Tubes = _tubeRepository.Tubes;
+            tubesListViewModel.CurrentCategory = "vacuum tubes";
+
+            return View(tubesListViewModel);
         }
         
         

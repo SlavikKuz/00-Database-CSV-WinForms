@@ -24,11 +24,11 @@ namespace WebAppStore.Models
                         FullDetails = "pre amp tube for ...",
                         Category = _categoryRepository.Categories.ToList()[0],
                         ImageUrl = "",
-                        ImageThumbnailUrl = "",
+                        ImageThumbnailUrl = "/Images/DoubleTriodes/6N1P_small.jpg",
                         InStock = true,
                         IsTubeOfTheWeek = false
                     },
-                                        new Tube
+                    new Tube
                     {
                         TubeId = 2,
                         Name = "6N2P",
@@ -37,7 +37,7 @@ namespace WebAppStore.Models
                         FullDetails = "pre amp tube for strong ...",
                         Category = _categoryRepository.Categories.ToList()[1],
                         ImageUrl = "",
-                        ImageThumbnailUrl = "",
+                        ImageThumbnailUrl = "/Images/DoubleTriodes/6N2P_small.jpg",
                         InStock = true,
                         IsTubeOfTheWeek = false
                     },

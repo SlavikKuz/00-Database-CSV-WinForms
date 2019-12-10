@@ -1,0 +1,23 @@
+﻿@model TubesListViewModel
+
+    <div class="row">
+        @foreach (var item in Model.Tubes)
+        {
+
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="img-thumbnail">
+                    <figure class="figure">
+                        <img src="@item.ImageThumbnailUrl" class="figure-img img-fluid rounded" alt="">
+                        <figcaption class="figure-caption">
+                            <h3 class="float-right">@item.Price.ToString("c")</h3>
+                            <h3>
+                                <a>@item.Name</a>
+                            </h3>
+                            <p>@item.ShortDetails</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+        }
+    </div>
