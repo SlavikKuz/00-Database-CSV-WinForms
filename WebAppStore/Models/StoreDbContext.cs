@@ -15,6 +15,7 @@ namespace WebAppStore.Models
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tube> Tubes { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

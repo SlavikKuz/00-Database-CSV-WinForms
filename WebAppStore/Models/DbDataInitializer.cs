@@ -28,7 +28,6 @@ namespace WebAppStore.Models
                     storeDbContext.AddRange(
                         new Tube
                         {
-                            //TubeId = 1,
                             Type = "6N1P",
                             Brand = "NEVZ",
                             Date = "Early 60s",
@@ -45,7 +44,6 @@ namespace WebAppStore.Models
                         },
                         new Tube
                         {
-                            //TubeId = 2,
                             Type = "6N2P",
                             Brand = "Voskhod",
                             Date = "1967",
@@ -62,7 +60,6 @@ namespace WebAppStore.Models
                         },
                         new Tube
                         {
-                            //TubeId = 3,
                             Type = "6N1P",
                             Brand = "NEVZ",
                             Date = "Early 60s",
@@ -79,7 +76,6 @@ namespace WebAppStore.Models
                         },
                         new Tube
                         {
-                            //TubeId = 4,
                             Type = "6N2P",
                             Brand = "Voskhod",
                             Date = "1967",

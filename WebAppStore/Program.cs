@@ -14,9 +14,7 @@ namespace WebAppStore
     public class Program
     {
         public static void Main(string[] args)
-        {
-            //CreateHostBuilder(args).Build().Run();
-            
+        {   
             //Seeding tutorial
             // https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/sql?view=aspnetcore-3.1&tabs=visual-studio
             

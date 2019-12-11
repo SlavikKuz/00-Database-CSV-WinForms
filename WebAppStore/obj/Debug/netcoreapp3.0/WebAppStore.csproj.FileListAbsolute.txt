@@ -70,4 +70,5 @@ d:\Repos\05 - Web Store\WebAppStore\bin\Debug\netcoreapp3.0\System.Collections.I
 d:\Repos\05 - Web Store\WebAppStore\bin\Debug\netcoreapp3.0\System.ComponentModel.Annotations.dll
 d:\Repos\05 - Web Store\WebAppStore\bin\Debug\netcoreapp3.0\System.Diagnostics.DiagnosticSource.dll
 d:\Repos\05 - Web Store\WebAppStore\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\TubeOverviewSummary.cshtml.g.cs
 d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\WebAppStore.MvcApplicationPartsAssemblyInfo.cache
