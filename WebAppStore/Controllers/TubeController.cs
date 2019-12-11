@@ -11,19 +11,19 @@ namespace WebAppStore.Controllers
 {
     public class TubeController : Controller
     {
-        private readonly ITubeRepository _tubeRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ITubeRepository tubeRepository;
+        private readonly ICategoryRepository categoryRepository;
         
         public TubeController(ITubeRepository tubeRepository, ICategoryRepository categoryRepository)
         {
-            _tubeRepository = tubeRepository;
-            _categoryRepository = categoryRepository;
+            this.tubeRepository = tubeRepository;
+            this.categoryRepository = categoryRepository;
         }
 
         public ViewResult List()
         {
             TubesListViewModel tubesListViewModel = new TubesListViewModel();
-            tubesListViewModel.Tubes = _tubeRepository.Tubes;
+            tubesListViewModel.Tubes = tubeRepository.Tubes;
             tubesListViewModel.CurrentCategory = "vacuum tubes";
 
             return View(tubesListViewModel);
