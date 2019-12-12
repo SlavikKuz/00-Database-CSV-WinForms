@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAppStore.Models;
+using WebAppStore.ViewModels;
 
 namespace WebAppStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ITubeRepository tubeRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ITubeRepository tubeRepository)
         {
-            _logger = logger;
+            this.tubeRepository = tubeRepository;
         }
 
-        public IActionResult Index()
+        public ViewResult Index()
         {
-            return View();
-        }
+            var homeViewModel = new HomeViewModel
+            {
+                TubesOfTheWeek = tubeRepository.TubesOfTheWeek
+            };
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(homeViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -33,5 +34,11 @@ namespace WebAppStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }    
+
     }
 }

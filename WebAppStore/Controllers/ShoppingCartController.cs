@@ -32,5 +32,28 @@ namespace WebAppStore.Controllers
 
             return View(shoppingCartViewModel);
         }
+
+        public RedirectToActionResult AddToShoppingCart(int tubeId)
+        {
+            var selectedTube = tubeRepository.Tubes.FirstOrDefault(p => p.TubeId == tubeId);
+
+            if (selectedTube != null)
+            {
+                shoppingCart.AddToCart(selectedTube, 1);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToActionResult RemoveFromShoppingCart(int tubeId)
+        {
+            var selectedTube = tubeRepository.Tubes.FirstOrDefault(p => p.TubeId == tubeId);
+
+            if (selectedTube != null)
+            {
+                shoppingCart.RemoveFromCart(selectedTube);
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

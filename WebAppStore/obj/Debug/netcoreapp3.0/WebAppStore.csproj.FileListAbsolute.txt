@@ -72,3 +72,7 @@ d:\Repos\05 - Web Store\WebAppStore\bin\Debug\netcoreapp3.0\System.Diagnostics.D
 d:\Repos\05 - Web Store\WebAppStore\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
 d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\TubeOverviewSummary.cshtml.g.cs
 d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\WebAppStore.MvcApplicationPartsAssemblyInfo.cache
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Carousel.cshtml.g.cs
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Components\ShoppingCartSummary\Default.cshtml.g.cs
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\TubeOfTheWeekSummary.cshtml.g.cs
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\ShoppingCart\Index.cshtml.g.cs
