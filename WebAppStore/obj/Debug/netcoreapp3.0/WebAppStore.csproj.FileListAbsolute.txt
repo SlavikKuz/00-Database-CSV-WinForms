@@ -76,3 +76,6 @@ d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\C
 d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Components\ShoppingCartSummary\Default.cshtml.g.cs
 d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\TubeOfTheWeekSummary.cshtml.g.cs
 d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\ShoppingCart\Index.cshtml.g.cs
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Contact\Index.cshtml.g.cs
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Components\CategoryMenu\Default.cshtml.g.cs
+d:\Repos\05 - Web Store\WebAppStore\obj\Debug\netcoreapp3.0\Razor\Views\Tube\Details.cshtml.g.cs

@@ -34,7 +34,7 @@ using WebAppStore.ViewModels;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fcccf3a539ae74509ec68f28cf39c78999606398", @"/Views/Tube/List.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4569262b37ae0455eecaa346ad22a74fe1b043f9", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6f494bb41b4bc3416a8ce56a6c8139636c136946", @"/Views/_ViewImports.cshtml")]
     public class Views_Tube_List : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<TubesListViewModel>
     {
         #pragma warning disable 1998

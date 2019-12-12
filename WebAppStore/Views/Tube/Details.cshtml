@@ -1,0 +1,18 @@
+﻿@model Tube
+
+<div class="img-thumbnail">
+    <img src="@Model.ImageUrl">
+    <div class="caption-full">
+        <h3 class="float-right">@Model.Price.ToString("c")</h3>
+        <h3>
+            @Model.Brand, @Model.Type
+        </h3>
+        <h4>@Model.ShortDescription</h4>
+        <p>@Model.FullDescription</p>
+        <p>@Model.Parameters</p>
+        <p class="button">
+            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+               asp-route-tubeId="@Model.TubeId">Add to cart</a>
+        </p>
+    </div>
+</div>

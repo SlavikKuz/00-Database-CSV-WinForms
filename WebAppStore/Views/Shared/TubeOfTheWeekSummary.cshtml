@@ -7,10 +7,18 @@
                 <figcaption class="figure-caption">
                     <h3 class="float-right">@Model.Price.ToString("c")</h3>
                     <h3>
-                        <a>@Model.Brand, @Model.Type</a>
+                        <a asp-controller="Tube" asp-action="Details" asp-route-id="@Model.TubeId">
+                            @Model.Brand, @Model.Type
+                        </a>
                     </h3>
                     <p>@Model.ShortDescription</p>
                 </figcaption>
+                <div class="addToCart">
+                    <p class="button">
+                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                           asp-route-tubeId="@Model.TubeId">Add to cart</a>
+                    </p>
+                </div>
             </figure>
         </div>
     </div>

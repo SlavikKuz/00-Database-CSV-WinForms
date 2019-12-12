@@ -20,100 +20,38 @@ namespace WebAppStore.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        public ViewResult List()
+        public ViewResult List(string category)
         {
-            TubesListViewModel tubesListViewModel = new TubesListViewModel();
-            tubesListViewModel.Tubes = tubeRepository.Tubes;
-            tubesListViewModel.CurrentCategory = "vacuum tubes";
+            IEnumerable<Tube> tubes;
+            string currentCategory = string.Empty;
 
-            return View(tubesListViewModel);
+            if (string.IsNullOrEmpty(category))
+            {
+                tubes = tubeRepository.Tubes.OrderBy(x => x.TubeId);
+                currentCategory = "All tubes";
+            }
+            else
+            {
+                tubes = tubeRepository.Tubes.Where(x => x.Category.CategoryName == category)
+                    .OrderBy(x => x.TubeId);
+                currentCategory = categoryRepository.Categories
+                    .FirstOrDefault(x => x.CategoryName == category).CategoryName;
+            }
+            
+            return View( new TubesListViewModel
+            {
+                Tubes = tubes,
+                CurrentCategory = currentCategory
+            });
         }
         
-        
-        
-        
-        
-        
-        
-        // GET: Tube
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Tube/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
+            var tube = tubeRepository.GetTubeById(id);
+            if (tube == null)
+                return NotFound();
 
-        // GET: Tube/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Tube/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Tube/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Tube/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Tube/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Tube/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            return View(tube);
+        }        
     }
 }
