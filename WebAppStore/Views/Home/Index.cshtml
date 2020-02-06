@@ -1,13 +1,13 @@
 ﻿@model HomeViewModel
 
-@await Html.PartialAsync("Carousel")
+<partial name="_Carousel" />
 
 <br />
 <h6>Top tubes this week:</h6>
 
 <div class="row">
-    @foreach (var item in Model.TubesOfTheWeek)
+    @foreach (var tube in Model.TubesOfTheWeek)
     {
-        @Html.Partial("TubeOfTheWeekSummary", item)
+        <partial name="_TubeCard" model="tube" />
     }
 </div>

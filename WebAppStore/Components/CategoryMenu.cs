@@ -18,7 +18,7 @@ namespace WebAppStore.Components
 
         public IViewComponentResult Invoke()
         {
-            var categories = categoryRepository.Categories.OrderBy(x => x.CategoryName);
+            var categories = categoryRepository.AllCategories.OrderBy(x => x.CategoryName);
             return View(categories);
         }
     }

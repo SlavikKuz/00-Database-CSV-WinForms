@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppStore", "WebAppStore.csproj", "{94A00A16-7AD7-4A85-9B7D-F9D319C496EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppStore", "WebAppStore.csproj", "{94A00A16-7AD7-4A85-9B7D-F9D319C496EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

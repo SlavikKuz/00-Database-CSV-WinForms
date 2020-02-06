@@ -7,6 +7,6 @@ namespace WebAppStore.Models
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> Categories { get; }
+        IEnumerable<Category> AllCategories { get; }
     }
 }

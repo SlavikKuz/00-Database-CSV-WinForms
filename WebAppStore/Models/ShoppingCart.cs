@@ -44,7 +44,8 @@ namespace WebAppStore.Models
                     Tube = tube,
                     Amount = 1 //= amount
                 };
-            storeDbContext.ShoppingCartItems.Add(shoppingCartItem);
+
+                storeDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {

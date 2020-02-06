@@ -14,6 +14,6 @@ namespace WebAppStore.Models
             this.storeDbContext = storeDbContext;
         }
 
-        public IEnumerable<Category> Categories => storeDbContext.Categories;
+        public IEnumerable<Category> AllCategories => storeDbContext.Categories;
     }
 }

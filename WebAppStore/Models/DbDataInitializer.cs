@@ -10,7 +10,7 @@ namespace WebAppStore.Models
 {
     public static class DbDataInitializer
     {
-        
+       
         
         public static void Seed (IServiceProvider serviceProvider)
         {

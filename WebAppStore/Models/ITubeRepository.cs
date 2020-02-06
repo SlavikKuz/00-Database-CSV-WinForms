@@ -7,7 +7,7 @@ namespace WebAppStore.Models
 {
     public interface ITubeRepository
     {
-        IEnumerable<Tube> Tubes { get; }
+        IEnumerable<Tube> AllTubes { get; }
         IEnumerable<Tube> TubesOfTheWeek { get; }
 
         Tube GetTubeById(int tubeId);

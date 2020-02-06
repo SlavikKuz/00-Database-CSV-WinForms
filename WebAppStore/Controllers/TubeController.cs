@@ -21,20 +21,20 @@ namespace WebAppStore.Controllers
         }
 
         public ViewResult List(string category)
-        {
+        {            
             IEnumerable<Tube> tubes;
             string currentCategory = string.Empty;
 
             if (string.IsNullOrEmpty(category))
             {
-                tubes = tubeRepository.Tubes.OrderBy(x => x.TubeId);
+                tubes = tubeRepository.AllTubes.OrderBy(x => x.TubeId);
                 currentCategory = "All tubes";
             }
             else
             {
-                tubes = tubeRepository.Tubes.Where(x => x.Category.CategoryName == category)
+                tubes = tubeRepository.AllTubes.Where(x => x.Category.CategoryName == category)
                     .OrderBy(x => x.TubeId);
-                currentCategory = categoryRepository.Categories
+                currentCategory = categoryRepository.AllCategories
                     .FirstOrDefault(x => x.CategoryName == category).CategoryName;
             }
             

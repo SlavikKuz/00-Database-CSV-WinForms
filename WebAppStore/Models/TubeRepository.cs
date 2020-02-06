@@ -15,7 +15,7 @@ namespace WebAppStore.Models
             this.storeDbContext = storeDbContext;
         }
         
-        public IEnumerable<Tube> Tubes
+        public IEnumerable<Tube> AllTubes
         {
             get
             {

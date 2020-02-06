@@ -35,7 +35,7 @@ namespace WebAppStore.Controllers
 
         public RedirectToActionResult AddToShoppingCart(int tubeId)
         {
-            var selectedTube = tubeRepository.Tubes.FirstOrDefault(p => p.TubeId == tubeId);
+            var selectedTube = tubeRepository.AllTubes.FirstOrDefault(p => p.TubeId == tubeId);
 
             if (selectedTube != null)
             {
@@ -46,7 +46,7 @@ namespace WebAppStore.Controllers
 
         public RedirectToActionResult RemoveFromShoppingCart(int tubeId)
         {
-            var selectedTube = tubeRepository.Tubes.FirstOrDefault(p => p.TubeId == tubeId);
+            var selectedTube = tubeRepository.AllTubes.FirstOrDefault(p => p.TubeId == tubeId);
 
             if (selectedTube != null)
             {
