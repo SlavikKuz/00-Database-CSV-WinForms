@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebAppStore.Models;
+using WebAppStore.Repository;
 
 namespace WebAppStore
 {
@@ -28,10 +29,13 @@ namespace WebAppStore
             services.AddControllersWithViews();
             services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<ITubeRepository, TubeRepository>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITubeRepository, TubeRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
             services.AddMemoryCache();
             services.AddSession();
