@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,9 +28,13 @@ namespace WebAppStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<StoreDbContext>();
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ITubeRepository, TubeRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
@@ -57,9 +62,10 @@ namespace WebAppStore
             app.UseStaticFiles();
             app.UseSession();
 
+            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -70,6 +76,8 @@ namespace WebAppStore
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
 
         }
