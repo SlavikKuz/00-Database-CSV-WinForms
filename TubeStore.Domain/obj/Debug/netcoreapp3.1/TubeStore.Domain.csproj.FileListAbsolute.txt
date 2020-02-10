@@ -1,7 +1,0 @@
-D:\Repos\05 - TubeStore\TubeStore.Domain\bin\Debug\netcoreapp3.1\TubeStore.Domain.deps.json
-D:\Repos\05 - TubeStore\TubeStore.Domain\bin\Debug\netcoreapp3.1\TubeStore.Domain.dll
-D:\Repos\05 - TubeStore\TubeStore.Domain\bin\Debug\netcoreapp3.1\TubeStore.Domain.pdb
-D:\Repos\05 - TubeStore\TubeStore.Domain\obj\Debug\netcoreapp3.1\TubeStore.Domain.AssemblyInfoInputs.cache
-D:\Repos\05 - TubeStore\TubeStore.Domain\obj\Debug\netcoreapp3.1\TubeStore.Domain.AssemblyInfo.cs
-D:\Repos\05 - TubeStore\TubeStore.Domain\obj\Debug\netcoreapp3.1\TubeStore.Domain.dll
-D:\Repos\05 - TubeStore\TubeStore.Domain\obj\Debug\netcoreapp3.1\TubeStore.Domain.pdb
