@@ -17,9 +17,10 @@ namespace TubeStore.Controllers
             this.tubes = tubes;
         }
 
-        public IActionResult Details(int tubeId)
+        [HttpGet]
+        public async Task<ActionResult<Tube>> Details(int tubeId)
         {
-            Tube tube = tubes.GetItem(tubeId);
+            Tube tube = await tubes.GetById(tubeId);
             return View(tube);
         }
     }

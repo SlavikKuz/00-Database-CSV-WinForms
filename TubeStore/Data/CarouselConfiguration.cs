@@ -1,26 +1,28 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.Models;
 
-namespace TubeStore.Services
+namespace TubeStore.Data
 {
-    public class MockCarouselRepository : IRepository<Carousel>
+    public class CarouselConfiguration : IEntityTypeConfiguration<Carousel>
     {
-        List<Carousel> carousels;
-        
-        public MockCarouselRepository()
+        public void Configure(EntityTypeBuilder<Carousel> builder)
         {
-            carousels = new List<Carousel>()
-            {
+            builder.ToTable("Carousels");
+
+            builder.HasData
+            (
                 new Carousel()
                 {
                     CarouselId = 1,
                     ImageUrl = "/Images/Carousel/carousel_01.jpg",
                     Title = "ECC82",
                     Description = "Premium selected",
-                    Status = true 
+                    Status = true
                 },
                 new Carousel()
                 {
@@ -37,33 +39,8 @@ namespace TubeStore.Services
                     Title = "6N6P",
                     Description = "Tested pre-amp set",
                     Status = true,
-                },
-            };
-        }
-               
-        public bool Add(Carousel item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(Carousel item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Edit(Carousel item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Carousel GetItem(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Carousel> GetAll()
-        {
-            return carousels.ToList();
+                }
+            );
         }
     }
 }

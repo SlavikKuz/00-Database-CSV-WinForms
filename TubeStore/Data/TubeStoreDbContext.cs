@@ -1,19 +1,24 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.Models;
 
-namespace TubeStore.Services
+namespace TubeStore.Data
 {
-    public class MockTubeRepository : IRepository<Tube>
+    public class TubeStoreDbContext : DbContext
     {
-        List<Tube> tubes;
+        public TubeStoreDbContext(DbContextOptions<TubeStoreDbContext> options)
+            : base(options) { }
 
-        public MockTubeRepository()
+        public DbSet<Tube> Tubes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Carousel> Carousels { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            tubes = new List<Tube>()
-            {
+            modelBuilder.Entity<Tube>().HasData(
                 new Tube()
                 {
                     TubeId = 1,
@@ -29,7 +34,7 @@ namespace TubeStore.Services
                     ImageThumbnailUrl = "/Images/PreTriodes/6N1P/20160808_6N1Pnevz_small.jpg",
                     IsTubeOfTheWeek = false,
                     IsNewArrival = false,
-                    Category = new Category() { CategoryName = "Pre Triodes" }
+                    CategoryId = 1
                 },
                 new Tube()
                 {
@@ -47,11 +52,11 @@ namespace TubeStore.Services
                     InStock = true,
                     IsTubeOfTheWeek = true,
                     IsNewArrival = false,
-                    Category = new Category() { CategoryName = "Pre Triodes" }
+                    CategoryId = 1
                 },
                 new Tube()
                 {
-                    TubeId=3,
+                    TubeId = 3,
                     Type = "6N6P",
                     Brand = "Foton",
                     Date = "1960s",
@@ -65,7 +70,7 @@ namespace TubeStore.Services
                     InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = false,
-                    Category = new Category() { CategoryName = "Pre Triodes" }
+                    CategoryId = 1
                 },
                 new Tube()
                 {
@@ -83,7 +88,7 @@ namespace TubeStore.Services
                     InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = true,
-                    Category = new Category() { CategoryName = "Pre Triodes" }
+                    CategoryId = 1
                 },
                 new Tube()
                 {
@@ -101,9 +106,9 @@ namespace TubeStore.Services
                     InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = true,
-                    Category = new Category() { CategoryName = "Pre Triodes" }
+                    CategoryId = 1
                 },
-                                new Tube()
+                new Tube()
                 {
                     TubeId = 6,
                     Type = "ECC82",
@@ -119,44 +124,46 @@ namespace TubeStore.Services
                     InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = true,
-                    Category = new Category() { CategoryName = "Pre Triodes" }
+                    CategoryId = 1
                 }
-            };
-        }
+            );
 
-        public bool Add(Tube item)
-        {
-            try
-            {
-                Tube tube = item;
-                tube.TubeId = tubes.Max(x => x.TubeId) + 1;
-                tubes.Add(tube);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+            modelBuilder.Entity<Category>().HasData(
+                new Category()
+                {
+                    CategoryId = 1,
+                    CategoryName = "Pre Triodes"
+                }            
+            );
 
-        public bool Delete(Tube item)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool Edit(Tube item)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Tube GetItem(int id)
-        {
-            return tubes.FirstOrDefault(x => x.TubeId == id);
-        }
-
-        public IEnumerable<Tube> GetAll()
-        {
-            return tubes.ToList();
+            modelBuilder.Entity<Carousel>().HasData(
+                new Carousel()
+                {
+                    CarouselId = 1,
+                    ImageUrl = "/Images/Carousel/carousel_01.jpg",
+                    Title = "ECC82",
+                    Description = "Premium selected",
+                    Status = true
+                },
+                new Carousel()
+                {
+                    CarouselId = 2,
+                    ImageUrl = "/Images/Carousel/carousel_02.jpg",
+                    Title = "6P14P",
+                    Description = "Platinum matched quad",
+                    Status = true,
+                },
+                new Carousel()
+                {
+                    CarouselId = 3,
+                    ImageUrl = "/Images/Carousel/carousel_03.jpg",
+                    Title = "6N6P",
+                    Description = "Tested pre-amp set",
+                    Status = true,
+                }
+                );
         }
     }
 }

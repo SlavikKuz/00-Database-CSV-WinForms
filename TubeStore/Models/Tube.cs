@@ -33,7 +33,7 @@ namespace TubeStore.Models
 
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<InvoiceInfo> InvoicesInfo { get; set; } 
-            = new HashSet<InvoiceInfo>();
+        //public virtual ICollection<InvoiceInfo> InvoicesInfo { get; set; } 
+        //    = new HashSet<InvoiceInfo>();
     }
 }

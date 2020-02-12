@@ -42,24 +42,24 @@ namespace TubeStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Tube item = new Tube()
-                {
-                    TubeId = tubes.GetAll().Max(x => x.TubeId) + 1,
-                    Type = tube.Type,
-                    Brand = tube.Brand,
-                    Date = tube.Date,
-                    ShortDescription = tube.ShortDescription,
-                    FullDescription = tube.FullDescription,
-                    MatchedPair = tube.MatchedPair,
-                    Price = tube.Price,
-                    Quantity = tube.Quantity,
-                    ImageUrl = tube.ImageUrl,
-                    ImageThumbnailUrl = tube.ImageThumbnailUrl,
-                    IsTubeOfTheWeek = tube.IsTubeOfTheWeek,
-                    InStock = tube.InStock,
-                    CategoryId = tube.CategoryId
-                };
-                tubes.Add(item);
+                //Tube item = new Tube()
+                //{
+                //    TubeId = tubes.GetAll().Max(x => x.TubeId) + 1,
+                //    Type = tube.Type,
+                //    Brand = tube.Brand,
+                //    Date = tube.Date,
+                //    ShortDescription = tube.ShortDescription,
+                //    FullDescription = tube.FullDescription,
+                //    MatchedPair = tube.MatchedPair,
+                //    Price = tube.Price,
+                //    Quantity = tube.Quantity,
+                //    ImageUrl = tube.ImageUrl,
+                //    ImageThumbnailUrl = tube.ImageThumbnailUrl,
+                //    IsTubeOfTheWeek = tube.IsTubeOfTheWeek,
+                //    InStock = tube.InStock,
+                //    CategoryId = tube.CategoryId
+                //};
+                //tubes.(item);
                 return RedirectToAction("Index");
             }
             else
