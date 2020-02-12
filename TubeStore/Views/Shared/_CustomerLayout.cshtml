@@ -6,14 +6,47 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.css">
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-
 </head>
+
 <body>
     <div>
-        @Html.Partial("_Header.cshtml")
-        @RenderBody()
+        <partial name="_Header" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="lead mt-2 mb-0">
+                        <img class="img-fluid" alt="Tube Store" src="~/Images/logo.jpg" />
+                    </p>
+                    <h3 align="center">Tube store</h3>
+                    <div class="input-group mt-5 mb-5">
+                        <input type="text" class="form-control" placeholder="Find a tube..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-danger" type="submit">Go!</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container mt-4">
+                        @RenderSection("TopTube", required: false)
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="container mb-2">
+                        <partial name="_Navigation" />
+                    </div>
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                    <div class="container">
+                        @RenderSection("NewArrivals", required: false)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <partial name="_Footer" />
     </div>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

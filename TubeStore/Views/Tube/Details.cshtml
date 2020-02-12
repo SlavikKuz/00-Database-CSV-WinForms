@@ -1,0 +1,71 @@
+﻿@model Tube
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+    <ol class="breadcrumb bg-transparent">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Home</a> 
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Tube" asp-action="Index" asp-route-tubeid="@Model.Category.CategoryName">
+                @Model.Category.CategoryName
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            @Model.Type Details
+        </li>
+    </ol>
+
+<div class="row">
+    <div id="gallery" class="col-lg-6 mb-2">
+        <img src="@Model.ImageUrl" class="rounded img-fluid" width="420">
+        <div class="card" id="moreImages">
+            <div class="carousel-inner mb-2 mt-2">
+                <img src="@Model.ImageThumbnailUrl" class="rounded img-fluid" width="120">
+                <img src="@Model.ImageThumbnailUrl" class="rounded img-fluid" width="120">
+                <img src="@Model.ImageThumbnailUrl" class="rounded img-fluid" width="120">
+            </div>
+            <a class="carousel-control-prev" href="#moreImages" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#moreImages" role="button" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        <div class="btn-toolbar">
+            <div class="mx-auto">
+                <div class="btn-group mt-2" role="group">
+                    <span type="button" class="btn btn-primary"><i class="fa fa-envelope mx-4"></i></span>
+                    <span type="button" class="btn btn-primary"><i class="fa fa-print mx-4"></i></span>
+                    <span type="button" class="btn btn-primary"><i class="fa fa-share mx-4"></i></span>
+                    <span type="button" class="btn btn-primary"><i class="fa fa-star mx-4"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="description" class="col-lg-6">
+        <div class="caption-full">
+            <h3>@Model.Brand @Model.Type</h3>
+            <h4>@Model.ShortDescription</h4>
+            <partial name="_AvailableInPairs" model="@Model" />
+            <hr class="soft my-4" />
+            <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
+                <div class="form-group">
+                    <label class="mr-4">
+                        <h4>@Model.Price.ToString("c")</h4>
+                    </label>
+                    <input type="number" class="col-2 mx-4" min="1" max="@Model.Quantity" name="quantity" value="1" placeholder="Quantity" />
+                    <input type="hidden" name="TubeId" value="@Model.TubeId" />
+                    <button type="submit" class="btn btn-danger mx-2">Add to cart  <i class="fa fa-shopping-basket"></i></button>
+                </div>
+            </form>
+            <p> @Model.Quantity tubes in stock</p>
+            <hr class="soft my-4" />
+            <p>@Model.FullDescription</p>
+        </div>
+    </div>
+</div>

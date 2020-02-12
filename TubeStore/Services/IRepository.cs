@@ -7,7 +7,7 @@ namespace TubeStore.Services
 {
     public interface IRepository<T>
     {
-        T Get(int id);
+        T GetItem(int id);
         IEnumerable<T> GetAll();
         bool Add(T item);
         bool Delete(T item);

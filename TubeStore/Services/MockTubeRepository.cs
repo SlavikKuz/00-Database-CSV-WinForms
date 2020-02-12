@@ -20,71 +20,106 @@ namespace TubeStore.Services
                     Type = "6N1P",
                     Brand = "NEVZ",
                     Date = "10.1963",
-                    ShortDescription = "gray plates, tripple mica",
-                    FullDescription = "Superb sonic tube, Novosibirsk NEVZ plant. The tubes are early series, large logo, and golden grids! " +
-                    "Parameters are #270 (12-1959) 7.0 mA, 4.15 mA/V -- 7.5 mA, 4.15 mA/V",
+                    ShortDescription = "NOS, Gray plates, gold grids, mica",
+                    FullDescription = "The 6N1P has similar ratings to the 6DJ8 and in the past was sometimes rebranded as such, however differences between the two types (the 6N1P requires almost twice the filament current and has only one third the S value) mean they are not directly interchangeable. The S is about 4.35 ma/V, the 6DJ8/ECC88 has a S of 12.5 ma/V and a gain of 33 and a lower internal resistance. However, the 6N1P is typically more linear for a given load. It is therefore inaccurate to say that these two tubes are identical. The correct Russian equivalent to the 6DJ8/ECC88 is the 6N23P, the latter has a S of 12.5 mA/V and a gain of 33.",
                     MatchedPair = true,
                     Price = 12.00M,
-                    Quantity = 22,
-                    ImageUrl = "/Images/DoubleTriodes/6N1P.jpg",
-                    ImageThumbnailUrl = "/Images/DoubleTriodes/6N1P_small.jpg",
-                    InStock = true,
+                    Quantity = 62,
+                    ImageUrl = "/Images/PreTriodes/6N1P/20160808_6N1Pnevz.jpg",
+                    ImageThumbnailUrl = "/Images/PreTriodes/6N1P/20160808_6N1Pnevz_small.jpg",
                     IsTubeOfTheWeek = false,
-                    //Category = Categories["Preamp Triodes"],
+                    IsNewArrival = false,
+                    Category = new Category() { CategoryName = "Pre Triodes" }
                 },
                 new Tube()
                 {
                     TubeId = 2,
-                    Type = "6N2P",
-                    Brand = "Voskhod",
+                    Type = "6N1P",
+                    Brand = "NEVZ",
                     Date = "01.1967",
-                    ShortDescription = "gray plates, tripple mica",
-                    FullDescription = "Superb sonic tube, Novosibirsk NEVZ plant. The tubes are early series, large logo, and golden grids! " +
-                    "Parameters are #270 7.0 mA, 4.15 mA/V -- 7.5 mA, 4.15 mA/V",
+                    ShortDescription = "NOS, box plates",
+                    FullDescription = "The 6N1P has similar ratings to the 6DJ8 and in the past was sometimes rebranded as such, however differences between the two types (the 6N1P requires almost twice the filament current and has only one third the S value) mean they are not directly interchangeable. The S is about 4.35 ma/V, the 6DJ8/ECC88 has a S of 12.5 ma/V and a gain of 33 and a lower internal resistance. However, the 6N1P is typically more linear for a given load. It is therefore inaccurate to say that these two tubes are identical. The correct Russian equivalent to the 6DJ8/ECC88 is the 6N23P, the latter has a S of 12.5 mA/V and a gain of 33.",
                     MatchedPair = true,
-                    Price = 14.00M,
-                    Quantity = 110,
-                    ImageUrl = "/Images/DoubleTriodes/6N2P.jpg",
-                    ImageThumbnailUrl = "/Images/DoubleTriodes/6N2P_small.jpg",
+                    Price = 115.00M,
+                    Quantity = 12,
+                    ImageUrl = "/Images/PreTriodes/6N1P/20170201_6N1Pboxplates.jpg",
+                    ImageThumbnailUrl = "/Images/PreTriodes/6N1P/20170201_6N1Pboxplates_small.jpg",
                     InStock = true,
-                    IsTubeOfTheWeek = false,
-                    //Category = Categories["Preamp Triodes"],
+                    IsTubeOfTheWeek = true,
+                    IsNewArrival = false,
+                    Category = new Category() { CategoryName = "Pre Triodes" }
                 },
                 new Tube()
                 {
                     TubeId=3,
-                    Type = "6N1P",
-                    Brand = "Orel",
-                    Date = "12.1971",
-                    ShortDescription = "black plates, tripple mica",
-                    FullDescription = "Superb sonic tube, Orel plant. The tubes are early series, large logo, and golden grids! " +
-                    "Parameters = #272 (12-1959) 7.0 mA, 4.15 mA/V -- 7.5 mA, 4.15 mA/V",
-                    MatchedPair = false,
-                    Price = 21.00M,
+                    Type = "6N6P",
+                    Brand = "Foton",
+                    Date = "1960s",
+                    ShortDescription = "square getter, millitary grade",
+                    FullDescription = "The 6N6p tube is a Russian dual triode tube. This tube is often seen as 6N6p, 6N6PI, 6N6pi, 6H6p, 6N6p-i, 6N6n-i ,or 6H6n-i. The Chinese name for the 6H6p tube is 6N6 tube. The 6N6p is a fantastic tube for preamps and driver stages, and is even used as output tubes in the Little Dot MkIII headphone amp. It has been used by the tube DIY underground for many years and is now becoming better known in the mainstream.",
+                    MatchedPair = true,
+                    Price = 39.99M,
                     Quantity = 30,
-                    ImageUrl = "/Images/DoubleTriodes/6N1P.jpg",
-                    ImageThumbnailUrl = "/Images/DoubleTriodes/6N1P_small.jpg",
+                    ImageUrl = "/Images/PreTriodes/6N6P/20170506_6N6Pfoton.jpg",
+                    ImageThumbnailUrl = "/Images/PreTriodes/6N6P/20170506_6N6Pfoton_small.jpg",
                     InStock = true,
-                    IsTubeOfTheWeek = true,
-                    //Category = Categories["Preamp Triodes"],
+                    IsTubeOfTheWeek = false,
+                    IsNewArrival = false,
+                    Category = new Category() { CategoryName = "Pre Triodes" }
                 },
                 new Tube()
                 {
                     TubeId = 4,
                     Type = "6N6P",
-                    Brand = "Foton",
-                    Date = "05.1960",
-                    ShortDescription = "box plates, double mica",
-                    FullDescription = "Superb sonic tube, Foton plant. The tubes are early series, large logo, and golden grids! " +
-                    "Parameters = #270 7.0 mA, 4.15 mA/V -- 7.5 mA, 4.15 mA/V",
+                    Brand = "NEVZ",
+                    Date = "08.1974",
+                    ShortDescription = "gold pin & grid",
+                    FullDescription = "The 6N6p tube is a Russian dual triode tube. This tube is often seen as 6N6p, 6N6PI, 6N6pi, 6H6p, 6N6p-i, 6N6n-i ,or 6H6n-i. The Chinese name for the 6H6p tube is 6N6 tube. The 6N6p is a fantastic tube for preamps and driver stages, and is even used as output tubes in the Little Dot MkIII headphone amp. It has been used by the tube DIY underground for many years and is now becoming better known in the mainstream.",
                     MatchedPair = true,
-                    Price = 49.99M,
+                    Price = 89.99M,
                     Quantity = 10,
-                    ImageUrl = "/Images/DoubleTriodes/6N2P.jpg",
-                    ImageThumbnailUrl = "/Images/DoubleTriodes/6N2P_small.jpg",
+                    ImageUrl = "/Images/PreTriodes/6N6P/20170506_6N6Pnevz.jpg",
+                    ImageThumbnailUrl = "/Images/PreTriodes/6N6P/20170506_6N6Pnevz_small.jpg",
                     InStock = true,
                     IsTubeOfTheWeek = false,
-                    //Category = Categories["Preamp Triodes"],
+                    IsNewArrival = true,
+                    Category = new Category() { CategoryName = "Pre Triodes" }
+                },
+                new Tube()
+                {
+                    TubeId = 5,
+                    Type = "ECC82",
+                    Brand = "Tungsram",
+                    Date = "1970s",
+                    ShortDescription = "Made in hungary",
+                    FullDescription = "The tube is popular in hi-fi vacuum tube audio as a low-noise line amplifier, driver (especially for tone stacks), and phase-inverter in vacuum tube push–pull amplifier circuits. It was widely used, in special-quality versions such as ECC82 and 5814A, in pre-semiconductor digital computer circuitry. ",
+                    MatchedPair = false,
+                    Price = 49.99M,
+                    Quantity = 11,
+                    ImageUrl = "/Images/PreTriodes/ECC82/20171220_ECC82tungsram.jpg",
+                    ImageThumbnailUrl = "/Images/PreTriodes/ECC82/20171220_ECC82tungsram_small.jpg",
+                    InStock = true,
+                    IsTubeOfTheWeek = false,
+                    IsNewArrival = true,
+                    Category = new Category() { CategoryName = "Pre Triodes" }
+                },
+                                new Tube()
+                {
+                    TubeId = 6,
+                    Type = "ECC82",
+                    Brand = "Mullard",
+                    Date = "02.1961",
+                    ShortDescription = "Made in Great Britain",
+                    FullDescription = "The tube is popular in hi-fi vacuum tube audio as a low-noise line amplifier, driver (especially for tone stacks), and phase-inverter in vacuum tube push–pull amplifier circuits. It was widely used, in special-quality versions such as ECC82 and 5814A, in pre-semiconductor digital computer circuitry. ",
+                    MatchedPair = false,
+                    Price = 299.99M,
+                    Quantity = 3,
+                    ImageUrl = "/Images/PreTriodes/ECC82/20171212_ECC82mullard.jpg",
+                    ImageThumbnailUrl = "/Images/PreTriodes/ECC82/20171212_ECC82mullard_small.jpg",
+                    InStock = true,
+                    IsTubeOfTheWeek = false,
+                    IsNewArrival = true,
+                    Category = new Category() { CategoryName = "Pre Triodes" }
                 }
             };
         }
@@ -114,7 +149,7 @@ namespace TubeStore.Services
             throw new NotImplementedException();
         }
 
-        public Tube Get(int id)
+        public Tube GetItem(int id)
         {
             return tubes.FirstOrDefault(x => x.TubeId == id);
         }

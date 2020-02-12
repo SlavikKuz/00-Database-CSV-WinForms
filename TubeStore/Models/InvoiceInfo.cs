@@ -10,7 +10,7 @@ namespace TubeStore.Models
         public int InvoiceId { get; set; }
         public int TubeId { get; set; }
         public decimal Price { get; set; }
-        public int Quntity { get; set; }
+        public int Quantity { get; set; }
 
         public virtual Invoice Invoice { get; set; }
         public virtual Tube Tube { get; set; }

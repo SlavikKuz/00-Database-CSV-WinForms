@@ -1,9 +1,55 @@
 ﻿@model HomeIndexViewModel
 
-@{ 
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
+<partial name="_Carousel" model="Model.Carousels" />
 
-@Html.Partial("_Carousel", Model.Carousels)
+@section TopTube
+{
+    <h4 align="center">Tube of the Week:</h4>
+    @{ int counter = 0;
+        foreach (var tube in Model.Tubes)
+        {
+            if (tube.IsTubeOfTheWeek)
+            {
+                <partial name="_TubeBadge" model="tube" />
+                counter++;
+            }
+        };
+
+        if (counter == 0)
+        {
+            <h4>We love all our tubes!</h4>
+        }
+    }
+}
+
+@section NewArrivals
+{
+    <h5>New Arrivals</h5>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                @foreach (var tube in Model.Tubes)
+                {
+                    if (tube.IsNewArrival)
+                    {
+                        <figure class="card ml-3 mr-3">
+                            <img src="@tube.ImageThumbnailUrl" class="figure-img img-fluid rounded" alt="" width="120">
+                            <figcaption class="figure-caption" align="center">
+                                <a asp-controller="Tube" asp-action="Details" asp-route-tubeid="@tube.TubeId">
+                                    @tube.Brand @tube.Type
+                                </a>
+                            </figcaption>
+                        </figure>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+

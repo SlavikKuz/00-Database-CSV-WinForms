@@ -17,7 +17,7 @@ namespace TubeStore.Services
                 new Carousel()
                 {
                     CarouselId = 1,
-                    ImageUrl = "/Images/Carousel/carousel01.jpg",
+                    ImageUrl = "/Images/Carousel/carousel_01.jpg",
                     Title = "ECC82",
                     Description = "Premium selected",
                     Status = true 
@@ -25,7 +25,7 @@ namespace TubeStore.Services
                 new Carousel()
                 {
                     CarouselId = 2,
-                    ImageUrl = "/Images/Carousel/carousel02.jpg",
+                    ImageUrl = "/Images/Carousel/carousel_02.jpg",
                     Title = "6P14P",
                     Description = "Platinum matched quad",
                     Status = true,
@@ -33,7 +33,7 @@ namespace TubeStore.Services
                 new Carousel()
                 {
                     CarouselId = 3,
-                    ImageUrl = "/Images/Carousel/carousel03.jpg",
+                    ImageUrl = "/Images/Carousel/carousel_03.jpg",
                     Title = "6N6P",
                     Description = "Tested pre-amp set",
                     Status = true,
@@ -56,7 +56,7 @@ namespace TubeStore.Services
             throw new NotImplementedException();
         }
 
-        public Carousel Get(int id)
+        public Carousel GetItem(int id)
         {
             throw new NotImplementedException();
         }
