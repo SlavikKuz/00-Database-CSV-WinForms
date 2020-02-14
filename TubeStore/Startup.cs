@@ -28,6 +28,9 @@ namespace TubeStore
         {
             services.AddDbContext<TubeStoreDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -43,6 +46,8 @@ namespace TubeStore
             }
 
             app.UseStaticFiles();
+            app.UseSession();
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
