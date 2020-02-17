@@ -12,7 +12,7 @@ namespace TubeStore.Models
         
         [Required(ErrorMessage = "Type is required")]
         [MinLength(2, ErrorMessage = "Please check the type value")]
-        [Display(Name = "Tube type:")]        
+        [Display(Name = "Tube type")]        
         public string Type { get; set; }
         
         public string Brand { get; set; }

@@ -1,0 +1,116 @@
+﻿@model ICollection<Tube>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content mt-4">
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <button type="button" class="btn btn-link" asp-area="Admin" asp-controller="Tube" asp-action="Index">
+                        Tube Stock</button>
+                        <button type="button" class="btn btn-danger mx-4" asp-area="Admin" asp-controller="Tube" asp-action="Add">
+                            <i class="fas fa-plus-circle"></i> New Tube
+                        </button>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 80Vh;">
+                        <table class="table table-head-fixed">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Tube</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Full Description</th>
+                                    <th>Available</th>
+                                    <th>Pairs</th>
+                                    <th>Price</th>
+                                    <th>Bestseller</th>
+                                    <th>New</th>
+                                    <th>Sale</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var tube in Model)
+                                {
+                                <tr>
+                                    <td>@tube.TubeId</td>
+                                    <td>
+                                        <img src="@tube.ImageThumbnailUrl" width="80" />
+                                        <p>@tube.Type @tube.Brand</p>
+
+                                        <a class="btn btn-info" asp-area="Admin" asp-controller="Tube" asp-action="Edit" asp-route-tubeId="@tube.TubeId">
+                                            <i class="fas fa-edit"></i>Edit
+                                        </a>
+
+                                    </td>
+                                    <td>@tube.Date</td>
+                                    <td>@tube.ShortDescription</td>
+                                    <td>@tube.FullDescription</td>
+                                    <td>@tube.Quantity</td>
+                                    @if (@tube.MatchedPair)
+                                    {
+                                        <td><span class="badge bg-primary">Yes</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-danger">No</span></td>
+                                    }
+
+                                    <td>@tube.Price.ToString("c")</td>
+                                    @if (@tube.IsTubeOfTheWeek)
+                                    {
+                                        <td><span class="badge bg-primary">Yes</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-danger">No</span></td>
+                                    }
+                                    @if (@tube.IsNewArrival)
+                                    {
+                                        <td><span class="badge bg-primary">Yes</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-danger">No</span></td>
+                                    }
+                                    @if (@tube.InStock)
+                                    {
+                                        <td><span class="badge bg-primary">Yes</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-danger">No</span></td>
+                                    }
+
+                                    <td>@tube.Category.CategoryName</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</section>
+

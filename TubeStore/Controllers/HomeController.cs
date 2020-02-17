@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TubeStore.DataLayer;
 using TubeStore.Models;
-using TubeStore.Services;
 using TubeStore.ViewModels;
 
 namespace TubeStore.Controllers
 {
     public class HomeController : Controller
     {
-        IRepository<Tube> tubes;
-        IRepository<Carousel> carousels;
+        private readonly IGenericRepository<Tube> tubes;
+        private readonly IGenericRepository<Carousel> carousels;
 
-        public HomeController(IRepository<Tube> tubes, IRepository<Carousel> carousels)
+        public HomeController(IGenericRepository<Tube> tubes, IGenericRepository<Carousel> carousels)
         {
             this.tubes = tubes;
             this.carousels = carousels;

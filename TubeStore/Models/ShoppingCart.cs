@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TubeStore.Data;
-using TubeStore.Services;
+using TubeStore.DataLayer;
 
 namespace TubeStore.Models
 {
@@ -14,5 +13,6 @@ namespace TubeStore.Models
         public string ShoppingCartId { get; set; }
         public List<ShoppingCartItem> ShoppingCartItems { get; set; } 
             = new List<ShoppingCartItem>();
+        public decimal GrandTotal { get; set; }
     }
 }

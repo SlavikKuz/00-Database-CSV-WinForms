@@ -9,9 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TubeStore.Data;
+using TubeStore.DataLayer;
 using TubeStore.Models;
-using TubeStore.Services;
 
 namespace TubeStore
 {
@@ -34,8 +33,11 @@ namespace TubeStore
             
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddScoped<IRepository<Tube>, TubeRepository>();
-            services.AddScoped<IRepository<Carousel>, CarouselRepository>();
+            //services.AddScoped<IRepository<Tube>, TubeRepository>();
+            //services.AddScoped<IRepository<Carousel>, CarouselRepository>();
+            //services.AddScoped<IRepository<Category>, CategoryRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,6 +57,10 @@ namespace TubeStore
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=home}/{action=index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

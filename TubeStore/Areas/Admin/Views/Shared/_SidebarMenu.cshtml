@@ -1,0 +1,113 @@
+﻿<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <li class="nav-item">
+        <a asp-area="Admin" asp-controller="Login" asp-action="Index" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Dashboard
+            </p>
+        </a>
+    </li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-folder-open"></i>
+            <p>
+                Categories
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add New</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Show All</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-warehouse"></i>
+            <p>
+                Tube Stock
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Tube" asp-action="Add" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add New</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Tube" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Show All</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-images"></i>
+            <p>
+                Carousel
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Carousel" asp-action="Add" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add New</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Carousel" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Show All</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-portrait"></i>
+            <p>
+                Customers
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Show All</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-receipt"></i>
+            <p>
+                Invoices
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Invoices" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Show All</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

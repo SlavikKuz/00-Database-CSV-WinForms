@@ -1,0 +1,153 @@
+﻿@model TubeViewModel
+
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Add New Tube</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form role="form" method="post" asp-area="Admin" asp-controller="Tube" asp-action="Add" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Tube.Type" class="control-label"></label>
+                                    <input asp-for="Tube.Type" type="text" class="form-control">
+                                    <span asp-validation-for="Tube.Type" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Tube.Brand" class="control-label"></label>
+                                    <input asp-for="Tube.Brand" type="text" class="form-control">
+                                    <span asp-validation-for="Tube.Brand" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label asp-for="Tube.Date" class="control-label"></label>
+                                    <input asp-for="Tube.Date" type="text" class="form-control">
+                                    <span asp-validation-for="Tube.Date" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label asp-for="Tube.ShortDescription" class="control-label"></label>
+                                    <input asp-for="Tube.ShortDescription" type="text" class="form-control">
+                                    <span asp-validation-for="Tube.ShortDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label asp-for="Tube.FullDescription" class="control-label"></label>
+                                    <textarea asp-for="Tube.FullDescription" type="text" class="form-control" rows="8"></textarea>
+                                    <span asp-validation-for="Tube.FullDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label asp-for="Tube.Price" class="control-label"></label>
+                                    <input asp-for="Tube.Price" type="number" class="form-control is-warning">
+                                    <span asp-validation-for="Tube.Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label asp-for="Tube.Quantity" class="control-label"></label>
+                                    <input asp-for="Tube.Quantity" type="number" class="form-control">
+                                    <span asp-validation-for="Tube.Quantity" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Tube.CategoryId" class="control-label"></label>
+                                    <select class="form-control" asp-for="Tube.CategoryId" asp-items="@Model.CategoriesList">                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="Tube.MatchedPair" /> @Html.DisplayNameFor(model => model.Tube.MatchedPair)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="Tube.IsTubeOfTheWeek" /> @Html.DisplayNameFor(model => model.Tube.IsTubeOfTheWeek)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="Tube.IsNewArrival" /> @Html.DisplayNameFor(model => model.Tube.IsNewArrival)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="Tube.InStock" /> @Html.DisplayNameFor(model => model.Tube.InStock)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Tube.ImageUrl" class="control-label"></label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="imageFile" name="image" accept="image/*">
+                                        <label class="custom-file-label" for="imageFile">Tube Image</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Tube.ImageThumbnailUrl" class="control-label"></label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="thumbnail" name="thumb" accept="image/*">
+                                        <label class="custom-file-label" for="thumbnail">Tube Thumbnail</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div>
+                                    <a asp-area="Admin" asp-controller="Tube" asp-action="Index">Back to List</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <input type="submit" value="Save" class="btn btn-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
