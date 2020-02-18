@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,9 @@ namespace TubeStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication();
+            services.AddIdentity<Customer, IdentityRole>().AddEntityFrameworkStores<TubeStoreDbContext>();
             services.AddDbContext<TubeStoreDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
 
@@ -33,9 +37,7 @@ namespace TubeStore
             
             services.AddControllersWithViews();
             services.AddRazorPages();
-            //services.AddScoped<IRepository<Tube>, TubeRepository>();
-            //services.AddScoped<IRepository<Carousel>, CarouselRepository>();
-            //services.AddScoped<IRepository<Category>, CategoryRepository>();
+
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
@@ -47,11 +49,14 @@ namespace TubeStore
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
+            app.UseAuthentication();
+
             app.UseSession();
             app.UseCookiePolicy();
             app.UseRouting();
 
+            app.UseStaticFiles();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -7,7 +7,7 @@
 
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="card card-danger">
                 <div class="card-header">
                     <h3 class="card-title">Add New Tube</h3>
@@ -79,7 +79,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label asp-for="Tube.CategoryId" class="control-label"></label>
-                                    <select class="form-control" asp-for="Tube.CategoryId" asp-items="@Model.CategoriesList">                                    </select>
+                                    <select class="form-control" asp-for="Tube.CategoryId" asp-items="@Model.CategoriesList"></select>
                                 </div>
                             </div>
                         </div>

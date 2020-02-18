@@ -19,15 +19,15 @@ namespace TubeStore.Areas.Admin.Controllers
     {
         private IGenericRepository<Tube> tubes;
         private IGenericRepository<Category> categories;
-        private IHostingEnvironment hostingEnvironment;
+        private IWebHostEnvironment hostEnvironment;
 
         public TubeController(IGenericRepository<Tube> tubes,
             IGenericRepository<Category> categories,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostEnvironment)
         {
             this.tubes = tubes;
             this.categories = categories;
-            this.hostingEnvironment = hostingEnvironment;
+            this.hostEnvironment = hostEnvironment;
         }
 
         [Route("Index")]
@@ -80,13 +80,14 @@ namespace TubeStore.Areas.Admin.Controllers
             return categoriesList;
         }
 
-
         [HttpPost]
         [Route("Add")]
         public async Task<ActionResult<Tube>> Add(Tube tube, IFormFile image, IFormFile thumb)
         {
             tube.ImageUrl = await UploadAndGetPath(tube, image);
             tube.ImageThumbnailUrl = await UploadAndGetPath(tube, thumb);
+
+            if (tube.Quantity > 0) tube.InStock = true;
 
             await tubes.AddAsync(tube);
 
@@ -97,7 +98,7 @@ namespace TubeStore.Areas.Admin.Controllers
         {
             Category category = await categories.GetAsync(tube.CategoryId);
 
-            var categoryPath = Path.Combine(hostingEnvironment.WebRootPath, "Images", category.CategoryName);
+            var categoryPath = Path.Combine(hostEnvironment.WebRootPath, "Images", category.CategoryName);
              
             if (!Directory.Exists(categoryPath))
                 Directory.CreateDirectory(categoryPath);

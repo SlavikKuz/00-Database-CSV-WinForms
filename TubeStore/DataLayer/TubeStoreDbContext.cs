@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using TubeStore.Models;
 
 namespace TubeStore.DataLayer
 {
-    public class TubeStoreDbContext : DbContext
+    public class TubeStoreDbContext : IdentityDbContext<Customer>
     {
         public TubeStoreDbContext(DbContextOptions<TubeStoreDbContext> options)
             : base(options) { }
@@ -15,9 +16,17 @@ namespace TubeStore.DataLayer
         public DbSet<Tube> Tubes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Carousel> Carousels { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceInfo> InvoiceInfos { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Tube>().HasData(
                 new Tube()
                 {
