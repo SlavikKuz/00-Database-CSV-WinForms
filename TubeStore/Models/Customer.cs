@@ -47,7 +47,7 @@ namespace TubeStore.Models
         [Required(ErrorMessage = "Please enter your country")]
         [Display(Name = "Country")]
         [StringLength(50)]
-        public string Coutry { get; set; }
+        public string Coutry { get; set; }  //Country
 
         [Required(ErrorMessage = "Please enter your phone number")]
         [Display(Name = "Phone Number")]

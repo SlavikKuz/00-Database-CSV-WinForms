@@ -11,12 +11,12 @@ namespace TubeStore.Models
         public string CategoryName { get; set; }
 
         public int? ParentId { get; set; }
-        //public Category Parent { get; set; }
+        public Category Parent { get; set; }
 
-        //public virtual ICollection<Category> Parents { get; set; } 
-        //    = new HashSet<Category>();
+        public virtual ICollection<Category> Parents { get; set; }
+            = new HashSet<Category>();
 
-        //public virtual ICollection<Tube> Tubes { get; set; }
-        //    = new HashSet<Tube>();
+        public virtual ICollection<Tube> Tubes { get; set; }
+            = new HashSet<Tube>();
     }
 }

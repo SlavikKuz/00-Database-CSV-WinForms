@@ -38,6 +38,7 @@ namespace TubeStore
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddScoped<RoleManager<IdentityRole>>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
@@ -48,24 +49,24 @@ namespace TubeStore
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseAuthentication();
-
             app.UseSession();
-            app.UseCookiePolicy();
-            app.UseRouting();
-
             app.UseStaticFiles();
+            app.UseRouting();            
             
+            app.UseCookiePolicy();            
+            app.UseAuthentication();
+            app.UseAuthorization();
+          
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=home}/{action=index}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "areaAdmin",
+                    areaName: "Admin",
+                    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,9 @@ using TubeStore.Models;
 
 namespace TubeStore.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    [Route("Admin/Tube")]
+    [Route("Admin/[controller]/[action]")]
     public class TubeController : Controller
     {
         private IGenericRepository<Tube> tubes;
@@ -30,7 +32,6 @@ namespace TubeStore.Areas.Admin.Controllers
             this.hostEnvironment = hostEnvironment;
         }
 
-        [Route("Index")]
         public IActionResult Index()
         {
             List<Tube> allTubes = tubes.GetAllIncluding(x => x.Category).ToList();            
@@ -114,6 +115,5 @@ namespace TubeStore.Areas.Admin.Controllers
 
             return imagePath;
         }
-
     }
 }

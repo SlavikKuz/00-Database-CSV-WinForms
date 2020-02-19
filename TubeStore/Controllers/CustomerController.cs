@@ -39,19 +39,34 @@ namespace TubeStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(CustomerRegistrationViewModel model)
         {
+
             if (!ModelState.IsValid) 
                 return RedirectToAction("Register");
 
             Customer customer = new Customer()
             {
-                Email = model.Email
+                UserName = model.Login,
+                Email = model.Email,
+
+                FirstName = "John",
+                LastName = "Doe",
+                AddressLine1 = "USA",
+                ZipCode = "90210",
+                City = "New York",
+                Coutry = "New York",
+                PhoneNumber = "123123321"
             };
 
             var result = await userManager.CreateAsync(customer, model.Password);
 
             if (result.Succeeded)
-                return RedirectToAction("Cabinet");
-            else 
+            {
+                await signInManager.SignInAsync(customer, false);
+                await userManager.AddToRoleAsync(customer, "User");
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
             {
                 foreach (var error in result.Errors)
                 {
@@ -98,7 +113,7 @@ namespace TubeStore.Controllers
             {
                 await signInManager.SignOutAsync();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
 

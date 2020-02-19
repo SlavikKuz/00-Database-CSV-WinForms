@@ -145,7 +145,6 @@ D:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\runtimes\win\lib\netco
 D:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\ShoppingCart\ReturnCart.cshtml.g.cs
-d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Login\Index.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_AdminLayout.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_Notifications.cshtml.g.cs
@@ -171,3 +170,8 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicati
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicationPartsAssemblyInfo.cache
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Register.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Login.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Index.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Add.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Edit.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Delete.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs

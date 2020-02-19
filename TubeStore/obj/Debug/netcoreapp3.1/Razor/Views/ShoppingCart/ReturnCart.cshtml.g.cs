@@ -33,8 +33,15 @@ using TubeStore.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"af75629329b57bcde46c1a9acc57c225e948f8e6", @"/Views/ShoppingCart/ReturnCart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4f688881c3b892b8ca8d9e9aa844d18118a3862c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"21ddd904858ac4cdd56489d376a1183d652da8b1", @"/Views/_ViewImports.cshtml")]
     public class Views_ShoppingCart_ReturnCart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ShoppingCart>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -84,7 +91,7 @@ using TubeStore.ViewModels;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n\r\n<ol class=\"breadcrumb bg-transparent\">\r\n    <li class=\"breadcrumb-item\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e67077", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e67255", async() => {
                 WriteLiteral("Home");
             }
             );
@@ -123,7 +130,7 @@ using TubeStore.ViewModels;
 
 
 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e69254", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e69432", async() => {
                 WriteLiteral(@"
     <table class=""table table-bordered"">
         <thead>
@@ -195,7 +202,7 @@ WriteAttributeValue("", 1852, item.Quantity, 1852, 14, false);
 #nullable disable
                 EndWriteAttribute();
                 WriteLiteral(" name=\"quantity\" />\r\n                                <button class=\"btn btn-light\" type=\"submit\">Update</button>\r\n                                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e612425", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e612603", async() => {
                     WriteLiteral("Remove <i class=\"fa fa-remove\"></i>");
                 }
                 );
@@ -281,7 +288,7 @@ WriteAttributeValue("", 1852, item.Quantity, 1852, 14, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e618149", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e618327", async() => {
                 WriteLiteral("<i class=\"fa fa-angle-double-left\"></i> Continue Shopping ");
             }
             );
@@ -309,7 +316,7 @@ WriteAttributeValue("", 1852, item.Quantity, 1852, 14, false);
 #line hidden
 #nullable disable
             WriteLiteral("    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e619879", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af75629329b57bcde46c1a9acc57c225e948f8e620057", async() => {
                 WriteLiteral("Checkout <i class=\"fa fa-angle-double-right\"></i>");
             }
             );

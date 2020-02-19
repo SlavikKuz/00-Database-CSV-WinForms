@@ -1,4 +1,4 @@
-﻿@inject UserManager<Customer>
+﻿@inject UserManager<Customer> UserManager
 
 <header>
     <div class="container card bg-light mt-2 mb-2">
@@ -22,10 +22,21 @@
                     }
                     else
                     {
-                        <div class="col-4">
+                        if (User.IsInRole("Admin"))
+                        {
+                            <div class="col-1">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                    <i class="fas fa-user-cog">A</i>
+                                </a>
+                            </div>
+                        }
+                        <div class="col-3">
                             <a class="text">Hi, @User.Identity.Name</a>
                         </div>
-                        <div class="col-4">
+                        <div class="col-1">
+                            Cart
+                        </div>
+                        <div class="col-3">
                             <a class="nav-link text-dark" asp-controller="Customer" asp-action="Logout">Logout</a>
                         </div>
                     }

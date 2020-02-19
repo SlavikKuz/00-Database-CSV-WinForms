@@ -47,8 +47,15 @@ using TubeStore.Areas.Admin.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 6 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"217a99ee92178d79e8d626a123cd2393cd25c46b", @"/Areas/Admin/Views/Tube/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"438b00a9279fabc9c44a08d3633a379b8b0a640b", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"16fd004c9c2dc4ced0df7fc844821740764d1a7e", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Tube_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ICollection<Tube>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("type", new global::Microsoft.AspNetCore.Html.HtmlString("button"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -104,7 +111,7 @@ using TubeStore.Areas.Admin.ViewModels;
                 <div class=""card"">
                     <div class=""card-header"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("button", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "217a99ee92178d79e8d626a123cd2393cd25c46b7264", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("button", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "217a99ee92178d79e8d626a123cd2393cd25c46b7454", async() => {
                 WriteLiteral("\r\n                        Tube Stock");
             }
             );
@@ -126,7 +133,7 @@ using TubeStore.Areas.Admin.ViewModels;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("button", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "217a99ee92178d79e8d626a123cd2393cd25c46b9076", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("button", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "217a99ee92178d79e8d626a123cd2393cd25c46b9266", async() => {
                 WriteLiteral("\r\n                            <i class=\"fas fa-plus-circle\"></i> New Tube\r\n                        ");
             }
             );
@@ -213,7 +220,7 @@ WriteAttributeValue("", 2126, tube.ImageThumbnailUrl, 2126, 23, false);
 #line hidden
 #nullable disable
             WriteLiteral("</p>\r\n\r\n                                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "217a99ee92178d79e8d626a123cd2393cd25c46b13689", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "217a99ee92178d79e8d626a123cd2393cd25c46b13879", async() => {
                 WriteLiteral("\r\n                                            <i class=\"fas fa-edit\"></i>Edit\r\n                                        ");
             }
             );
