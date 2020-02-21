@@ -18,6 +18,9 @@ namespace TubeStore.Models
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; } 
 
+        public int ShippingAddressId { get; set; }
+        public virtual ShippingAddress ShippingAddress { get; set; }
+
         public virtual ICollection<InvoiceInfo> InvoicesInfo { get; set; } 
             = new HashSet<InvoiceInfo>();
     }

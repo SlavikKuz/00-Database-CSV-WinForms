@@ -135,5 +135,16 @@ namespace TubeStore.Controllers
 
             return RedirectToAction("ReturnCart");
         }
+
+        public IActionResult CheckOut()
+        {
+            //1. Get user
+            //1.1. Update Shipping address
+            //2. Get invoice, save invoice
+            //3. foreach item in cart, they become InvoiceInfo, save each
+            //4. HttpContext.Session.Remove("cart");
+
+            return View();
+        }
     }
 }

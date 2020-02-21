@@ -92,7 +92,7 @@ namespace TubeStore.Controllers
             customer.ZipCode = customerDetails.ZipCode;
             customer.City = customerDetails.City;
             customer.State = customerDetails.State;
-            customer.Coutry = customerDetails.Coutry;
+            customer.Country = customerDetails.Coutry;
             customer.PhoneNumber = customerDetails.PhoneNumber;
 
             var result = await userManager.UpdateAsync(customer);

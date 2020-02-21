@@ -41,7 +41,7 @@ namespace TubeStore.Models
 
         [Display(Name = "Country")]
         [StringLength(50)]
-        public string Coutry { get; set; }  //Country
+        public string Country { get; set; } 
 
         [Display(Name = "Phone Number")]
         [StringLength(25)]
