@@ -17,10 +17,6 @@
     {
       "library": "admin-lte@3.0.2",
       "destination": "wwwroot/admin/lte/"
-    },
-    {
-      "library": "popper.js@1.16.1",
-      "destination": "wwwroot/lib/popper.js/"
     }
   ]
 }

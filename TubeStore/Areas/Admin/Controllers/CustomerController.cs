@@ -36,15 +36,14 @@ namespace TubeStore.Areas.Admin.Controllers
                     Email = x.Email,
                     Login = x.UserName
                 });
-            
-            
+                        
             return View(customers);
         }
 
         [HttpGet]
         public async Task<ActionResult> Details(string id)
         {
-            Customer customer = userManager.Users.Where(x => x.CustomerId == id).FirstOrDefault();
+            Customer customer = userManager.Users.Where(x => x.Id == id).FirstOrDefault();
             List<IdentityRole> roles = roleManager.Roles.ToList();
             List<string> userRoles = (await userManager.GetRolesAsync(customer)).ToList();
 
@@ -69,10 +68,10 @@ namespace TubeStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Details(string id, CustomerViewModel customerViewModel)
+        public async Task<ActionResult> Details(CustomerViewModel customerViewModel)
         {
-            var customer = userManager.Users.First(x => x.CustomerId == id);
-            var roles = roleManager.Roles.ToList();
+            Customer customer = userManager.Users.First(x => x.Id == customerViewModel.CustomerId);
+            List<IdentityRole> roles = roleManager.Roles.ToList();
             
             foreach (var item in customerViewModel.CustomerInRoles)
             {
@@ -85,7 +84,15 @@ namespace TubeStore.Areas.Admin.Controllers
                     await userManager.RemoveFromRoleAsync(customer, roles.First(x => x.Id == item.RoleId).Name);
                 }
             }
-            return RedirectToAction("Details", new { id });
+            return RedirectToAction("Details", new { customer.Id });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> LockOut(string id)
+        {          
+            Customer customer = userManager.Users.First(x => x.Id == id);
+            await userManager.SetLockoutEnabledAsync(customer, false);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
