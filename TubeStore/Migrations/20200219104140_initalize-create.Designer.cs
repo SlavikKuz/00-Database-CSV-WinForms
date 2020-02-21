@@ -10,8 +10,8 @@ using TubeStore.DataLayer;
 namespace TubeStore.Migrations
 {
     [DbContext(typeof(TubeStoreDbContext))]
-    [Migration("20200218083125_initialize-create")]
-    partial class initializecreate
+    [Migration("20200219104140_initalize-create")]
+    partial class initalizecreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,6 +217,8 @@ namespace TubeStore.Migrations
 
                     b.HasKey("CategoryId");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("Categories");
 
                     b.HasData(
@@ -236,7 +238,6 @@ namespace TubeStore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AddressLine1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -245,7 +246,6 @@ namespace TubeStore.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -254,7 +254,6 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Coutry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -262,7 +261,6 @@ namespace TubeStore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
@@ -270,12 +268,10 @@ namespace TubeStore.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -297,7 +293,6 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
@@ -319,7 +314,6 @@ namespace TubeStore.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
@@ -714,6 +708,13 @@ namespace TubeStore.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TubeStore.Models.Category", b =>
+                {
+                    b.HasOne("TubeStore.Models.Category", "Parent")
+                        .WithMany("Parents")
+                        .HasForeignKey("ParentId");
+                });
+
             modelBuilder.Entity("TubeStore.Models.Invoice", b =>
                 {
                     b.HasOne("TubeStore.Models.Customer", null)
@@ -755,7 +756,7 @@ namespace TubeStore.Migrations
             modelBuilder.Entity("TubeStore.Models.Tube", b =>
                 {
                     b.HasOne("TubeStore.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Tubes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

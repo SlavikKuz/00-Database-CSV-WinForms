@@ -1,0 +1,26 @@
+﻿@model Category
+
+<tr>
+    <td>
+        @Model.CategoryId
+    </td>
+    <td>
+        @Model.CategoryName
+    </td>
+    <td>
+        @(Model.Parent == null ? "--" : Model.Parent.CategoryName)
+    </td>
+    <td>
+        <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@Model.CategoryId">Edit</a> |
+        @if (Model.Parents != null && Model.Parents.Count == 0)
+        {
+            <a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@Model.CategoryId" onclick="return confirm('Are you sure?')">Delete</a> <span>|</span>
+        }
+        <a asp-area="Admin" asp-controller="Category" asp-action="AddSub" asp-route-id="@Model.CategoryId">Add Sub Category</a>
+    </td>
+</tr>
+
+@foreach (var category in Model.Parents)
+{
+    <partial name="_CategoryPartial" model="category" />
+}

@@ -1,47 +1,68 @@
-﻿@inject UserManager<Customer> UserManager
+﻿@inject UserManager<Customer> userManager
 
-<header>
-    <div class="container card bg-light mt-2 mb-2">
-        <div class="row">
-            <div class="col-lg-6">
-                <a class="nav-link text-dark " asp-controller="Home" asp-action="Index">Home</a>
-            </div>
-            <div class="col-lg-6 text-right">
-                <div class="row">
-                    <div class="col-4">
-                        <a class="nav-link text-dark" asp-controller="Contact" asp-action="Index">Contact us</a>
-                    </div>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <div class="col-4">
-                            <a class="nav-link text-dark" asp-controller="Customer" asp-action="Register">Register</a>
-                        </div>
-                        <div class="col-4">
-                            <a class="nav-link text-dark" asp-controller="Customer" asp-action="Login">Login</a>
-                        </div>
-                    }
-                    else
-                    {
-                        if (User.IsInRole("Admin"))
-                        {
-                            <div class="col-1">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
-                                    <i class="fas fa-user-cog">A</i>
-                                </a>
-                            </div>
-                        }
-                        <div class="col-3">
-                            <a class="text">Hi, @User.Identity.Name</a>
-                        </div>
-                        <div class="col-1">
-                            Cart
-                        </div>
-                        <div class="col-3">
-                            <a class="nav-link text-dark" asp-controller="Customer" asp-action="Logout">Logout</a>
-                        </div>
-                    }
+@{
+    var user = userManager.Users.FirstOrDefault(x => x.Email == User.Identity.Name);
+}
+
+    <header>
+        <div class="container card bg-light mt-2 mb-2">
+            <nav class="navbar navbar-expand-md navbar-dark bg-light">
+          
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link active text-dark" href=@Url.Action("Index","Home")>Home<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
                 </div>
+                <ul class="navbar-nav mr-auto float-right">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <i class="fa fa-sign-in-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-user-circle fa-fw"></i>
+                            }
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="text-center"><label>Hello <strong>@User.Identity.Name!</strong></label></div>
+                                <a class="dropdown-item" asp-action="Profile" asp-controller="Customer">
+                                    <span class="fas fa-user-alt"></span> Profile
+                                </a>
+                                <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Customer">
+                                    <span class="fas fa-key"></span> Change Password
+                                </a>
+
+
+                                <div class="dropdown-divider"></div>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                        <i class="fas fa-user-cog"></i> Admin Page
+                                    </a>
+                                }
+                                <a class="dropdown-item" asp-controller="Customer" asp-action="Logout" onclick="return confirm('Are you sure?')"><span class="fa fa-sign-out-alt"> Logout</span></a>
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-controller="Customer" asp-action="Login">
+                                    <span class="fa fa-sign-in-alt"></span> Login
+                                </a>
+                            }
+                        </div>
+                    </li>
+                </ul>
+            </nav>
             </div>
-        </div>
-    </div>
-</header>
+    </header>

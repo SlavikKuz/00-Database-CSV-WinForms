@@ -1,0 +1,72 @@
+﻿@model CustomerViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<body class="hold-transition register-page">
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="register-box">
+                <div class="card">
+                    <div class="card-body register-card-body">
+                        <p class="login-box-msg">My Profile</p>
+
+                        <form asp-controller="Customer" asp-action="Profile" method="post">
+                            <div class="input-group mb-3">
+                                <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name" required="required">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" required="required">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input asp-for="Email" type="email" class="form-control" placeholder="Email" required="required">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input asp-for="Phone" type="text" class="form-control" placeholder="Phone number" required="required">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="row">
+
+                                <!-- /.col -->
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-danger btn-block">Update</button>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </form>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                <span class="text-success">@ViewData["message"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CustomerViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            @Html.HiddenFor(modelItem => item.CustomerId)
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-area="Admin" asp-controller="Customer" asp-action="Details" asp-route-id="@item.CustomerId" title="Details">
+                    <span class="fa fa-th-list"> Details</span>|
+                </a>
+                <a asp-area="Admin" asp-controller="Customer" asp-action="Delete" asp-route-id="@item.CustomerId" title="Delete">
+                    <span class="fa fa-times text-danger"> Delete</span>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

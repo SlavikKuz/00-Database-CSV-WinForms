@@ -7,29 +7,51 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Add">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RoleName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoleName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { RoleName = item.RoleName }) |
-                @Html.ActionLink("Delete", "Delete", new { RoleName = item.RoleName })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="content mt-4">
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-link" asp-area="Admin" asp-controller="Role" asp-action="Index">
+                            Role List
+                        </a>
+                        <a class="btn btn-danger mx-4" asp-area="Admin" asp-controller="Role" asp-action="Add">
+                            <i class="fas fa-plus-circle"></i> New Role
+                        </a>
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 80Vh;">
+                        <table class="table table-head-fixed">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.RoleName)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RoleName)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { RoleName = item.RoleName }) |
+                                            @Html.ActionLink("Delete", "Delete", new { RoleName = item.RoleName })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -28,7 +28,12 @@ namespace TubeStore
         {
 
             services.AddAuthentication();
-            services.AddIdentity<Customer, IdentityRole>().AddEntityFrameworkStores<TubeStoreDbContext>();
+            services.AddIdentity<Customer, IdentityRole>(x=>
+            {
+                x.Lockout.MaxFailedAccessAttempts = 3;
+            })
+                .AddEntityFrameworkStores<TubeStoreDbContext>();
+            
             services.AddDbContext<TubeStoreDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
 
@@ -38,7 +43,6 @@ namespace TubeStore
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddScoped<RoleManager<IdentityRole>>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }

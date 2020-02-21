@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TubeStore.Migrations
 {
-    public partial class initializecreate : Migration
+    public partial class initalizecreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,16 +39,16 @@ namespace TubeStore.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    AddressLine1 = table.Column<string>(maxLength: 100, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(maxLength: 50, nullable: true),
+                    AddressLine1 = table.Column<string>(maxLength: 100, nullable: true),
                     AddressLine2 = table.Column<string>(maxLength: 100, nullable: true),
-                    ZipCode = table.Column<string>(maxLength: 10, nullable: false),
-                    City = table.Column<string>(maxLength: 50, nullable: false),
+                    ZipCode = table.Column<string>(maxLength: 10, nullable: true),
+                    City = table.Column<string>(maxLength: 50, nullable: true),
                     State = table.Column<string>(maxLength: 50, nullable: true),
-                    Coutry = table.Column<string>(maxLength: 50, nullable: false),
-                    PhoneNumber = table.Column<string>(maxLength: 25, nullable: false),
-                    Email = table.Column<string>(maxLength: 256, nullable: false)
+                    Coutry = table.Column<string>(maxLength: 50, nullable: true),
+                    PhoneNumber = table.Column<string>(maxLength: 25, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,6 +83,12 @@ namespace TubeStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -410,6 +416,11 @@ namespace TubeStore.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_ParentId",
+                table: "Categories",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvoiceInfos_InvoiceId",

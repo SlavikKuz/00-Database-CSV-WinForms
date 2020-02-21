@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -46,15 +47,7 @@ namespace TubeStore.Controllers
             Customer customer = new Customer()
             {
                 UserName = model.Login,
-                Email = model.Email,
-
-                FirstName = "John",
-                LastName = "Doe",
-                AddressLine1 = "USA",
-                ZipCode = "90210",
-                City = "New York",
-                Coutry = "New York",
-                PhoneNumber = "123123321"
+                Email = model.Email
             };
 
             var result = await userManager.CreateAsync(customer, model.Password);
@@ -64,7 +57,7 @@ namespace TubeStore.Controllers
                 await signInManager.SignInAsync(customer, false);
                 await userManager.AddToRoleAsync(customer, "User");
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             }
             else
             {
@@ -73,10 +66,52 @@ namespace TubeStore.Controllers
                     ModelState.TryAddModelError("", error.Description);
                 }
             }
-
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CompleteRegisration(string username)
+        {
+            CustomerDetailsViewModel customerDetails = new CustomerDetailsViewModel() { UserName = username };
+            return View(customerDetails);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> CompleteRegisration(string username, CustomerDetailsViewModel customerDetails)
+        {
+
+            if (!ModelState.IsValid)
+                return RedirectToAction("CompleteRegisration");
+
+            Customer customer = await userManager.FindByNameAsync(username);
+
+            customer.FirstName = customerDetails.FirstName;
+            customer.LastName = customerDetails.LastName;
+            customer.AddressLine1 = customerDetails.AddressLine1;
+            customer.AddressLine2 = customerDetails.AddressLine2;
+            customer.ZipCode = customerDetails.ZipCode;
+            customer.City = customerDetails.City;
+            customer.State = customerDetails.State;
+            customer.Coutry = customerDetails.Coutry;
+            customer.PhoneNumber = customerDetails.PhoneNumber;
+
+            var result = await userManager.UpdateAsync(customer);
+
+            if (result.Succeeded)
+            {
+            return RedirectToAction("Login", "Customer");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError("", error.Description);
+                }
+            }
+            
+            return View();
+        }
+        
         [HttpGet]
         public IActionResult Login()
         {
@@ -97,7 +132,7 @@ namespace TubeStore.Controllers
                 if (Request.Query.Keys.Contains("ReturnUrl"))
                     return Redirect(Request.Query["ReturnUrl"].FirstOrDefault());
                 else
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -116,8 +151,82 @@ namespace TubeStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        [Authorize(Roles="User, Admin")]
+        public IActionResult Profile()
+        {
+            //x => x.Email == User.Identity.Name
+            var user = userManager.Users.First(x => x.UserName == User.Identity.Name);
+            return View( new CustomerViewModel
+                {
+                CustomerId = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber
+            });
+        }
 
+        [HttpPost]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<IActionResult> Profile(CustomerViewModel customerViewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                var user = userManager.Users.First(x => x.UserName == User.Identity.Name);
+                user.FirstName = customerViewModel.FirstName;
+                user.LastName = customerViewModel.LastName;
+                user.Email = customerViewModel.Email;
+                user.NormalizedEmail = customerViewModel.Email.ToUpper();
+                user.PhoneNumber = customerViewModel.Phone;
 
+                var result = await userManager.UpdateAsync(user);
+                if(result.Succeeded)
+                {
+                    ViewData["Message"] = "Profile updated";
+                }
+                else
+                {
+                    ViewData["Message"] = "Updating Error";
+                }
+            }
+           return View();
+        }
 
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = await userManager.FindByNameAsync(User.Identity.Name);
+                    var result = await userManager.ChangePasswordAsync(user, 
+                        changePasswordViewModel.OldPassword, changePasswordViewModel.NewPassword);
+
+                    if (result.Succeeded)
+                        return RedirectToAction("Index", "Home");
+
+                    ModelState.AddModelError("", "Password can not be changed");
+                    return View();
+                }
+                ModelState.AddModelError("", "Invalid data");
+                return View();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("","Error. Password was not changed");
+                return View(); ;
+            }
+           
+        }
     }
 }

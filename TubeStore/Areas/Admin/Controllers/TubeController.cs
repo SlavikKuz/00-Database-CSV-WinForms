@@ -66,7 +66,7 @@ namespace TubeStore.Areas.Admin.Controllers
             return View(tubeViewModel);
         }
 
-        public async Task<List<SelectListItem>> GetCategoriesList ()
+        private async Task<List<SelectListItem>> GetCategoriesList ()
         {
             List<SelectListItem> categoriesList = new List<SelectListItem>();
             ICollection<Category> categoryList = await categories.GetAllAsync();
@@ -95,7 +95,7 @@ namespace TubeStore.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<string> UploadAndGetPath(Tube tube, IFormFile image)
+        private async Task<string> UploadAndGetPath(Tube tube, IFormFile image)
         {
             Category category = await categories.GetAsync(tube.CategoryId);
 

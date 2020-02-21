@@ -9,19 +9,16 @@ namespace TubeStore.Models
 {
     public class Customer:IdentityUser
     {
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
-        [Required(ErrorMessage = "Please enter your first name")]
         [Display(Name = "First Name")]
         [StringLength(50)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Please enter your last name")]
         [Display(Name = "Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Please enter your address")]
         [Display(Name = "Address Line 1")]
         [StringLength(100)]
         public string AddressLine1 { get; set; }
@@ -30,12 +27,10 @@ namespace TubeStore.Models
         [StringLength(100)]
         public string AddressLine2 { get; set; }
 
-        [Required(ErrorMessage = "Please enter your Zip Code")]
         [Display(Name = "Zip Code")]
         [StringLength(10, MinimumLength = 4)]
         public string ZipCode { get; set; }
 
-        [Required(ErrorMessage = "Please enter your city")]
         [Display(Name = "City")]
         [StringLength(50)]
         public string City { get; set; }
@@ -44,18 +39,15 @@ namespace TubeStore.Models
         [StringLength(50)]
         public string State { get; set; }
 
-        [Required(ErrorMessage = "Please enter your country")]
         [Display(Name = "Country")]
         [StringLength(50)]
         public string Coutry { get; set; }  //Country
 
-        [Required(ErrorMessage = "Please enter your phone number")]
         [Display(Name = "Phone Number")]
         [StringLength(25)]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        [Required]
         [Display(Name = "Email")]
         [StringLength(50)]
         [DataType(DataType.EmailAddress)]

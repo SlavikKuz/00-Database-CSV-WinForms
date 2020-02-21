@@ -5,27 +5,34 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Add</h1>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Add New Tube</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form asp-action="Add">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="RoleName" class="control-label"></label>
+                            <input asp-for="RoleName" class="form-control" />
+                            <span asp-validation-for="RoleName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Add" class="btn btn-primary btn-block" />
+                        </div>
+                    </form>
 
-<h4>RoleViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Add">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RoleName" class="control-label"></label>
-                <input asp-for="RoleName" class="form-control" />
-                <span asp-validation-for="RoleName" class="text-danger"></span>
+
+                    <div>
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary btn-block" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+</section>

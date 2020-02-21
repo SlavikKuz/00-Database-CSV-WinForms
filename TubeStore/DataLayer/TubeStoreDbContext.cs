@@ -142,10 +142,8 @@ namespace TubeStore.DataLayer
                 {
                     CategoryId = 1,
                     CategoryName = "Pre Triodes"
-                }            
+                }
             );
-
-
 
             modelBuilder.Entity<Carousel>().HasData(
                 new Carousel()
@@ -172,7 +170,101 @@ namespace TubeStore.DataLayer
                     Description = "Tested pre-amp set",
                     Status = true,
                 }
-                );
+            );
+
+            //modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityRole>().HasData(
+            //    new Microsoft.AspNetCore.Identity.IdentityRole()
+            //    {
+            //        Id = "80460a1b-fab3-40be-b4c5-b7f729182021",
+            //        Name = "User",
+            //        NormalizedName = "USER",
+            //        ConcurrencyStamp = "ee28bb50-8b19-4af0-9cf1-48573d65d9f3"
+            //    },
+
+            //    new Microsoft.AspNetCore.Identity.IdentityRole()
+            //    {
+            //        Id = "86950302-3357-444d-8bbc-39c68c8281ab",
+            //        Name = "Admin",
+            //        NormalizedName = "ADMIN",
+            //        ConcurrencyStamp = "1ec21564-a910-4fa8-be57-37d44d96c402"
+            //    }
+            // );
+
+            //modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserRole<string>>().HasData(
+            //    new Microsoft.AspNetCore.Identity.IdentityUserRole<string>()
+            //    {
+            //        UserId = "c24949e8-4b97-45ba-b3e7-76fb264a9084",
+            //        RoleId = "80460a1b-fab3-40be-b4c5-b7f729182021"
+            //    },
+            //    new Microsoft.AspNetCore.Identity.IdentityUserRole<string>()
+            //    {
+            //        UserId = "effaa59b-cf9c-4a90-84b4-216ee34f5f88",
+            //        RoleId = "80460a1b-fab3-40be-b4c5-b7f729182021"
+            //    },
+            //    new Microsoft.AspNetCore.Identity.IdentityUserRole<string>()
+            //    {
+            //        UserId = "effaa59b-cf9c-4a90-84b4-216ee34f5f88",
+            //        RoleId = "86950302-3357-444d-8bbc-39c68c8281ab"
+            //    }
+            //);
+
+            //modelBuilder.Entity<Customer>().HasData(
+            //    new Customer()
+            //    {
+            //        Id = "c24949e8-4b97-45ba-b3e7-76fb264a9084",
+            //        UserName = "TubeBuyer",
+            //        NormalizedUserName = "TUBEBUYER",
+            //        NormalizedEmail = null,
+            //        EmailConfirmed = false,
+            //        PasswordHash = "AQAAAAEAACcQAAAAECXF+15xykXe2LSDNPah0L3iiaoGvChbybS0dqYCYOgfUeNoFArSQ/YR0ffCowFLig==",
+            //        SecurityStamp = "ISHJIMWLALM4H5ABVCOZVZRVR7HCT7RG",
+            //        ConcurrencyStamp = "5cbf33be-a467-4380-ab2d-1672dd9f9db6",
+            //        PhoneNumberConfirmed = false,
+            //        TwoFactorEnabled = false,
+            //        LockoutEnd = null,
+            //        LockoutEnabled = true,
+            //        AccessFailedCount = 0,
+            //        CustomerId = 0,
+            //        FirstName = "John",
+            //        LastName = "Doe",
+            //        AddressLine1 = "Ruby str. 22",
+            //        AddressLine2 = null,
+            //        ZipCode = "90210",
+            //        City = "New York",
+            //        State = "New York",
+            //        Coutry = "USA",
+            //        PhoneNumber = "123123321",
+            //        Email= "postmottak@usn.no"
+            //    },
+
+            //    new Customer()
+            //    {
+            //        Id = "effaa59b-cf9c-4a90-84b4-216ee34f5f88",
+            //        UserName = "SlavikKuz",
+            //        NormalizedUserName = "SLAVIKKUZ",
+            //        NormalizedEmail = null,
+            //        EmailConfirmed = false,
+            //        PasswordHash = "AQAAAAEAACcQAAAAEKzuJwAwLsiEX5ATjMDXxJYl5y5GjHIZT/JNRe1GKazc/iE9+6ZkDiwBlMhdF1f3rQ==",
+            //        SecurityStamp = "TSNXDCDG7HNCSFL2QQTU4M6TS5ZI2WNW",
+            //        ConcurrencyStamp = "d8de7816-a82d-47e1-adeb-6a31a0ff4210",
+            //        PhoneNumberConfirmed = false,
+            //        TwoFactorEnabled = false,
+            //        LockoutEnd = null,
+            //        LockoutEnabled = true,
+            //        AccessFailedCount = 0,
+            //        CustomerId = 0,
+            //        FirstName = "Slavik",
+            //        LastName = "Kuz",
+            //        AddressLine1 = "Rambergveien 7",
+            //        AddressLine2 = "321",
+            //        ZipCode = "3115",
+            //        City = "Toensberg",
+            //        State = "Vestfold",
+            //        Coutry = "Norge",
+            //        PhoneNumber = "96703964",
+            //        Email = "slavik.kuz.mail@gmail.com"
+            //    }
+            //    );
         }
     }
 }

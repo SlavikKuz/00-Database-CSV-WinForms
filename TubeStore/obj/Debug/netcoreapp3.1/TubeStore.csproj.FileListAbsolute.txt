@@ -175,3 +175,13 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\View
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Edit.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Delete.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Add.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\AddSub.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_CategoryPartial.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\CompleteRegisration.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Edit.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Profile.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ChangePassword.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Customer\Index.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Customer\Details.cshtml.g.cs
