@@ -13,15 +13,16 @@ namespace TubeStore.DataLayer
         public TubeStoreDbContext(DbContextOptions<TubeStoreDbContext> options)
             : base(options) { }
 
-        public DbSet<Tube> Tubes { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Carousel> Carousels { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceInfo> InvoiceInfos { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ShippingAddress> ShippingAddresses { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<Tube> Tubes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

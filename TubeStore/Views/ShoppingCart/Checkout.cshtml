@@ -1,0 +1,109 @@
+﻿@model TubeStore.ViewModels.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<body class="hold-transition register-page">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="register-box">
+                <div class="card">
+                    <div class="card-body register-card-body">
+                        <p class="login-box-msg"><b>Checkout Info:</b></p>
+
+                        <div>
+                            @Model.Customer.FirstName @Model.Customer.LastName,
+                            Tel. @Model.Customer.Phone
+                        </div>
+                        <hr />
+                        <form asp-controller="ShoppingCart" asp-action="Checkout" method="post">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h6 class="mb-4"><b>Billing Address:</b></h6>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.BillingAddress.AddressLine1" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.BillingAddress.AddressLine1" type="text" class="form-control" placeholder="@Model.BillingAddress.AddressLine1" required="required">
+                                        <span asp-validation-for="@Model.BillingAddress.AddressLine1" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.BillingAddress.AddressLine2" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.BillingAddress.AddressLine2" type="text" class="form-control" placeholder="@Model.BillingAddress.AddressLine2" required="required">
+                                        <span asp-validation-for="@Model.BillingAddress.AddressLine2" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.BillingAddress.ZipCode" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.BillingAddress.ZipCode" type="text" class="form-control" placeholder="@Model.BillingAddress.ZipCode" required="required">
+                                        <span asp-validation-for="@Model.BillingAddress.ZipCode" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.BillingAddress.City" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.BillingAddress.City" type="text" class="form-control" placeholder="@Model.BillingAddress.City" required="required">
+                                        <span asp-validation-for="@Model.BillingAddress.City" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.BillingAddress.State" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.BillingAddress.State" type="text" class="form-control" placeholder="@Model.BillingAddress.State" required="required">
+                                        <span asp-validation-for="@Model.BillingAddress.State" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.BillingAddress.Country" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.BillingAddress.Country" type="text" class="form-control" placeholder="@Model.BillingAddress.Country" required="required">
+                                        <span asp-validation-for="@Model.BillingAddress.Country" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h6 class="mb-4"><b>Shipping Address:</b></h6>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.ShippingAddress.AddressLine1" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.ShippingAddress.AddressLine1" type="text" class="form-control" placeholder="@Model.ShippingAddress.AddressLine1" required="required">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.ShippingAddress.AddressLine2" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.ShippingAddress.AddressLine2" type="text" class="form-control" placeholder="@Model.ShippingAddress.AddressLine2" required="required">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.ShippingAddress.ZipCode" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.ShippingAddress.ZipCode" type="text" class="form-control" placeholder="@Model.ShippingAddress.ZipCode" required="required">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.ShippingAddress.City" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.ShippingAddress.City" type="text" class="form-control" placeholder="@Model.ShippingAddress.City" required="required">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.ShippingAddress.State" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.ShippingAddress.State" type="text" class="form-control" placeholder="@Model.ShippingAddress.State" required="required">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label asp-for="@Model.ShippingAddress.Country" class="col-form-label mr-2"></label>
+                                        <input asp-for="@Model.ShippingAddress.Country" type="text" class="form-control" placeholder="@Model.ShippingAddress.Country" required="required">
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input asp-for="IsTheSame" type="checkbox">
+                                        <label>
+                                            Is the same as billing address
+                                        </label>
+                                    </div>
+                                    <input asp-for="@Model.Customer.CustomerId" type="hidden" />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-5">
+                                    <a asp-controller="ShoppingCart" asp-action="ReturnCart">Back to Cart</a>
+                                </div>
+                                <div class="col-7">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Proceed" class="btn btn-danger" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>

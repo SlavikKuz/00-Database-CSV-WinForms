@@ -36,7 +36,7 @@ namespace TubeStore.Models
         [StringLength(50)]
         public string Country { get; set; }
 
-        [ForeignKey("Clients")]
-        public string ClientId { get; set; }
+        [ForeignKey("Customers")]
+        public string CustomerId { get; set; }
     }
 }

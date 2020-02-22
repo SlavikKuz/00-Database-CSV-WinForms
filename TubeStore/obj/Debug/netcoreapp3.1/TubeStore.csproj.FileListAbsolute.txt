@@ -185,3 +185,4 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\P
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ChangePassword.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Customer\Index.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Customer\Details.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\ShoppingCart\Checkout.cshtml.g.cs

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TubeStore.DataLayer;
 
 namespace TubeStore.Migrations
 {
     [DbContext(typeof(TubeStoreDbContext))]
-    partial class TubeStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200221161149_shippingAddress")]
+    partial class shippingAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -335,7 +337,10 @@ namespace TubeStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("OrderDate")
@@ -349,7 +354,7 @@ namespace TubeStore.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("ShippingAddressId");
 
@@ -391,7 +396,10 @@ namespace TubeStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("InvoiceId")
@@ -399,7 +407,7 @@ namespace TubeStore.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("InvoiceId");
 
@@ -425,12 +433,12 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(50)")
@@ -442,7 +450,7 @@ namespace TubeStore.Migrations
 
                     b.HasKey("ShoppingAdressId");
 
-                    b.ToTable("ShippingAddresses");
+                    b.ToTable("ShippingAddress");
                 });
 
             modelBuilder.Entity("TubeStore.Models.ShoppingCart", b =>
@@ -725,7 +733,7 @@ namespace TubeStore.Migrations
                 {
                     b.HasOne("TubeStore.Models.Customer", "Customer")
                         .WithMany("Invoices")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
 
                     b.HasOne("TubeStore.Models.ShippingAddress", "ShippingAddress")
                         .WithMany()
@@ -751,7 +759,7 @@ namespace TubeStore.Migrations
                 {
                     b.HasOne("TubeStore.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
 
                     b.HasOne("TubeStore.Models.Invoice", "Invoice")
                         .WithMany()

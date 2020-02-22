@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TubeStore.DataLayer;
 
 namespace TubeStore.Migrations
 {
     [DbContext(typeof(TubeStoreDbContext))]
-    partial class TubeStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200222084601_cart")]
+    partial class cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,7 +393,10 @@ namespace TubeStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("InvoiceId")
@@ -399,7 +404,7 @@ namespace TubeStore.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("InvoiceId");
 
@@ -751,7 +756,7 @@ namespace TubeStore.Migrations
                 {
                     b.HasOne("TubeStore.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
 
                     b.HasOne("TubeStore.Models.Invoice", "Invoice")
                         .WithMany()

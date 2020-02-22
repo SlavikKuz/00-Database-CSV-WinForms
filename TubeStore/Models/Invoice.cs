@@ -14,8 +14,7 @@ namespace TubeStore.Models
         public DateTime OrderDate { get; set; }
         public int Status { get; set; }
        
-        [ForeignKey("Customers")]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public virtual Customer Customer { get; set; } 
 
         public int ShippingAddressId { get; set; }

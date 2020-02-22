@@ -13,7 +13,7 @@ namespace TubeStore.Models
         public int OrderId { get; set; }
 
         [ForeignKey("Customers")]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
         [ForeignKey("Invoices")]

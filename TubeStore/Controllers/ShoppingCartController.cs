@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TubeStore.DataLayer;
@@ -14,12 +16,19 @@ namespace TubeStore.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IGenericRepository<Tube> tubes;
-        private readonly IGenericRepository<ShoppingCart> shoppingCarts;
+        private readonly IGenericRepository<Invoice> invoices;
+        private readonly IGenericRepository<ShippingAddress> shippingAddresses;
+        private readonly UserManager<Customer> userManager;
 
-        public ShoppingCartController(IGenericRepository<Tube> tubes, IGenericRepository<ShoppingCart> shoppingCarts)
+        public ShoppingCartController(IGenericRepository<Tube> tubes, 
+                                      IGenericRepository<Invoice> invoices,
+                                      IGenericRepository<ShippingAddress> shippingAddresses,
+                                      UserManager<Customer> userManager)
         {
             this.tubes = tubes;
-            this.shoppingCarts = shoppingCarts;
+            this.invoices = invoices;
+            this.shippingAddresses = shippingAddresses;
+            this.userManager = userManager;
         }
 
         public async Task<ActionResult<ShoppingCart>> ReturnCart()
@@ -136,14 +145,108 @@ namespace TubeStore.Controllers
             return RedirectToAction("ReturnCart");
         }
 
-        public IActionResult CheckOut()
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
         {
-            //1. Get user
-            //1.1. Update Shipping address
-            //2. Get invoice, save invoice
-            //3. foreach item in cart, they become InvoiceInfo, save each
-            //4. HttpContext.Session.Remove("cart");
+            Customer customer = userManager.Users.First(x => x.UserName == this.User.Identity.Name);
 
+            if (customer == null)
+                return RedirectToAction("Login", "Home"); 
+                                
+            CheckoutViewModel checkoutViewModel = new CheckoutViewModel();
+
+            checkoutViewModel.BillingAddress = new ShippingAddress()
+            {
+                AddressLine1 = customer.AddressLine1,
+                AddressLine2 = customer.AddressLine2,
+                ZipCode = customer.ZipCode,
+                City = customer.City,
+                State = customer.State,
+                Country = customer.Country,
+                CustomerId = customer.Id
+            };
+
+            checkoutViewModel.ShippingAddress = 
+                await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) ?? new ShippingAddress();
+
+            checkoutViewModel.Customer = new CustomerViewModel()
+            {
+                CustomerId = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Email = customer.Email,
+                Phone = customer.PhoneNumber
+            };
+
+            return View(checkoutViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckOut(CheckoutViewModel checkoutViewModel)
+        {
+            Customer customer = await userManager.FindByIdAsync(checkoutViewModel.Customer.CustomerId);
+            customer.Id = checkoutViewModel.Customer.CustomerId;
+            customer.AddressLine1 = checkoutViewModel.BillingAddress.AddressLine1;
+            customer.AddressLine2 = checkoutViewModel.BillingAddress.AddressLine2;
+            customer.ZipCode = checkoutViewModel.BillingAddress.ZipCode;
+            customer.City = checkoutViewModel.BillingAddress.City;
+            customer.State = checkoutViewModel.BillingAddress.State;
+            customer.Country = checkoutViewModel.BillingAddress.Country;
+            
+            var result = await userManager.UpdateAsync(customer);
+
+            if (!result.Succeeded) return RedirectToAction("ReturnCart");
+
+            ShippingAddress shippingAddress = new ShippingAddress();
+
+            if (checkoutViewModel.IsTheSame)
+                shippingAddress = checkoutViewModel.BillingAddress;
+            else
+                shippingAddress = checkoutViewModel.ShippingAddress;
+
+            shippingAddress.CustomerId = customer.Id;
+
+            if (await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) == null)
+                await shippingAddresses.AddAsync(shippingAddress);
+            //else
+            //    await shippingAddresses.UpdateAsync(shippingAddress);
+
+            Invoice invoice = new Invoice()
+            {
+                OrderDate = DateTime.Now,
+                CustomerId = customer.Id,
+                ShippingAddressId = shippingAddress.ShoppingAdressId
+            };
+
+            //get shoppingcart
+            ISession session = this.HttpContext.Session;
+
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.ShoppingCartId = session.GetString("ShoppingCartId");
+            List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
+                    session.GetString("ShoppingCartItems"));
+            
+            //3. foreach item in cart, they become InvoiceInfo
+            foreach (var item in sessionList)
+            {
+                invoice.InvoicesInfo.Add(new InvoiceInfo()
+                {
+                    TubeId = item.TubeId,
+                    Price = (await tubes.GetAsync(item.TubeId)).Price,
+                    Quantity = item.Quantity
+                });
+            }
+
+            await invoices.AddAsync(invoice);
+            HttpContext.Session.Remove("cart");
+            
+            return View();
+        }
+
+        public IActionResult Pay()
+        {
+            // get users unpaid orders
+            // pay
             return View();
         }
     }
