@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TubeStore.Areas.Admin.ViewModels;
+using TubeStore.DataLayer;
 using TubeStore.Models;
 using TubeStore.ViewModels;
 
@@ -25,7 +26,7 @@ namespace TubeStore.Areas.Admin.Controllers
             this.roleManager = roleManager;
         }
               
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page)
         {
             var customers = userManager.Users.Select(
                 x => new CustomerViewModel
@@ -36,8 +37,12 @@ namespace TubeStore.Areas.Admin.Controllers
                     Email = x.Email,
                     Login = x.UserName
                 });
-                        
-            return View(customers);
+
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+            return View(await PaginatedList<CustomerViewModel>.CreateAsync(customers,
+                                                                 pageNumber,
+                                                                 pageSize));
         }
 
         [HttpGet]

@@ -25,6 +25,12 @@ namespace TubeStore.DataLayer
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Invoice>()
+                .Property(x => x.Status)
+                .HasConversion(
+                    z => z.ToString(),
+                    z => (EnumStatus)Enum.Parse(typeof(EnumStatus), z));
+
             modelBuilder.Entity<Tube>().HasData(
                 new Tube()
                 {

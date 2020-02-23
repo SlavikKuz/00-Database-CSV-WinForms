@@ -1,58 +1,86 @@
-﻿@model IEnumerable<CustomerViewModel>
+﻿@model PaginatedList<CustomerViewModel>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Login)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            @Html.HiddenFor(modelItem => item.CustomerId)
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-area="Admin" asp-controller="Customer" asp-action="Details" asp-route-id="@item.CustomerId">
-                    <span class="fa fa-th-list"> Details & Roles</span>|
-                </a>
-                <a asp-area="Admin" asp-controller="Customer" asp-action="LockOut" asp-route-id="@item.CustomerId">
-                    <span class="fa fa-times text-danger"> LockOut</span>
-                </a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<section class="content mt-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive p-0" style="height: 80Vh;">
 
-
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.First().Login)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.First().FirstName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.First().LastName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.First().Email)
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @Html.HiddenFor(modelItem => item.CustomerId)
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Login)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Customer" asp-action="Details" asp-route-id="@item.CustomerId">
+                                                <span class="fa fa-th-list"> Details & Roles</span>|
+                                            </a>
+                                            <a asp-area="Admin" asp-controller="Customer" asp-action="LockOut" asp-route-id="@item.CustomerId">
+                                                <span class="fa fa-times text-danger"> LockOut</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            @if (@Model.PageIndex > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-area="Admin" asp-controller="Customer" asp-action="Index" asp-route-page="@(Model.PageIndex-1)">&laquo;</a>
+                                </li>
+                            }
+                            <li class="page-item"><a class="page-link">@Model.PageIndex</a></li>
+                            @if (@Model.TotalPages > @Model.PageIndex)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-area="Admin" asp-controller="Customer" asp-action="Index" asp-route-page="@(Model.PageIndex+1)">&raquo;</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

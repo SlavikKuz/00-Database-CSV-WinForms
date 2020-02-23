@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css"  />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
 </head>
@@ -21,12 +21,14 @@
                         <img class="img-fluid" alt="Tube Store" src="~/Images/logo.jpg" />
                     </p>
                     <h3 align="center">Tube store</h3>
-                    <div class="input-group mt-5 mb-5">
-                        <input type="text" class="form-control" placeholder="Find a tube..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-danger" type="submit">Go!</button>
+                    <form role="form" method="post" asp-controller="Home" asp-action="Search">
+                        <div class="input-group mt-5 mb-5">
+                            <input type="text" class="form-control" name="keyword" placeholder="Find a tube...">
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" type="submit">Go!</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <hr>
                     <div class="container mt-4">
                         @RenderSection("TopTube", required: false)

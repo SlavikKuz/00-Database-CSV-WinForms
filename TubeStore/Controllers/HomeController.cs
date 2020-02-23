@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TubeStore.DataLayer;
 using TubeStore.Models;
@@ -22,60 +24,56 @@ namespace TubeStore.Controllers
      
         public IActionResult Index()
         {
-            HomeIndexViewModel hivm = new HomeIndexViewModel()
+            HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
             {
                 Tubes = tubes.GetAll(),
                 Carousels = carousels.GetAll()
             };       
             
-            return View(hivm);
+            return View(homeIndexViewModel);
         }
 
-        [HttpGet]
-        public IActionResult AddTube()
-        {
-            return View();
-        }
-        
         [HttpPost]
-        public IActionResult AddTube(Tube tube)
+        public async Task<IActionResult> Search(IFormCollection form)
         {
-            if (ModelState.IsValid)
+            string keyword = this.HttpContext.Request.Query["keyword"].ToString();
+
+            string keyString = form["keyword"];
+            string[] searchKeys = keyString.Split(' ');
+
+            IEnumerable<Tube> temp;
+            List<Tube> resultTemp = new List<Tube>();
+
+            for (int i = 0; i < searchKeys.Count(); i++)
             {
-                //Tube item = new Tube()
-                //{
-                //    TubeId = tubes.GetAll().Max(x => x.TubeId) + 1,
-                //    Type = tube.Type,
-                //    Brand = tube.Brand,
-                //    Date = tube.Date,
-                //    ShortDescription = tube.ShortDescription,
-                //    FullDescription = tube.FullDescription,
-                //    MatchedPair = tube.MatchedPair,
-                //    Price = tube.Price,
-                //    Quantity = tube.Quantity,
-                //    ImageUrl = tube.ImageUrl,
-                //    ImageThumbnailUrl = tube.ImageThumbnailUrl,
-                //    IsTubeOfTheWeek = tube.IsTubeOfTheWeek,
-                //    InStock = tube.InStock,
-                //    CategoryId = tube.CategoryId
-                //};
-                //tubes.(item);
-                return RedirectToAction("Index");
+                temp = await tubes.FindAllAsync(x => x.Brand.Contains(searchKeys[i]));
+
+                foreach (var tube in temp)
+                    resultTemp.Add(tube);
+
+                temp = await tubes.FindAllAsync(x => x.Type.Contains(searchKeys[i]));
+
+                foreach (var tube in temp)
+                    resultTemp.Add(tube);
+
+                temp = await tubes.FindAllAsync(x => x.ShortDescription.Contains(searchKeys[i]));
+
+                foreach (var tube in temp)
+                    resultTemp.Add(tube);
             }
-            else
-            {
-                return View();
-            }
+
+            List<Tube> result = resultTemp.Distinct().ToList();
+            
+            return RedirectToAction("List", result);
         }
 
-        public IActionResult About()
+        public IActionResult List(int? page, List<Tube> result)
         {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            return View();
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(PaginatedList<Tube>.CreateNonAsync(result,
+                                                           pageNumber,
+                                                           pageSize));
         }
     }
 }

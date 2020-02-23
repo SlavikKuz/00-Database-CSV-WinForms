@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Category>
+﻿@model PaginatedList<Category>
 
 @{
     ViewData["Title"] = "Index";
@@ -27,13 +27,13 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.CategoryId)
+                                        @Html.DisplayNameFor(model => model.First().CategoryId)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.CategoryName)
+                                        @Html.DisplayNameFor(model => model.First().CategoryName)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ParentId)
+                                        @Html.DisplayNameFor(model => model.First().ParentId)
                                     </th>
                                     <th>
                                         Action
@@ -54,11 +54,19 @@
                     </div>
                     <div class="card-footer clearfix">
                         <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                            @if (@Model.PageIndex > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-area="Admin" asp-controller="Category" asp-action="Index" asp-route-page="@(Model.PageIndex-1)">&laquo;</a>
+                                </li>
+                            }
+                            <li class="page-item"><a class="page-link">@Model.PageIndex</a></li>
+                            @if (@Model.TotalPages > @Model.PageIndex)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-area="Admin" asp-controller="Category" asp-action="Index" asp-route-page="@(Model.PageIndex+1)">&raquo;</a>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <!-- /.card-body -->

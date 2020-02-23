@@ -67,8 +67,6 @@ namespace TubeStore.Areas.Admin.Controllers
             return View(roleViewModel);
         }
 
-        int c = 0;
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(string RoleId, string RoleName)

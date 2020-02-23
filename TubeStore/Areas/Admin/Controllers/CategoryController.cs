@@ -23,12 +23,17 @@ namespace TubeStore.Areas.Admin.Controllers
             this.categories = categories;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
             var roughList = await categories.GetAllAsync();
             var topCategories = roughList.Where(x => x.ParentId == null).ToList();
             var completeList = GetRecursively(roughList, topCategories);
-            return View(completeList);
+
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+            return View(PaginatedList<Category>.CreateNonAsync(completeList,
+                                                               pageNumber,
+                                                               pageSize));
         }
 
         private ICollection<Category> GetRecursively(ICollection<Category> roughList, 

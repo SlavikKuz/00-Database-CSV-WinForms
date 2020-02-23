@@ -197,16 +197,30 @@ namespace TubeStore.Controllers
 
             if (!result.Succeeded) return RedirectToAction("ReturnCart");
 
-            ShippingAddress shippingAddress = new ShippingAddress();
+            ShippingAddress shippingAddress = await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) ?? new ShippingAddress();
 
             if (checkoutViewModel.IsTheSame)
-                shippingAddress = checkoutViewModel.BillingAddress;
+            {
+                shippingAddress.AddressLine1 = checkoutViewModel.BillingAddress.AddressLine1;
+                shippingAddress.AddressLine2 = checkoutViewModel.BillingAddress.AddressLine2;
+                shippingAddress.ZipCode = checkoutViewModel.BillingAddress.ZipCode;
+                shippingAddress.City = checkoutViewModel.BillingAddress.City;
+                shippingAddress.State = checkoutViewModel.BillingAddress.State;
+                shippingAddress.Country = checkoutViewModel.BillingAddress.Country;
+                shippingAddress.CustomerId = customer.Id;
+            }
             else
-                shippingAddress = checkoutViewModel.ShippingAddress;
+            {
+                shippingAddress.AddressLine1 = checkoutViewModel.ShippingAddress.AddressLine1;
+                shippingAddress.AddressLine2 = checkoutViewModel.ShippingAddress.AddressLine2;
+                shippingAddress.ZipCode = checkoutViewModel.ShippingAddress.ZipCode;
+                shippingAddress.City = checkoutViewModel.ShippingAddress.City;
+                shippingAddress.State = checkoutViewModel.ShippingAddress.State;
+                shippingAddress.Country = checkoutViewModel.ShippingAddress.Country;
+                shippingAddress.CustomerId = customer.Id;
+            }
 
-            shippingAddress.CustomerId = customer.Id;
-
-            if (await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) == null)
+            if (shippingAddress.ShippingAdressId == 0)
                 await shippingAddresses.AddAsync(shippingAddress);
             else
                 await shippingAddresses.UpdateAsync(shippingAddress);
@@ -236,10 +250,6 @@ namespace TubeStore.Controllers
                     TubeId = item.TubeId,
                     Price = tubeTemp.Price,
                     Quantity = item.Quantity
-                    //Type Brand
-                    //thumb
-                    //Discount
-                    //shortdescr
                 });
                 tubeTemp.Quantity -= item.Quantity;
                 await tubes.UpdateAsync(tubeTemp);

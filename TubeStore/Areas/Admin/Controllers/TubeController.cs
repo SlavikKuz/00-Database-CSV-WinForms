@@ -32,10 +32,15 @@ namespace TubeStore.Areas.Admin.Controllers
             this.hostEnvironment = hostEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            List<Tube> allTubes = tubes.GetAllIncluding(x => x.Category).ToList();            
-            return View(allTubes);
+            IQueryable<Tube> allTubes = tubes.GetAllIncluding(x => x.Category);
+
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return View(await PaginatedList<Tube>.CreateAsync(allTubes,
+                                                              pageNumber,
+                                                              pageSize));
         }
 
         [HttpGet]

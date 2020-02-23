@@ -34,9 +34,26 @@ namespace TubeStore.Controllers
             return View(customerInvoices);
         }
 
-        public IActionResult SetInactive(int id)
+        public async Task<IActionResult> SetInactive(int id)
         {
-            return View();
+            Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
+                    x => x.Customer,
+                    x => x.ShippingAddress,
+                    x => x.InvoicesInfo).First();
+
+            invoice.Status = EnumStatus.Cancelled;
+            await invoices.UpdateAsync(invoice);
+
+            Tube tempTube;
+
+            foreach (var item in invoice.InvoicesInfo)
+            {
+                tempTube = await tubes.GetAsync(item.TubeId);
+                tempTube.Quantity += item.Quantity;
+                await tubes.UpdateAsync(tempTube);
+            }    
+            
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Details(int id)
@@ -49,14 +66,16 @@ namespace TubeStore.Controllers
             for (int i = 0; i < invoice.InvoicesInfo.Count; i++)
             {
                 invoice.InvoicesInfo[i].Tube = await tubes.GetAsync(invoice.InvoicesInfo[i].TubeId);
-            }
-            
+            }            
             return View(invoice);
         }
 
-        public IActionResult PayInvoce(int id)
+        public async Task<IActionResult> PayInvoce(int id)
         {
-            return View();
+            Invoice invoice = await invoices.GetAsync(id);
+            invoice.Status = EnumStatus.Paid;
+            await invoices.UpdateAsync(invoice);
+            return RedirectToAction("Index");
         }
     }
 }
