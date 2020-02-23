@@ -255,9 +255,6 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -347,6 +344,9 @@ namespace TubeStore.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("InvoiceId");
 
                     b.HasIndex("CustomerId");
@@ -384,31 +384,9 @@ namespace TubeStore.Migrations
                     b.ToTable("InvoiceInfos");
                 });
 
-            modelBuilder.Entity("TubeStore.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("InvoiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("InvoiceId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("TubeStore.Models.ShippingAddress", b =>
                 {
-                    b.Property<int>("ShoppingAdressId")
+                    b.Property<int>("ShippingAdressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -440,60 +418,9 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.HasKey("ShoppingAdressId");
+                    b.HasKey("ShippingAdressId");
 
                     b.ToTable("ShippingAddresses");
-                });
-
-            modelBuilder.Entity("TubeStore.Models.ShoppingCart", b =>
-                {
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("GrandTotal")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.HasKey("ShoppingCartId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
-            modelBuilder.Entity("TubeStore.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("ShoppingCartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ImageThumbnailUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityLimit")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(7,2)");
-
-                    b.Property<int>("TubeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeBrandDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ShoppingCartItemId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("TubeStore.Models.Tube", b =>
@@ -511,6 +438,9 @@ namespace TubeStore.Migrations
 
                     b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
@@ -559,6 +489,7 @@ namespace TubeStore.Migrations
                             Brand = "NEVZ",
                             CategoryId = 1,
                             Date = "10.1963",
+                            Discount = 10m,
                             FullDescription = "The 6N1P has similar ratings to the 6DJ8 and in the past was sometimes rebranded as such, however differences between the two types (the 6N1P requires almost twice the filament current and has only one third the S value) mean they are not directly interchangeable. The S is about 4.35 ma/V, the 6DJ8/ECC88 has a S of 12.5 ma/V and a gain of 33 and a lower internal resistance. However, the 6N1P is typically more linear for a given load. It is therefore inaccurate to say that these two tubes are identical. The correct Russian equivalent to the 6DJ8/ECC88 is the 6N23P, the latter has a S of 12.5 mA/V and a gain of 33.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N1P/20160808_6N1Pnevz_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N1P/20160808_6N1Pnevz.jpg",
@@ -577,6 +508,7 @@ namespace TubeStore.Migrations
                             Brand = "NEVZ",
                             CategoryId = 1,
                             Date = "01.1967",
+                            Discount = 0m,
                             FullDescription = "The 6N1P has similar ratings to the 6DJ8 and in the past was sometimes rebranded as such, however differences between the two types (the 6N1P requires almost twice the filament current and has only one third the S value) mean they are not directly interchangeable. The S is about 4.35 ma/V, the 6DJ8/ECC88 has a S of 12.5 ma/V and a gain of 33 and a lower internal resistance. However, the 6N1P is typically more linear for a given load. It is therefore inaccurate to say that these two tubes are identical. The correct Russian equivalent to the 6DJ8/ECC88 is the 6N23P, the latter has a S of 12.5 mA/V and a gain of 33.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N1P/20170201_6N1Pboxplates_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N1P/20170201_6N1Pboxplates.jpg",
@@ -595,6 +527,7 @@ namespace TubeStore.Migrations
                             Brand = "Foton",
                             CategoryId = 1,
                             Date = "1960s",
+                            Discount = 0m,
                             FullDescription = "The 6N6p tube is a Russian dual triode tube. This tube is often seen as 6N6p, 6N6PI, 6N6pi, 6H6p, 6N6p-i, 6N6n-i ,or 6H6n-i. The Chinese name for the 6H6p tube is 6N6 tube. The 6N6p is a fantastic tube for preamps and driver stages, and is even used as output tubes in the Little Dot MkIII headphone amp. It has been used by the tube DIY underground for many years and is now becoming better known in the mainstream.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pfoton_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pfoton.jpg",
@@ -613,6 +546,7 @@ namespace TubeStore.Migrations
                             Brand = "NEVZ",
                             CategoryId = 1,
                             Date = "08.1974",
+                            Discount = 0m,
                             FullDescription = "The 6N6p tube is a Russian dual triode tube. This tube is often seen as 6N6p, 6N6PI, 6N6pi, 6H6p, 6N6p-i, 6N6n-i ,or 6H6n-i. The Chinese name for the 6H6p tube is 6N6 tube. The 6N6p is a fantastic tube for preamps and driver stages, and is even used as output tubes in the Little Dot MkIII headphone amp. It has been used by the tube DIY underground for many years and is now becoming better known in the mainstream.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pnevz_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pnevz.jpg",
@@ -631,6 +565,7 @@ namespace TubeStore.Migrations
                             Brand = "Tungsram",
                             CategoryId = 1,
                             Date = "1970s",
+                            Discount = 0m,
                             FullDescription = "The tube is popular in hi-fi vacuum tube audio as a low-noise line amplifier, driver (especially for tone stacks), and phase-inverter in vacuum tube push–pull amplifier circuits. It was widely used, in special-quality versions such as ECC82 and 5814A, in pre-semiconductor digital computer circuitry. ",
                             ImageThumbnailUrl = "/Images/Pre Triodes/ECC82/20171220_ECC82tungsram_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/ECC82/20171220_ECC82tungsram.jpg",
@@ -649,6 +584,7 @@ namespace TubeStore.Migrations
                             Brand = "Mullard",
                             CategoryId = 1,
                             Date = "02.1961",
+                            Discount = 0m,
                             FullDescription = "The tube is popular in hi-fi vacuum tube audio as a low-noise line amplifier, driver (especially for tone stacks), and phase-inverter in vacuum tube push–pull amplifier circuits. It was widely used, in special-quality versions such as ECC82 and 5814A, in pre-semiconductor digital computer circuitry. ",
                             ImageThumbnailUrl = "/Images/Pre Triodes/ECC82/20171212_ECC82mullard_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/ECC82/20171212_ECC82mullard.jpg",
@@ -745,26 +681,6 @@ namespace TubeStore.Migrations
                         .HasForeignKey("TubeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TubeStore.Models.Order", b =>
-                {
-                    b.HasOne("TubeStore.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("TubeStore.Models.Invoice", "Invoice")
-                        .WithMany()
-                        .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TubeStore.Models.ShoppingCartItem", b =>
-                {
-                    b.HasOne("TubeStore.Models.ShoppingCart", null)
-                        .WithMany("ShoppingCartItems")
-                        .HasForeignKey("ShoppingCartId");
                 });
 
             modelBuilder.Entity("TubeStore.Models.Tube", b =>

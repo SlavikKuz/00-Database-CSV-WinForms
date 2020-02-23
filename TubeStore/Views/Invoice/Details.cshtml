@@ -1,0 +1,100 @@
+﻿@model TubeStore.Models.Invoice
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<body class="hold-transition register-page">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="register-box">
+                <div class="card">
+                    <div class="card-body register-card-body">
+
+                        <div>
+                            <h4 class="my-2">Invoice #@Model.InvoiceId</h4>
+                            <h6>From @Model.OrderDate.ToShortDateString(), Status: @Model.Status </h6>
+                            <hr />
+                            <div class="row ml-4">
+                                <p><b>@Model.Customer.FirstName @Model.Customer.LastName</b>, tel. @Model.Customer.PhoneNumber, @Model.Customer.Email</p>
+                            </div>
+                            <div class="row ml-4">
+                                <h6><u>Billing Address:</u></h6>
+                            </div>
+                            <div class="row ml-4">
+                                <p>@Model.Customer.AddressLine1 @Model.Customer.AddressLine2, @Model.Customer.ZipCode @Model.Customer.City, @Model.Customer.State, @Model.Customer.Country</p>
+                            </div>
+                            <div class="row ml-4">
+                                <h6><u>Shipping Address:</u></h6>
+                            </div>
+                            <div class="row ml-4">
+                                <p>@Model.ShippingAddress.AddressLine1 @Model.ShippingAddress.AddressLine2, @Model.ShippingAddress.ZipCode @Model.ShippingAddress.City, @Model.ShippingAddress.State, @Model.ShippingAddress.Country</p>
+                            </div>
+                            <p><h6><u>Purchased Items:</u></h6></p>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Tube
+                                    </th>
+                                    <th>
+                                        Type
+                                    </th>
+                                    <th>
+                                        Specifics
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.InvoicesInfo)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@item.Tube.ImageThumbnailUrl" class="figure-img img-fluid rounded" width="50" alt="">
+                                        </td>
+                                        <td>
+                                            @item.Tube.Brand @item.Tube.Type
+                                        </td>
+                                        <td>
+                                            @item.Tube.ShortDescription
+                                        </td>
+                                        <td>
+                                            @item.Quantity
+                                        </td>
+                                        <td>
+                                            @item.Price
+                                        </td>
+                                        <th>
+                                            @if (item.Tube.Discount == 0)
+                                            {@((item.Price * item.Quantity).ToString("c"))}
+                                        else
+                                        { @((item.Price * item.Quantity * (1 - item.Tube.Discount)).ToString("c"))
+                                        <p>Discount: @item.Tube.Discount % </p>}
+                                        </th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>                    
+                        
+                        <p class="text-center">
+                            @Html.ActionLink("Pay", "PayInvoice", new { id = Model.InvoiceId }) |
+                            <a asp-action="Index">Back to List</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

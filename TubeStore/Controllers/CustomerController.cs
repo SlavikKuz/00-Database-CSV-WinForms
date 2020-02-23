@@ -146,7 +146,8 @@ namespace TubeStore.Controllers
         {
             if(User.Identity.IsAuthenticated)
             {
-                await signInManager.SignOutAsync();
+                await signInManager.SignOutAsync();            
+                HttpContext.Session.Remove("ShoppingCartItems");
             }
             return RedirectToAction("Index", "Home");
         }
@@ -155,7 +156,6 @@ namespace TubeStore.Controllers
         [Authorize(Roles="User, Admin")]
         public IActionResult Profile()
         {
-            //x => x.Email == User.Identity.Name
             var user = userManager.Users.First(x => x.UserName == User.Identity.Name);
             return View( new CustomerViewModel
                 {

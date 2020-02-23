@@ -31,7 +31,9 @@ namespace TubeStore.Models
         public bool IsTubeOfTheWeek { get; set; }
         public bool IsNewArrival { get; set; }
         public bool InStock { get; set; }
-        //public decimal Discount { get; set; }
+        
+        public decimal Discount { get; set; }
+        
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

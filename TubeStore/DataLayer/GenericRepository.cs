@@ -164,5 +164,15 @@ namespace TubeStore.DataLayer
             return exist.Any() ? true : false;
         }
 
+        public IQueryable<Entity> GetIncluding(Expression<Func<Entity, bool>> predicate, 
+                                               params Expression<Func<Entity, object>>[] includeProperties)
+        {
+            IQueryable<Entity> entity = FindBy(predicate);
+            foreach (var property in includeProperties)
+            {
+                entity = entity.Include<Entity, object>(property);
+            }
+            return entity;
+        }
     }
 }

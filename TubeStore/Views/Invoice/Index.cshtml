@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TubeStore.Models.Invoice>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<body class="hold-transition register-page">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="register-box">
+                <div class="card">
+                    <div class="card-body register-card-body">
+
+                        <p class="login-box-msg"><b>Invoice History:</b></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InvoiceId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OrderDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Total)
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InvoiceId)
+                                        </td>
+                                        <td>
+                                            @item.OrderDate.ToShortDateString()
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @item.Total.ToString("c")
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Pay", "PayInvoce", new { id = item.InvoiceId }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.InvoiceId }) |
+                                            @Html.ActionLink("Delete", "SetInactive", new { id = item.InvoiceId })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

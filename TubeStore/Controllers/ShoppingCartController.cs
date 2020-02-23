@@ -208,46 +208,60 @@ namespace TubeStore.Controllers
 
             if (await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) == null)
                 await shippingAddresses.AddAsync(shippingAddress);
-            //else
-            //    await shippingAddresses.UpdateAsync(shippingAddress);
+            else
+                await shippingAddresses.UpdateAsync(shippingAddress);
 
             Invoice invoice = new Invoice()
             {
                 OrderDate = DateTime.Now,
                 CustomerId = customer.Id,
-                ShippingAddressId = shippingAddress.ShoppingAdressId
+                ShippingAddressId = shippingAddress.ShippingAdressId
             };
 
-            //get shoppingcart
             ISession session = this.HttpContext.Session;
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartId = session.GetString("ShoppingCartId");
             List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
                     session.GetString("ShoppingCartItems"));
-            
-            //3. foreach item in cart, they become InvoiceInfo
+
+            Tube tubeTemp;
+
             foreach (var item in sessionList)
             {
+                tubeTemp = await tubes.GetAsync(item.TubeId);
+
                 invoice.InvoicesInfo.Add(new InvoiceInfo()
                 {
                     TubeId = item.TubeId,
-                    Price = (await tubes.GetAsync(item.TubeId)).Price,
+                    Price = tubeTemp.Price,
                     Quantity = item.Quantity
+                    //Type Brand
+                    //thumb
+                    //Discount
+                    //shortdescr
                 });
+                tubeTemp.Quantity -= item.Quantity;
+                await tubes.UpdateAsync(tubeTemp);
+            }
+
+            foreach (var item in invoice.InvoicesInfo)
+            {
+                invoice.Total += item.Quantity * item.Price;
+                // ?? dicount
             }
 
             await invoices.AddAsync(invoice);
-            HttpContext.Session.Remove("cart");
-            
-            return View();
-        }
+            HttpContext.Session.Remove("ShoppingCartId");
+            HttpContext.Session.Remove("ShoppingCartItems");
 
-        public IActionResult Pay()
-        {
-            // get users unpaid orders
-            // pay
-            return View();
+            //coupon in the cart;
+            //dicount in the cart
+            //discount in infos 
+
+            //dicount into info and badge
+
+            return RedirectToAction("Index", "Invoice");
         }
     }
 }

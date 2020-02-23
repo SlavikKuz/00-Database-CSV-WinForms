@@ -13,14 +13,17 @@ namespace TubeStore.Models
         public int InvoiceId { get; set; }
         public DateTime OrderDate { get; set; }
         public int Status { get; set; }
-       
+        public EnumStatus EnumStatus { get; set; }
+
+        [ForeignKey("Customers")]
         public string CustomerId { get; set; }
         public virtual Customer Customer { get; set; } 
 
         public int ShippingAddressId { get; set; }
         public virtual ShippingAddress ShippingAddress { get; set; }
 
-        public virtual ICollection<InvoiceInfo> InvoicesInfo { get; set; } 
-            = new HashSet<InvoiceInfo>();
+        public virtual List<InvoiceInfo> InvoicesInfo { get; set; } 
+
+        public decimal Total { get; set; }
     }
 }

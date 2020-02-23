@@ -10,7 +10,7 @@ namespace TubeStore.Models
     public class ShippingAddress
     {
         [Key]
-        public int ShoppingAdressId { get; set; }
+        public int ShippingAdressId { get; set; }
         
         [Display(Name = "Address Line 1")]
         [StringLength(100)]
