@@ -112,7 +112,6 @@ D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.Views.pdb
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\Contact.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Carousel.cshtml.g.cs
-D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddTube.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\libman.json
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CustomerLayout.cshtml.g.cs
@@ -166,8 +165,6 @@ d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.I
 d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.dll
 d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
 d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
-d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicationPartsAssemblyInfo.cs
-d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicationPartsAssemblyInfo.cache
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Register.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Login.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Role\Index.cshtml.g.cs
@@ -190,4 +187,12 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Invoice\In
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Invoice\Details.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Invoice\Index.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Invoice\Details.cshtml.g.cs
-d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\List.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\ReflectionIT.Mvc.Paging.Views.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\ReflectionIT.Mvc.Paging.dll
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicationPartsAssemblyInfo.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicationPartsAssemblyInfo.cache
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\SearchList.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_SmallBoxesRow.cshtml.g.cs

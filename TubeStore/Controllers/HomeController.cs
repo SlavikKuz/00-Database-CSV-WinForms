@@ -34,12 +34,18 @@ namespace TubeStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(IFormCollection form)
+        public IActionResult Search(IFormCollection form)
         {
-            string keyword = this.HttpContext.Request.Query["keyword"].ToString();
+            ISession session = this.HttpContext.Session;
+            session.SetString("Keyword", form["keyword"]);           
+            
+            return RedirectToAction("SearchList");
+        }
 
-            string keyString = form["keyword"];
-            string[] searchKeys = keyString.Split(' ');
+        private async Task<List<Tube>> GetSearchingResult()
+        {
+            ISession session = this.HttpContext.Session;
+            string[] searchKeys = session.GetString("Keyword").Split(' ');
 
             IEnumerable<Tube> temp;
             List<Tube> resultTemp = new List<Tube>();
@@ -62,16 +68,14 @@ namespace TubeStore.Controllers
                     resultTemp.Add(tube);
             }
 
-            List<Tube> result = resultTemp.Distinct().ToList();
-            
-            return RedirectToAction("List", result);
+            return resultTemp.Distinct().ToList();
         }
 
-        public IActionResult List(int? page, List<Tube> result)
+        public async Task<IActionResult> SearchList(int? page)
         {
-            int pageSize = 6;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(PaginatedList<Tube>.CreateNonAsync(result,
+            return View(PaginatedList<Tube>.CreateNonAsync(await GetSearchingResult(),
                                                            pageNumber,
                                                            pageSize));
         }

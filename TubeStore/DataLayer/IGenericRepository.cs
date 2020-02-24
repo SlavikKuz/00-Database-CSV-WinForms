@@ -32,7 +32,8 @@ namespace TubeStore.DataLayer
         IQueryable<Entity> GetIncluding(Expression<Func<Entity, bool>> match, params Expression<Func<Entity, object>>[] includeProperties);
         IQueryable<Entity> GetAllIncluding(params Expression<Func<Entity, object>>[] includeProperties);
         Task<Entity> GetAsync(int id);
-        
+        Task<List<Entity>> GetAllIncludingThenIncluding();
+
         Entity Update(Entity entity);
         Task<Entity> UpdateAsync(Entity entity);
 

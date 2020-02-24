@@ -114,6 +114,16 @@ namespace TubeStore.DataLayer
             return dbContext.Set<Entity>();
         }
 
+        public async Task<List<Entity>> GetAllIncludingThenIncluding()
+        {
+            var query = dbContext.Set<Entity>().AsQueryable();
+            foreach (var property in dbContext.Model.FindEntityType(typeof(Entity)).GetNavigations())
+            {
+                query = query.Include(property.Name);
+            }
+            return await query.ToListAsync();
+        }
+
         public virtual async Task<ICollection<Entity>> GetAllAsync()
         {
             return await dbContext.Set<Entity>().ToListAsync();

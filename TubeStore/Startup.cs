@@ -10,7 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReflectionIT.Mvc.Paging;
 using TubeStore.DataLayer;
+using TubeStore.Middleware;
 using TubeStore.Models;
 
 namespace TubeStore
@@ -60,7 +62,9 @@ namespace TubeStore
             app.UseCookiePolicy();            
             app.UseAuthentication();
             app.UseAuthorization();
-          
+
+            app.UseMiddleware(typeof(VisitorCounterMiddleware));
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
