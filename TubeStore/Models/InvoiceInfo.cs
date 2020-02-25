@@ -17,6 +17,7 @@ namespace TubeStore.Models
         
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
+        public decimal Discount { get; set; }   
         
         public int Quantity { get; set; }
 

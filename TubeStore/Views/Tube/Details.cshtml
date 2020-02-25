@@ -52,6 +52,10 @@
             <h3>@Model.Brand @Model.Type</h3>
             <h4>@Model.ShortDescription</h4>
             <partial name="_AvailableInPairs" model="@Model" />
+            @if (Model.Discount != 0)
+            {
+                <a class="text-danger">Discount @Model.Discount.ToString("P0")</a>
+            }
             <hr class="soft my-4" />
             <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
                 <div class="form-group">

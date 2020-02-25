@@ -31,28 +31,26 @@ namespace TubeStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            DashboardViewModel model = new DashboardViewModel();
-
-            model.CountProducts = await tubes.CountAsync();
-
-            ICollection<Invoice> invoicesPaid =
+            ICollection<Invoice> invoicesAllPaid =
                 invoices.GetAllIncluding(x => x.InvoicesInfo)
                 .Where(x => x.Status == EnumStatus.Paid)
                 .ToList();
+            
+            DashboardViewModel model = new DashboardViewModel();
+            model.CountProducts = await tubes.CountAsync();
+            model.CountInvoices = invoicesAllPaid.Count();
+            model.CountVisitors = Int32.Parse(this.HttpContext.Session.GetString("Counter"));
 
-            model.CountInvoices = invoicesPaid.Count();
-
-            foreach (var invoice in invoicesPaid)
+            foreach (var invoice in invoicesAllPaid)
             {
                 foreach (var tube in invoice.InvoicesInfo)
                 {
                     model.CountTubeSold += tube.Quantity;
                 }
             }
-            model.CountVisitors = Int32.Parse(this.HttpContext.Session.GetString("Counter"));
 
-            ICollection<Invoice> invoicesTwoWeeks = 
-                invoicesPaid.Where(x => x.OrderDate > DateTime.Now.AddDays(-14)).ToList();
+            ICollection<Invoice> invoicesTwoWeeks =
+                invoicesAllPaid.Where(x => x.OrderDate > DateTime.Now.AddDays(-14)).ToList();
 
             ChartViewModel chartViewModel = new ChartViewModel()
             {
@@ -67,7 +65,7 @@ namespace TubeStore.Areas.Admin.Controllers
             model.ChartView = chartViewModel;
             
             List<int> tubeIds = new List<int>();
-            foreach (var invoice in invoicesPaid)
+            foreach (var invoice in invoicesAllPaid)
             {
                 foreach (var info in invoice.InvoicesInfo)
                 {
@@ -94,7 +92,7 @@ namespace TubeStore.Areas.Admin.Controllers
 
             foreach (var tableView in tableViews)
             {
-                foreach (var invoice in invoicesPaid)
+                foreach (var invoice in invoicesAllPaid)
                 {
                     foreach (var info in invoice.InvoicesInfo)
                     {
@@ -102,7 +100,6 @@ namespace TubeStore.Areas.Admin.Controllers
                             tableView.SoldTubes += info.Quantity;
                     }
                 }
-
             }
 
             model.TableView = tableViews;

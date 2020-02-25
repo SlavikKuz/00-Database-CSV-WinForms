@@ -16,6 +16,7 @@ namespace TubeStore.DataLayer
         public DbSet<Carousel> Carousels { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceInfo> InvoiceInfos { get; set; }
         public DbSet<ShippingAddress> ShippingAddresses { get; set; }
@@ -30,6 +31,12 @@ namespace TubeStore.DataLayer
                 .HasConversion(
                     z => z.ToString(),
                     z => (EnumStatus)Enum.Parse(typeof(EnumStatus), z));
+
+            modelBuilder.Entity<Coupon>()
+                .Property(x => x.CouponStatus)
+                .HasConversion(
+                    z => z.ToString(),
+                    z => (EnumCoupon)Enum.Parse(typeof(EnumCoupon), z));
 
             modelBuilder.Entity<Tube>().HasData(
                 new Tube()
@@ -48,7 +55,7 @@ namespace TubeStore.DataLayer
                     IsTubeOfTheWeek = false,
                     IsNewArrival = false,
                     CategoryId = 1,
-                    Discount = 10
+                    Discount = 0.05M
                 },
                 new Tube()
                 {
@@ -174,6 +181,30 @@ namespace TubeStore.DataLayer
                     Title = "6N6P",
                     Description = "Tested pre-amp set",
                     Status = true,
+                }
+            );
+
+            modelBuilder.Entity<Coupon>().HasData(
+                new Coupon()
+                { 
+                    CouponId = 1,
+                    CouponName = "ten",
+                    CouponValue = 10,
+                    CouponStatus = EnumCoupon.Active
+                },
+                new Coupon()
+                {
+                    CouponId = 2,
+                    CouponName = "fifteen",
+                    CouponValue = 15,
+                    CouponStatus = EnumCoupon.Expired
+                },
+                new Coupon()
+                {
+                    CouponId = 5,
+                    CouponName = "five",
+                    CouponValue = 5,
+                    CouponStatus = EnumCoupon.Active
                 }
             );
 

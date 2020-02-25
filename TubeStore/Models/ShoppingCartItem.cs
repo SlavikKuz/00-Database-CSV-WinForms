@@ -19,6 +19,9 @@ namespace TubeStore.Models
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
+
+        public decimal Discount { get; set; }
+
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(7,2)")]
         public decimal Total { get; set; }

@@ -4,14 +4,19 @@
     <figure class="figure">
         <img src="@Model.ImageThumbnailUrl" class="figure-img img-fluid rounded" alt="">
         <figcaption class="figure-caption">
-            <h5 class="float-right">
-                @Model.Price.ToString("c")
-            </h5>
-            <h4>
+            <h6 class="float-right">
+                @Model.Price.ToString("c")            
+                @if (Model.Discount != 0)
+                {
+                    <a class="text-danger">-@Model.Discount.ToString("P0")</a>
+                }
+            </h6>
+
+            <h5>
                 <a asp-controller="Tube" asp-action="Details" asp-route-tubeid="@Model.TubeId">
                     @Model.Brand @Model.Type
                 </a>
-            </h4>
+            </h5>
             <p>@Model.Date, @Model.ShortDescription</p>
             <partial name="_AvailableInPairs" model="@Model" />
         </figcaption>

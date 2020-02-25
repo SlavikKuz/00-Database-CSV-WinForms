@@ -40,7 +40,7 @@ namespace TubeStore.Controllers
             List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
                     session.GetString("ShoppingCartItems"));
 
-            Tube tempTube = null;
+            Tube tempTube;
 
             foreach (int id in sessionList.Select(x => x.TubeId))
             {
@@ -53,13 +53,14 @@ namespace TubeStore.Controllers
                     Quantity = sessionList.Find(z => z.TubeId == id).Quantity,
                     QuantityLimit = tempTube.Quantity,
                     Price = tempTube.Price,
+                    Discount = tempTube.Discount,
                     Total = sessionList.Find(z => z.TubeId == id).Quantity * tempTube.Price
                 });
             }
 
             foreach (var item in shoppingCart.ShoppingCartItems)
             {
-                shoppingCart.GrandTotal += item.Total;
+                shoppingCart.GrandTotal += item.Total - item.Total*item.Discount;
             }
 
             return View(shoppingCart);
@@ -110,7 +111,7 @@ namespace TubeStore.Controllers
             return RedirectToAction("ReturnCart");
         }
 
-        public async Task<ActionResult<ShoppingCart>> Update(int[] quantity)
+        public async Task<ActionResult<ShoppingCart>> Update(int[] quantity, string coupon)
         {
             ISession session = this.HttpContext.Session;
             List<ShoppingCartItem> sessionList = new List<ShoppingCartItem>();
