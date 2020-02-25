@@ -70,18 +70,52 @@
                                         <td>
                                             @item.Quantity
                                         </td>
-                                        <td>
-                                            @item.Price
-                                        </td>
-                                        <th>
-                                            @if (item.Tube.Discount == 0)
-                                            {@((item.Price * item.Quantity).ToString("c"))}
+
+                                        @if (item.Discount != 0)
+                                        {
+                                            <td>
+                                                @item.Price.ToString("c")
+                                                <p class="text-danger">-@item.Discount.ToString("P0")</p>
+                                                <p><b>New Price:</b></p>
+                                                <p>@((item.Price * (1 - item.Discount)).ToString("c"))</p>
+                                            </td>
+                                            <td>
+                                                @((item.Price * item.Quantity).ToString("c"))
+                                                <p class="text-danger">-@item.Discount.ToString("P0")</p>
+                                                <p><b>New Total:</b></p>
+                                                <p>@((item.Price * item.Quantity * (1 - item.Discount)).ToString("c"))</p>
+                                            </td>
+                                        }
                                         else
-                                        { @((item.Price * item.Quantity * (1 - item.Tube.Discount)).ToString("c"))
-                                        <p>Discount: @item.Tube.Discount % </p>}
-                                        </th>
+                                        {
+                                            <td>
+                                                @item.Price.ToString("c")
+                                            </td>
+                                            <td>
+                                                @((item.Price * item.Quantity).ToString("c"))
+                                            </td>
+                                        }
+
                                     </tr>
                                 }
+                                <tr>
+                                    <td colspan="6" style="text-align:right">
+                                        @{ decimal total = 0; }
+
+                                        @foreach (var item in Model.InvoicesInfo)
+                                        {
+                                            total += item.Price * item.Quantity * (1 - item.Discount);
+                                        }
+
+                                        @if (Model.Coupon != null)
+                                        {
+                                            <h5>Grand Total: @total.ToString("c"))</h5>
+
+                                            <p>Applied coupon: @Model.Coupon.CouponName (@Model.Coupon.CouponValue.ToString("P0"))</p>
+                                        }
+                                        <h5>Final Total: <strong>@Model.Total.ToString("c")</strong></h5>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 

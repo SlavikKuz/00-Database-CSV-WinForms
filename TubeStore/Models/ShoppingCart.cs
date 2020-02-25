@@ -20,7 +20,6 @@ namespace TubeStore.Models
         [Column(TypeName = "decimal(8,2)")]
         public decimal GrandTotal { get; set; }
 
-        public int CouponId { get; set; }
         public virtual Coupon Coupon { get; set; }
     }
 }

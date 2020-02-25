@@ -1,0 +1,13 @@
+﻿@model DropdownViewModel
+
+<a class="nav-link dropdown-toggle h5" data-toggle="dropdown">
+    <u>@Model.DropdownName</u>
+</a>
+<div class="dropdown-menu">
+    @foreach (var item in Model.DropdownItems)
+    {
+        <a class="dropdown-item" asp-controller="Home" asp-action="IndexType" asp-route-type="@item">@item</a>
+    }
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" asp-controller="Home" asp-action="IndexCategory" asp-route-category="@Model.DropdownName">Show All</a>
+</div>

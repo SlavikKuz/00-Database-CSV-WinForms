@@ -55,9 +55,34 @@ namespace TubeStore.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("Edit")]
-        public async Task<ActionResult<Tube>> Edit(Tube tube)
+        public async Task<ActionResult<Tube>> Edit(Tube tube, string price, string discount)
         {
-            await tubes.UpdateAsync(tube);
+            decimal priceNum;
+            decimal discoNum;
+
+            bool priceParse = decimal.TryParse(price, out priceNum);
+            bool discoParse = decimal.TryParse(discount, out discoNum);
+
+            if (!priceParse || !discoParse) return RedirectToAction("Edit", tube.TubeId);
+
+            Tube tempTube = await tubes.FindAsync(x => x.TubeId == tube.TubeId);
+
+            tempTube.Type = tube.Type;
+            tempTube.Brand = tube.Brand;
+            tempTube.Date = tube.Date;
+            tempTube.ShortDescription = tube.ShortDescription;
+            tempTube.FullDescription = tube.FullDescription;
+            tempTube.MatchedPair = tube.MatchedPair;
+            tempTube.Quantity = tube.Quantity;
+            if (tube.ImageUrl !=null) tempTube.ImageUrl = tube.ImageUrl;
+            if (tube.ImageThumbnailUrl != null) tempTube.ImageThumbnailUrl = tube.ImageThumbnailUrl;
+            tempTube.IsTubeOfTheWeek = tube.IsTubeOfTheWeek;
+            tempTube.IsNewArrival = tube.IsNewArrival;
+            tempTube.CategoryId = tube.CategoryId;
+            tempTube.Price = priceNum;
+            tempTube.Discount = discoNum;
+
+            await tubes.UpdateAsync(tempTube);
             return RedirectToAction("Index"); 
         }
 
@@ -88,12 +113,23 @@ namespace TubeStore.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<ActionResult<Tube>> Add(Tube tube, IFormFile image, IFormFile thumb)
+        public async Task<ActionResult<Tube>> Add(Tube tube, 
+                                                  IFormFile image, IFormFile thumb,
+                                                  string price, string discount)
         {
+            decimal priceNum;
+            decimal discoNum;
+
+            bool priceParse = decimal.TryParse(price, out priceNum);
+            bool discoParse = decimal.TryParse(discount, out discoNum);
+
+            if (!priceParse || !discoParse) return RedirectToAction("Add");
+
+            tube.Price = priceNum;
+            tube.Discount = discoNum;
+
             tube.ImageUrl = await UploadAndGetPath(tube, image);
             tube.ImageThumbnailUrl = await UploadAndGetPath(tube, thumb);
-
-            if (tube.Quantity > 0) tube.InStock = true;
 
             await tubes.AddAsync(tube);
 

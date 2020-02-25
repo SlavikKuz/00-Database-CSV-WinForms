@@ -33,6 +33,33 @@ namespace TubeStore.Controllers
             return View(homeIndexViewModel);
         }
 
+        public async Task<IActionResult> IndexCategory(string category, int? page, int? categoryId)
+        {
+            ICollection<Tube> tubesInCategory;
+
+            if (categoryId!=null)
+                tubesInCategory = await tubes.FindAllAsync(x => x.Category.CategoryId == categoryId);
+            else
+                tubesInCategory = await tubes.FindAllAsync(x => x.Category.CategoryName == category);
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(PaginatedList<Tube>.CreateNonAsync(tubesInCategory,
+                                                           pageNumber,
+                                                           pageSize));
+        }
+
+        public async Task<IActionResult> IndexType(string type, int? page)
+        {
+            ICollection<Tube> tubesInCategory = await tubes.FindAllAsync(x => x.Type == type);
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(PaginatedList<Tube>.CreateNonAsync(tubesInCategory,
+                                                           pageNumber,
+                                                           pageSize));
+        }
+
         [HttpPost]
         public IActionResult Search(IFormCollection form)
         {

@@ -3,14 +3,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <u>Pre Triodes</u>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">6N1P</a>
-                    <a class="dropdown-item" href="#">6N6P</a>
-                    <a class="dropdown-item" href="#">ECC82</a>
-                </div>
+                @await Component.InvokeAsync("MenuList", "Pre Triodes")   
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

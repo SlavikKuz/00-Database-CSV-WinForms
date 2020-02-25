@@ -227,6 +227,51 @@ namespace TubeStore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TubeStore.Models.Coupon", b =>
+                {
+                    b.Property<int>("CouponId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CouponName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CouponStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CouponValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("CouponId");
+
+                    b.ToTable("Coupons");
+
+                    b.HasData(
+                        new
+                        {
+                            CouponId = 1,
+                            CouponName = "ten",
+                            CouponStatus = "Active",
+                            CouponValue = 0.1m
+                        },
+                        new
+                        {
+                            CouponId = 2,
+                            CouponName = "fifteen",
+                            CouponStatus = "Expired",
+                            CouponValue = 0.15m
+                        },
+                        new
+                        {
+                            CouponId = 3,
+                            CouponName = "five",
+                            CouponStatus = "Active",
+                            CouponValue = 0.05m
+                        });
+                });
+
             modelBuilder.Entity("TubeStore.Models.Customer", b =>
                 {
                     b.Property<string>("Id")
@@ -332,6 +377,9 @@ namespace TubeStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CouponId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -350,6 +398,8 @@ namespace TubeStore.Migrations
 
                     b.HasKey("InvoiceId");
 
+                    b.HasIndex("CouponId");
+
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("ShippingAddressId");
@@ -363,6 +413,9 @@ namespace TubeStore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("InvoiceId")
                         .HasColumnType("int");
@@ -452,9 +505,6 @@ namespace TubeStore.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("InStock")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsNewArrival")
                         .HasColumnType("bit");
 
@@ -490,11 +540,10 @@ namespace TubeStore.Migrations
                             Brand = "NEVZ",
                             CategoryId = 1,
                             Date = "10.1963",
-                            Discount = 10m,
+                            Discount = 0.05m,
                             FullDescription = "The 6N1P has similar ratings to the 6DJ8 and in the past was sometimes rebranded as such, however differences between the two types (the 6N1P requires almost twice the filament current and has only one third the S value) mean they are not directly interchangeable. The S is about 4.35 ma/V, the 6DJ8/ECC88 has a S of 12.5 ma/V and a gain of 33 and a lower internal resistance. However, the 6N1P is typically more linear for a given load. It is therefore inaccurate to say that these two tubes are identical. The correct Russian equivalent to the 6DJ8/ECC88 is the 6N23P, the latter has a S of 12.5 mA/V and a gain of 33.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N1P/20160808_6N1Pnevz_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N1P/20160808_6N1Pnevz.jpg",
-                            InStock = false,
                             IsNewArrival = false,
                             IsTubeOfTheWeek = false,
                             MatchedPair = true,
@@ -513,7 +562,6 @@ namespace TubeStore.Migrations
                             FullDescription = "The 6N1P has similar ratings to the 6DJ8 and in the past was sometimes rebranded as such, however differences between the two types (the 6N1P requires almost twice the filament current and has only one third the S value) mean they are not directly interchangeable. The S is about 4.35 ma/V, the 6DJ8/ECC88 has a S of 12.5 ma/V and a gain of 33 and a lower internal resistance. However, the 6N1P is typically more linear for a given load. It is therefore inaccurate to say that these two tubes are identical. The correct Russian equivalent to the 6DJ8/ECC88 is the 6N23P, the latter has a S of 12.5 mA/V and a gain of 33.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N1P/20170201_6N1Pboxplates_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N1P/20170201_6N1Pboxplates.jpg",
-                            InStock = true,
                             IsNewArrival = false,
                             IsTubeOfTheWeek = true,
                             MatchedPair = true,
@@ -532,7 +580,6 @@ namespace TubeStore.Migrations
                             FullDescription = "The 6N6p tube is a Russian dual triode tube. This tube is often seen as 6N6p, 6N6PI, 6N6pi, 6H6p, 6N6p-i, 6N6n-i ,or 6H6n-i. The Chinese name for the 6H6p tube is 6N6 tube. The 6N6p is a fantastic tube for preamps and driver stages, and is even used as output tubes in the Little Dot MkIII headphone amp. It has been used by the tube DIY underground for many years and is now becoming better known in the mainstream.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pfoton_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pfoton.jpg",
-                            InStock = true,
                             IsNewArrival = false,
                             IsTubeOfTheWeek = false,
                             MatchedPair = true,
@@ -551,7 +598,6 @@ namespace TubeStore.Migrations
                             FullDescription = "The 6N6p tube is a Russian dual triode tube. This tube is often seen as 6N6p, 6N6PI, 6N6pi, 6H6p, 6N6p-i, 6N6n-i ,or 6H6n-i. The Chinese name for the 6H6p tube is 6N6 tube. The 6N6p is a fantastic tube for preamps and driver stages, and is even used as output tubes in the Little Dot MkIII headphone amp. It has been used by the tube DIY underground for many years and is now becoming better known in the mainstream.",
                             ImageThumbnailUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pnevz_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pnevz.jpg",
-                            InStock = true,
                             IsNewArrival = true,
                             IsTubeOfTheWeek = false,
                             MatchedPair = true,
@@ -570,7 +616,6 @@ namespace TubeStore.Migrations
                             FullDescription = "The tube is popular in hi-fi vacuum tube audio as a low-noise line amplifier, driver (especially for tone stacks), and phase-inverter in vacuum tube push–pull amplifier circuits. It was widely used, in special-quality versions such as ECC82 and 5814A, in pre-semiconductor digital computer circuitry. ",
                             ImageThumbnailUrl = "/Images/Pre Triodes/ECC82/20171220_ECC82tungsram_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/ECC82/20171220_ECC82tungsram.jpg",
-                            InStock = true,
                             IsNewArrival = true,
                             IsTubeOfTheWeek = false,
                             MatchedPair = false,
@@ -589,7 +634,6 @@ namespace TubeStore.Migrations
                             FullDescription = "The tube is popular in hi-fi vacuum tube audio as a low-noise line amplifier, driver (especially for tone stacks), and phase-inverter in vacuum tube push–pull amplifier circuits. It was widely used, in special-quality versions such as ECC82 and 5814A, in pre-semiconductor digital computer circuitry. ",
                             ImageThumbnailUrl = "/Images/Pre Triodes/ECC82/20171212_ECC82mullard_small.jpg",
                             ImageUrl = "/Images/Pre Triodes/ECC82/20171212_ECC82mullard.jpg",
-                            InStock = true,
                             IsNewArrival = true,
                             IsTubeOfTheWeek = false,
                             MatchedPair = false,
@@ -660,6 +704,10 @@ namespace TubeStore.Migrations
 
             modelBuilder.Entity("TubeStore.Models.Invoice", b =>
                 {
+                    b.HasOne("TubeStore.Models.Coupon", "Coupon")
+                        .WithMany()
+                        .HasForeignKey("CouponId");
+
                     b.HasOne("TubeStore.Models.Customer", "Customer")
                         .WithMany("Invoices")
                         .HasForeignKey("CustomerId");

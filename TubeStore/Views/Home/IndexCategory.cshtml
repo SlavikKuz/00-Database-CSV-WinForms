@@ -1,0 +1,38 @@
+﻿@model PaginatedList<Tube>
+
+@{
+    ViewData["Title"] = "IndexCategory";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-4">
+                    <partial name="_TubeBadge" model="item" />
+                </div>
+            }
+        </div>
+
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            @if (@Model.PageIndex > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="IndexCategory" asp-route-categoryId="@Model.First().CategoryId" asp-route-page="@(Model.PageIndex-1)">&laquo;</a>
+                </li>
+            }
+            <li class="page-item"><a class="page-link">@Model.PageIndex</a></li>
+            @if (@Model.TotalPages > @Model.PageIndex)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="IndexCategory" asp-route-categoryId="@Model.First().CategoryId" asp-route-page="@(Model.PageIndex+1)">&raquo;</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -22,7 +22,7 @@
         </div>
         <div class="col-4">
             <div class="input-group mb-2" style="text-align:right">
-                <input type="text" class="form-control" name="coupon" placeholder="Apply coupon...">
+                <input type="text" class="form-control" name="couponName" placeholder="Apply coupon...">
                 <div class="input-group-append">
                     <button class="btn btn-info" type="submit">Go!</button>
                 </div>
@@ -44,53 +44,55 @@
             @if (Model.ShoppingCartItems.Count > 0)
                 @foreach (var item in Model.ShoppingCartItems)
                 {
-                <tr>
-                <td>
-                    <img src="@item.ImageThumbnailUrl" class="figure-img img-fluid rounded" width="120" alt="">
-                </td>
-                <td>
-                    @item.TypeBrandDate
-                </td>
-                <td>
-                    <div class="input-group">
-                        <input class="col-4" type="number" max="@item.QuantityLimit" placeholder="1" value="@item.Quantity" name="quantity" />
-                        <button class="btn btn-light" type="submit">Update</button>
-                        <a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="Remove" asp-route-tubeid="@item.TubeId">Remove <i class="fa fa-remove"></i></a>
-                    </div>
-                </td>
-                @if (item.Discount != 0)
-                {
-                    <td>
-                        @item.Price.ToString("c")
-                        <p class="text-danger">-@item.Discount.ToString("P0")</p>
-                        <p><b>New Price:</b></p> 
-                        <p>@((item.Price - item.Price * item.Discount).ToString("c"))</p>
-                    </td>
-                    <td>
-                        @item.Total.ToString("c")
-                        <p class="text-danger">-@item.Discount.ToString("P0")</p>
-                        <p><b>New Total:</b></p> 
-                        <p>@((item.Total - item.Total * item.Discount).ToString("c"))</p>
-                    </td>
+                    <tr>
+                        <td>
+                            <img src="@item.ImageThumbnailUrl" class="figure-img img-fluid rounded" width="120" alt="">
+                        </td>
+                        <td>
+                            @item.TypeBrandDate
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input class="col-4" type="number" max="@item.QuantityLimit" placeholder="1" value="@item.Quantity" name="quantity" />
+                                <button class="btn btn-light" type="submit">Update</button>
+                                <a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="Remove" asp-route-tubeid="@item.TubeId">Remove <i class="fa fa-remove"></i></a>
+                            </div>
+                            <br />
+                            <p class="text-gray">@(item.QuantityLimit - item.Quantity) in Stock</p>
+                        </td>
+                        @if (item.Discount != 0)
+                        {
+                            <td>
+                                @item.Price.ToString("c")
+                                <p class="text-danger">-@item.Discount.ToString("P0")</p>
+                                <p><b>New Price:</b></p>
+                                <p>@((item.Price * (1 - item.Discount)).ToString("c"))</p>
+                            </td>
+                            <td>
+                                @item.Total.ToString("c")
+                                <p class="text-danger">-@item.Discount.ToString("P0")</p>
+                                <p><b>New Total:</b></p>
+                                <p>@((item.Total * (1 - item.Discount)).ToString("c"))</p>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Price.ToString("c")
+                            </td>
+                            <td>
+                                @item.Total.ToString("c")
+                            </td>
+                        }
+                    </tr>
                 }
-                else
-                {
-                    <td>
-                        @item.Price.ToString("c")
-                    </td>
-                    <td>
-                        @item.Total.ToString("c")
-                    </td>
-                }
-            </tr>
-                    }
             <tr>
                 <td colspan="5" style="text-align:right">
                     <h5>Grand Total: <strong>@Model.GrandTotal.ToString("c")</strong></h5>
-                    @if(Model.Coupon!=null)
+                    @if (Model.Coupon != null)
                     {
                         <p>Applied coupon: @Model.Coupon.CouponName</p>
-                        <h5>Total: @((Model.GrandTotal-Model.GrandTotal*Model.Coupon.CouponValue).ToString("c"))</h5>
+                        <h5>Total: @((Model.GrandTotal - Model.GrandTotal * Model.Coupon.CouponValue).ToString("c"))</h5>
                     }
                 </td>
             </tr>
@@ -98,8 +100,17 @@
     </table>
 </form>
 
-<a asp-controller="Home" asp-action="Index" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Continue Shopping </a>
-@if (Model.ShoppingCartItems.Count > 0)
-{
-    <a asp-controller="ShoppingCart" asp-action="Checkout" class="btn btn-danger pull-right">Checkout <i class="fa fa-angle-double-right"></i></a>
-}
+<div class="row">
+    <div class="col-6">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Continue Shopping </a>
+    </div>
+
+    <div class="col-6">
+        @if (Model.ShoppingCartItems.Count > 0)
+        {
+            <div class="text-right">
+                <a asp-controller="ShoppingCart" asp-action="Checkout" class="btn btn-danger">Checkout <i class="fa fa-angle-double-right"></i></a>
+            </div>
+        }
+    </div>
+</div>

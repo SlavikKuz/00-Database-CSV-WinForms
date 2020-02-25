@@ -18,22 +18,25 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<Tube> tubes;
         private readonly IGenericRepository<Invoice> invoices;
         private readonly IGenericRepository<ShippingAddress> shippingAddresses;
+        private readonly IGenericRepository<Coupon> coupons;
         private readonly UserManager<Customer> userManager;
 
         public ShoppingCartController(IGenericRepository<Tube> tubes, 
                                       IGenericRepository<Invoice> invoices,
                                       IGenericRepository<ShippingAddress> shippingAddresses,
+                                      IGenericRepository<Coupon> coupons,
                                       UserManager<Customer> userManager)
         {
             this.tubes = tubes;
             this.invoices = invoices;
             this.shippingAddresses = shippingAddresses;
+            this.coupons = coupons;
             this.userManager = userManager;
         }
 
         public async Task<ActionResult<ShoppingCart>> ReturnCart()
         {
-            ISession session = this.HttpContext.Session;
+            ISession session = HttpContext.Session;
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartId = session.GetString("ShoppingCartId");
@@ -58,11 +61,17 @@ namespace TubeStore.Controllers
                 });
             }
 
+            shoppingCart.Coupon = await coupons.FindAsync(x => 
+                                            x.CouponName == session.GetString("Coupon"));
+
             foreach (var item in shoppingCart.ShoppingCartItems)
             {
                 shoppingCart.GrandTotal += item.Total - item.Total*item.Discount;
             }
 
+            shoppingCart.Coupon = await coupons.FindAsync(x =>
+                                x.CouponName == session.GetString("Coupon"));
+            
             return View(shoppingCart);
         }
                 
@@ -77,6 +86,7 @@ namespace TubeStore.Controllers
             {
                 cartId = Guid.NewGuid().ToString();
                 session.SetString("ShoppingCartId", cartId);
+                session.SetString("Coupon", string.Empty);
             }
             else
             {
@@ -111,9 +121,10 @@ namespace TubeStore.Controllers
             return RedirectToAction("ReturnCart");
         }
 
-        public async Task<ActionResult<ShoppingCart>> Update(int[] quantity, string coupon)
+        public async Task<ActionResult<ShoppingCart>> Update(int[] quantity, string couponName)
         {
-            ISession session = this.HttpContext.Session;
+            ISession session = HttpContext.Session;
+
             List<ShoppingCartItem> sessionList = new List<ShoppingCartItem>();
 
             sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
@@ -125,6 +136,10 @@ namespace TubeStore.Controllers
             }
 
             session.SetString("ShoppingCartItems", JsonConvert.SerializeObject(sessionList));
+
+            if (String.IsNullOrEmpty(couponName)) couponName = string.Empty;
+
+            session.SetString("Coupon", couponName);
 
             return RedirectToAction("ReturnCart");
         }
@@ -149,7 +164,7 @@ namespace TubeStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
-            Customer customer = userManager.Users.First(x => x.UserName == this.User.Identity.Name);
+            Customer customer = userManager.Users.First(x => x.UserName == User.Identity.Name);
 
             if (customer == null)
                 return RedirectToAction("Login", "Home"); 
@@ -185,6 +200,8 @@ namespace TubeStore.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(CheckoutViewModel checkoutViewModel)
         {
+            ISession session = HttpContext.Session;
+
             Customer customer = await userManager.FindByIdAsync(checkoutViewModel.Customer.CustomerId);
             customer.Id = checkoutViewModel.Customer.CustomerId;
             customer.AddressLine1 = checkoutViewModel.BillingAddress.AddressLine1;
@@ -226,14 +243,15 @@ namespace TubeStore.Controllers
             else
                 await shippingAddresses.UpdateAsync(shippingAddress);
 
+            Coupon coupon = await coupons.FindAsync(x => x.CouponName.Equals(session.GetString("Coupon"))) ?? new Coupon();
+
             Invoice invoice = new Invoice()
             {
                 OrderDate = DateTime.Now,
                 CustomerId = customer.Id,
-                ShippingAddressId = shippingAddress.ShippingAdressId
+                ShippingAddressId = shippingAddress.ShippingAdressId,
+                CouponId = coupon.CouponId
             };
-
-            ISession session = this.HttpContext.Session;
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartId = session.GetString("ShoppingCartId");
@@ -250,7 +268,8 @@ namespace TubeStore.Controllers
                 {
                     TubeId = item.TubeId,
                     Price = tubeTemp.Price,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    Discount = tubeTemp.Discount
                 });
                 tubeTemp.Quantity -= item.Quantity;
                 await tubes.UpdateAsync(tubeTemp);
@@ -258,19 +277,14 @@ namespace TubeStore.Controllers
 
             foreach (var item in invoice.InvoicesInfo)
             {
-                invoice.Total += item.Quantity * item.Price;
-                // ?? dicount
+                invoice.Total += item.Quantity * item.Price * (1 - item.Discount);
             }
+
+            invoice.Total *= (1 - coupon.CouponValue);
 
             await invoices.AddAsync(invoice);
             HttpContext.Session.Remove("ShoppingCartId");
             HttpContext.Session.Remove("ShoppingCartItems");
-
-            //coupon in the cart;
-            //dicount in the cart
-            //discount in infos 
-
-            //dicount into info and badge
 
             return RedirectToAction("Index", "Invoice");
         }

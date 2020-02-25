@@ -21,7 +21,8 @@ namespace TubeStore.Models
         public int ShippingAddressId { get; set; }
         public virtual ShippingAddress ShippingAddress { get; set; }
 
-        public int CouponId { get; set; }
+        [ForeignKey("Coupons")]
+        public int? CouponId { get; set; }
         public virtual Coupon Coupon { get; set; }
 
         public virtual List<InvoiceInfo> InvoicesInfo { get; set; } = new List<InvoiceInfo>();

@@ -14,8 +14,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form role="form">
+                    <form role="form" method="post" asp-area="Admin" asp-controller="Tube" asp-action="Edit">
                         <div class="row">
+                            <input asp-for="Tube.TubeId" type="hidden">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label asp-for="Tube.Type" class="control-label"></label>
@@ -61,11 +62,9 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <!-- text input -->
                                 <div class="form-group">
                                     <label asp-for="Tube.Price" class="control-label"></label>
-                                    <input type="number" class="form-control is-warning" placeholder="@Model.Tube.Price.ToString("c")" min="0.01" step=".01">
-                                    <span asp-validation-for="Tube.Price" class="text-danger"></span>
+                                    <input type="text" class="form-control is-warning" name="price" value="@Model.Tube.Price.ToString()">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -84,11 +83,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Tube.Discount" class="control-label"></label>
+                                    <input type="text" class="form-control is-warning" name="discount" value="@Model.Tube.Discount.ToString()">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <br />
                                 <div class="form-group">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" asp-for="Tube.MatchedPair" /> @Html.DisplayNameFor(model => model.Tube.MatchedPair)
+                                            <input class="form-check-input" asp-for="Tube.IsNewArrival" /> @Html.DisplayNameFor(model => model.Tube.IsNewArrival)
                                         </label>
                                     </div>
                                     <div class="form-check">
@@ -98,18 +105,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <br />
                                 <div class="form-group">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" asp-for="Tube.IsNewArrival" /> @Html.DisplayNameFor(model => model.Tube.IsNewArrival)
+                                            <input class="form-check-input" asp-for="Tube.MatchedPair" /> @Html.DisplayNameFor(model => model.Tube.MatchedPair)
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" asp-for="Tube.InStock" /> @Html.DisplayNameFor(model => model.Tube.InStock)
-                                        </label>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -118,7 +122,7 @@
                                 <div class="form-group">
                                     <label asp-for="Tube.ImageUrl" class="control-label"></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <input type="file" class="custom-file-input" id="customFile" value="@Model.Tube.ImageUrl">
                                         <label class="custom-file-label" for="customFile">@Model.Tube.ImageUrl</label>
                                     </div>
                                 </div>
@@ -129,7 +133,7 @@
                                 <div class="form-group">
                                     <label asp-for="Tube.ImageThumbnailUrl" class="control-label"></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <input type="file" class="custom-file-input" id="customFile" value="@Model.Tube.ImageThumbnailUrl">
                                         <label class="custom-file-label" for="customFile">@Model.Tube.ImageThumbnailUrl</label>
                                     </div>
                                 </div>

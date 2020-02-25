@@ -19,58 +19,59 @@
 
                 @if (User.IsInRole("Admin"))
                 {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
-                        <i class="fas fa-tools"></i>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-tools"></i>
+                        </a>
+                    </li>
                 }
 
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Contact</a>
+                </li>
+                @await Component.InvokeAsync("ShoppingCartIcon")
+                
+                @if (!User.Identity.IsAuthenticated)
+                {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">About Us</a>
+                        <a class="nav-link text-dark" asp-controller="Customer" asp-action="Register">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Contact</a>
+                        <a class="nav-link text-dark" asp-controller="Customer" asp-action="Login">
+                            <span class="fa fa-sign-in-alt"></span>
+                        </a>
                     </li>
+                }
+                else
+                {
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Customer" asp-action="Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Customer" asp-action="Login">
-                                <span class="fa fa-sign-in-alt"></span>
+                            <div class="text-center"><label>Hello <strong>@User.Identity.Name!</strong></label></div>
+                            <a class="dropdown-item" asp-action="Profile" asp-controller="Customer">
+                                <span class="fas fa-user-alt"></span> Edit Profile
                             </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user-circle fa-fw"></i>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Invoice">
+                                <span class="fas fa-list-alt"></span> Invoices
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Customer">
+                                <span class="fas fa-key"></span> Change Password
+                            </a>
 
-                                <div class="text-center"><label>Hello <strong>@User.Identity.Name!</strong></label></div>
-                                <a class="dropdown-item" asp-action="Profile" asp-controller="Customer">
-                                    <span class="fas fa-user-alt"></span> Edit Profile
-                                </a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Invoice">
-                                    <span class="fas fa-list-alt"></span> Invoices
-                                </a>
-                                <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Customer">
-                                    <span class="fas fa-key"></span> Change Password
-                                </a>
+                            <div class="dropdown-divider"></div>
 
-                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Customer" asp-action="Logout" onclick="return confirm('Are you sure?')"><span class="fa fa-sign-out-alt"> Logout</span></a>
 
-                                <a class="dropdown-item" asp-controller="Customer" asp-action="Logout" onclick="return confirm('Are you sure?')"><span class="fa fa-sign-out-alt"> Logout</span></a>
-
-                            </div>
-                        </li>
-                    }
-                </ul>
+                        </div>
+                    </li>
+                }
+            </ul>
         </nav>
     </div>
 </header>

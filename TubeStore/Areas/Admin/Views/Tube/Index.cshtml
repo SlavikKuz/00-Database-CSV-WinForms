@@ -27,14 +27,13 @@
                                     <th>Id</th>
                                     <th>Tube</th>
                                     <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Full Description</th>
+                                    <th style="width: 10%">Description</th>
+                                    <th style="width: 40%">Full Description</th>
                                     <th>Available</th>
                                     <th>Pairs</th>
                                     <th>Price</th>
                                     <th>Bestseller</th>
                                     <th>New</th>
-                                    <th>Sale</th>
                                     <th>Category</th>
                                 </tr>
                             </thead>
@@ -65,7 +64,13 @@
                                         <td><span class="badge bg-danger">No</span></td>
                                     }
 
-                                    <td>@tube.Price.ToString("c")</td>
+                                <td>
+                                    @tube.Price.ToString("c")
+                                    @if (tube.Discount != 0)
+                                    {
+                                        <a class="text-danger">-@tube.Discount.ToString("P0")</a>
+                                    }
+                                </td>
                                     @if (@tube.IsTubeOfTheWeek)
                                     {
                                         <td><span class="badge bg-primary">Yes</span></td>
@@ -75,14 +80,6 @@
                                         <td><span class="badge bg-danger">No</span></td>
                                     }
                                     @if (@tube.IsNewArrival)
-                                    {
-                                        <td><span class="badge bg-primary">Yes</span></td>
-                                    }
-                                    else
-                                    {
-                                        <td><span class="badge bg-danger">No</span></td>
-                                    }
-                                    @if (@tube.InStock)
                                     {
                                         <td><span class="badge bg-primary">Yes</span></td>
                                     }

@@ -1,0 +1,10 @@
+﻿@model ShoppingCart
+
+@if (Model.ShoppingCartItems.Count > 0)
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="ShoppingCart" asp-action="ReturnCart">
+            <i class="fas fa-shopping-basket">@Model.ShoppingCartItems.Count</i>
+        </a>
+    </li>
+}

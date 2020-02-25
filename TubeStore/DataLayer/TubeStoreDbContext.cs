@@ -70,7 +70,6 @@ namespace TubeStore.DataLayer
                     Quantity = 12,
                     ImageUrl = "/Images/Pre Triodes/6N1P/20170201_6N1Pboxplates.jpg",
                     ImageThumbnailUrl = "/Images/Pre Triodes/6N1P/20170201_6N1Pboxplates_small.jpg",
-                    InStock = true,
                     IsTubeOfTheWeek = true,
                     IsNewArrival = false,
                     CategoryId = 1
@@ -88,7 +87,6 @@ namespace TubeStore.DataLayer
                     Quantity = 30,
                     ImageUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pfoton.jpg",
                     ImageThumbnailUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pfoton_small.jpg",
-                    InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = false,
                     CategoryId = 1
@@ -106,7 +104,6 @@ namespace TubeStore.DataLayer
                     Quantity = 10,
                     ImageUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pnevz.jpg",
                     ImageThumbnailUrl = "/Images/Pre Triodes/6N6P/20170506_6N6Pnevz_small.jpg",
-                    InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = true,
                     CategoryId = 1
@@ -124,7 +121,6 @@ namespace TubeStore.DataLayer
                     Quantity = 11,
                     ImageUrl = "/Images/Pre Triodes/ECC82/20171220_ECC82tungsram.jpg",
                     ImageThumbnailUrl = "/Images/Pre Triodes/ECC82/20171220_ECC82tungsram_small.jpg",
-                    InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = true,
                     CategoryId = 1
@@ -142,7 +138,6 @@ namespace TubeStore.DataLayer
                     Quantity = 3,
                     ImageUrl = "/Images/Pre Triodes/ECC82/20171212_ECC82mullard.jpg",
                     ImageThumbnailUrl = "/Images/Pre Triodes/ECC82/20171212_ECC82mullard_small.jpg",
-                    InStock = true,
                     IsTubeOfTheWeek = false,
                     IsNewArrival = true,
                     CategoryId = 1
@@ -189,21 +184,21 @@ namespace TubeStore.DataLayer
                 { 
                     CouponId = 1,
                     CouponName = "ten",
-                    CouponValue = 10,
+                    CouponValue = 0.1M,
                     CouponStatus = EnumCoupon.Active
                 },
                 new Coupon()
                 {
                     CouponId = 2,
                     CouponName = "fifteen",
-                    CouponValue = 15,
+                    CouponValue = 0.15M,
                     CouponStatus = EnumCoupon.Expired
                 },
                 new Coupon()
                 {
-                    CouponId = 5,
+                    CouponId = 3,
                     CouponName = "five",
-                    CouponValue = 5,
+                    CouponValue = 0.05M,
                     CouponStatus = EnumCoupon.Active
                 }
             );

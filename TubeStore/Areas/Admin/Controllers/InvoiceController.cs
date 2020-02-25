@@ -62,6 +62,7 @@ namespace TubeStore.Areas.Admin.Controllers
             Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
                     x => x.Customer,
                     x => x.ShippingAddress,
+                    x => x.Coupon,
                     x => x.InvoicesInfo).First();
 
             for (int i = 0; i < invoice.InvoicesInfo.Count; i++)
