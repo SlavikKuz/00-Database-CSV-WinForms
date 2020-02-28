@@ -14,8 +14,12 @@
                         <a class="nav-link active text-dark" href=@Url.Action("Index","Home")>Home<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
+
             </div>
             <ul class="navbar-nav mr-auto float-right">
+                <li class="nav-item ">
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Chat">Live Chat</a>
+                </li>
 
                 @if (User.IsInRole("Admin"))
                 {
@@ -33,7 +37,7 @@
                     <a class="nav-link text-dark" href="#">Contact</a>
                 </li>
                 @await Component.InvokeAsync("ShoppingCartIcon")
-                
+
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">

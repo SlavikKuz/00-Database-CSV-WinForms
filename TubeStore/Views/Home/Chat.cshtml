@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ChatMessage>
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    var userName = User.Identity.Name;
+    var chatGroupId = Model.First().ChatGroupId;
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h5 class="card-title"><i class="fas fa-comments">Live Chat</i></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12" id="chat">
+                                @if (Model != null)
+                                {
+                                    foreach (var item in Model.OrderBy(x => x.MessageDate))
+                                    {
+                                        string containerClass, timePosition, textAlign, contcolor;
+                                        if (userName == item.UserName)
+                                        {
+                                            containerClass = "container darker";
+                                            timePosition = "time-right text-light";
+                                            textAlign = "text-right text-white";
+                                            contcolor = "bg-primary";
+                                        }
+                                        else
+                                        {
+                                            containerClass = "container";
+                                            timePosition = "time-left";
+                                            textAlign = "text-left";
+                                            contcolor = "bg-light";
+                                        }
+
+                                        <div class="row">
+
+                                            <div class="@containerClass @contcolor">
+
+                                                <p class="sender @textAlign">@item.UserName</p>
+                                                <p class="@textAlign">@item.MessageText</p>
+                                                <span class="@timePosition">@item.MessageDate.ToString("M/dd/yyyy hh:MM tt")</span>
+                                            </div>
+
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                            <hr />
+
+                            <form asp-controller="Home" asp-action="CreateMessage"
+                                  data-ajax-begin="clearInputField" data-ajax-complete=""
+                                  data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                                  data-ajax="true" data-ajax-method="POST">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <input name="MessageText" class="form-control" id="messageText" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                                </div>
+                                <input type="hidden" value="@userName" name="userName" />
+                                <input type="hidden" value="@chatGroupId" name="chatGroupId" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const userName = '@User.Identity.Name';
+        const chatGroupId = '@Model.First().ChatGroupId';
+    </script>
+
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/chatScript.js"></script>
+    <script src="~/js/signalrChat.js"></script>
+</body>
+</html>

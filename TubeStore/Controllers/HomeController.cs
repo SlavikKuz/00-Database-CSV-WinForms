@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TubeStore.DataLayer;
 using TubeStore.Models;
@@ -15,11 +16,24 @@ namespace TubeStore.Controllers
     {
         private readonly IGenericRepository<Tube> tubes;
         private readonly IGenericRepository<Carousel> carousels;
+        private readonly IGenericRepository<ChatMessage> messages;
+        private readonly IGenericRepository<ChatUser> chatUsers;
+        private readonly IGenericRepository<ChatGroup> groups;
+        private readonly UserManager<Customer> userManager;
 
-        public HomeController(IGenericRepository<Tube> tubes, IGenericRepository<Carousel> carousels)
+        public HomeController(IGenericRepository<Tube> tubes,
+                              IGenericRepository<Carousel> carousels,
+                              IGenericRepository<ChatMessage> messages,
+                              IGenericRepository<ChatUser> chatUsers,
+                              IGenericRepository<ChatGroup> groups,
+                              UserManager<Customer> userManager)
         {
             this.tubes = tubes;
             this.carousels = carousels;
+            this.messages = messages;
+            this.chatUsers = chatUsers;
+            this.groups = groups;
+            this.userManager = userManager;
         }
      
         public IActionResult Index()
@@ -106,5 +120,74 @@ namespace TubeStore.Controllers
                                                            pageNumber,
                                                            pageSize));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Chat()
+        {   
+            ChatUser chatUser = new ChatUser();
+            chatUser.User = await userManager.GetUserAsync(User);
+            chatUser.ChatUserId = chatUser.User.Id;
+            chatUser.UserName = chatUser.User.UserName;
+
+            if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
+                return RedirectToAction("ChatInit", chatUser);
+
+            ICollection<ChatMessage> chatMessages = 
+                await messages.FindAllAsync(x => x.ChatUserId == chatUser.ChatUserId);
+            
+            return View(chatMessages);
+        }
+
+        [HttpPost]
+        public IActionResult Chat([FromBody] AjaxChatModel model)
+        {
+            return Json(new { newUrl = Url.Action("Chat", "Home") });
+        }
+
+        public async Task<IActionResult> ChatInit(ChatUser chatUser)
+        {
+            await chatUsers.AddAsync(chatUser);
+
+            ChatGroup chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
+                await groups.AddAsync(chatGroup);
+
+            ChatMessage chatMessage = new ChatMessage
+                {
+                    ChatGroupId = chatGroup.ChatGroupId.ToString(),
+                    ChatUserId = chatUser.ChatUserId,
+                    UserName = chatUser.UserName,
+                    MessageText = "You started the chat"
+                };
+
+            await messages.AddAsync(chatMessage);
+
+        return View(chatMessage);
+        }
+
+        public async Task<IActionResult> CreateMessage(ChatMessage message)
+        {
+            if(ModelState.IsValid)
+            {
+                message.Author = await chatUsers.FindAsync(x=>x.UserName == User.Identity.Name);
+                message.ChatUserId = message.Author.ChatUserId;
+                await messages.AddAsync(message);
+
+                return Ok();
+            }
+            return Error();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+    }
+
+    public class AjaxChatModel
+    {
+        public string name { get; set; }
+        public string group { get; set; }
     }
 }

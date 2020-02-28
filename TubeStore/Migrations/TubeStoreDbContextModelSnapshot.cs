@@ -227,6 +227,73 @@ namespace TubeStore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TubeStore.Models.ChatGroup", b =>
+                {
+                    b.Property<long>("ChatGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChatGroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChatGroupId");
+
+                    b.ToTable("ChatGroups");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.ChatMessage", b =>
+                {
+                    b.Property<int>("ChatMessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChatGroupId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChatUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChatMessageId");
+
+                    b.HasIndex("ChatUserId");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.ChatUser", b =>
+                {
+                    b.Property<string>("ChatUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChatUserId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChatUsers");
+                });
+
             modelBuilder.Entity("TubeStore.Models.Coupon", b =>
                 {
                     b.Property<int>("CouponId")
@@ -700,6 +767,24 @@ namespace TubeStore.Migrations
                     b.HasOne("TubeStore.Models.Category", "Parent")
                         .WithMany("Parents")
                         .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.ChatMessage", b =>
+                {
+                    b.HasOne("TubeStore.Models.ChatUser", "Author")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatUserId");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.ChatUser", b =>
+                {
+                    b.HasOne("TubeStore.Models.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("TubeStore.Models.Customer", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TubeStore.Models.Invoice", b =>

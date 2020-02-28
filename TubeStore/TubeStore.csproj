@@ -19,12 +19,15 @@
     <Compile Remove="Migrations\20200225085742_invcoup.Designer.cs" />
     <Compile Remove="Migrations\20200225090428_inv-disc.cs" />
     <Compile Remove="Migrations\20200225090428_inv-disc.Designer.cs" />
+    <Compile Remove="Migrations\20200226164920_ca.cs" />
+    <Compile Remove="Migrations\20200226164920_ca.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
       <PrivateAssets>all</PrivateAssets>

@@ -16,6 +16,9 @@ namespace TubeStore.DataLayer
         public DbSet<Carousel> Carousels { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ChatGroup> ChatGroups { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<ChatUser> ChatUsers { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceInfo> InvoiceInfos { get; set; }
@@ -37,6 +40,17 @@ namespace TubeStore.DataLayer
                 .HasConversion(
                     z => z.ToString(),
                     z => (EnumCoupon)Enum.Parse(typeof(EnumCoupon), z));
+
+            modelBuilder.Entity<ChatUser>()
+                .HasOne<Customer>()
+                .WithMany()
+                .HasForeignKey(x => x.CustomerId);
+
+            modelBuilder.Entity<ChatMessage>()
+                .HasOne<ChatUser>(z => z.Author)
+                .WithMany(x => x.Messages)
+                .HasForeignKey(x => x.ChatUserId);
+
 
             modelBuilder.Entity<Tube>().HasData(
                 new Tube()
