@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using TubeStore.Models;
 using TubeStore.DataLayer;
+using Microsoft.AspNetCore.Http;
 
 namespace TubeStore.Hubs
 {
     public class ChatHub : Hub
     {
-        public Task JoinGroup(string group)
+        private readonly IGenericRepository<ChatGroup> chatGroups;
+
+        public ChatHub(IGenericRepository<ChatGroup> chatGroups)
         {
-            return Groups.AddToGroupAsync(Context.ConnectionId, group);
+            this.chatGroups = chatGroups;
+        }
+
+        public async Task JoinGroup(string group)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, group);
         }
 
         public async Task SendToGroup(ChatMessage message)
@@ -22,10 +30,12 @@ namespace TubeStore.Hubs
             await Clients.Group(groupName).SendAsync("receiveMessage", message);
         }
 
-        public override Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
-            Clients.Caller.SendAsync("Connected", Context.ConnectionId);
-            return base.OnConnectedAsync();
+            string userName = Context.User.Identity.Name;
+            string group = chatGroups.FindAll(x => x.ChatGroupName == userName).Select(x=>x.ChatGroupId).First().ToString();
+            await Groups.AddToGroupAsync(Context.ConnectionId, group);
+            await base.OnConnectedAsync();
         }
     }
 }

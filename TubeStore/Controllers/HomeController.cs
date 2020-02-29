@@ -144,14 +144,23 @@ namespace TubeStore.Controllers
             return Json(new { newUrl = Url.Action("Chat", "Home") });
         }
 
-        public async Task<IActionResult> ChatInit(ChatUser chatUser)
+        public async Task<IActionResult> ChatInit()
         {
-            await chatUsers.AddAsync(chatUser);
+            ChatUser chatUser = new ChatUser();
+            chatUser.User = await userManager.GetUserAsync(User);
+            chatUser.ChatUserId = chatUser.User.Id;
+            chatUser.UserName = chatUser.User.UserName;
 
-            ChatGroup chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
+            ChatGroup chatGroup;
+
+            if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
+            {
+                await chatUsers.AddAsync(chatUser);
+
+                chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
                 await groups.AddAsync(chatGroup);
 
-            ChatMessage chatMessage = new ChatMessage
+                ChatMessage chatMessage = new ChatMessage
                 {
                     ChatGroupId = chatGroup.ChatGroupId.ToString(),
                     ChatUserId = chatUser.ChatUserId,
@@ -159,9 +168,12 @@ namespace TubeStore.Controllers
                     MessageText = "You started the chat"
                 };
 
-            await messages.AddAsync(chatMessage);
+                await messages.AddAsync(chatMessage);
+            }
 
-        return View(chatMessage);
+            ChatMessage message = (await messages.FindByAsync(x => x.ChatUserId == chatUser.ChatUserId)).First();
+
+        return View(message);
         }
 
         public async Task<IActionResult> CreateMessage(ChatMessage message)
