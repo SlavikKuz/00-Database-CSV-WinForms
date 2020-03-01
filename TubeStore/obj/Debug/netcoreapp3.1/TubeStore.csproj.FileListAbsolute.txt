@@ -208,3 +208,5 @@ d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.d
 d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\UserNotifications.dll
 d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\UserNotifications.pdb
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\UserNotification\Notification.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Watchlist\Index.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\AddToWatchlist\AddToWatchlist.cshtml.g.cs

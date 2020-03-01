@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Invoice>
+﻿@model IEnumerable<Watchlist>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-body register-card-body">
 
-                        <p class="login-box-msg"><b>Invoice History</b></p>
+                        <p class="login-box-msg"><b>Watchlist</b></p>
                         
                         @if(Model.Count()>0)
                         { 
@@ -20,16 +20,19 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.InvoiceId)
+                                        @Html.DisplayNameFor(model => model.First().WatchlistId)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.OrderDate)
+                                        @Html.DisplayNameFor(model => model.First().Tube.ImageThumbnailUrl)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Status)
+                                        @Html.DisplayNameFor(model => model.First().Tube.Brand)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Total)
+                                        @Html.DisplayNameFor(model => model.First().Tube.ShortDescription)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.First().Tube.Price)
                                     </th>
                                     <th>
                                         Actions
@@ -41,32 +44,40 @@
                                 {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.InvoiceId)
+                                        @item.WatchlistId
                                     </td>
                                     <td>
-                                        @item.OrderDate.ToShortDateString()
+                                        <img src="@item.Tube.ImageThumbnailUrl" class="figure-img img-fluid rounded" width="80" alt="">
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Status)
+                                        @item.Tube.Brand  @item.Tube.Type
                                     </td>
                                     <td>
-                                        @item.Total.ToString("c")
+                                        @item.Tube.ShortDescription
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Pay", "PayInvoce", new { id = item.InvoiceId }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.InvoiceId }) |
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.InvoiceId })*@
-                                        <a class="btn btn-danger delete" data-id="@item.InvoiceId" data-controller="invoice" data-action="delete" data-body-message="Are you sure?">
-                                            <i class="fas fa-trash alt"></i>
-                                            Delete
+                                        @item.Tube.Price.ToString("c")
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-controller="Tube" asp-action="Details" asp-route-tubeId="@item.TubeId">                                            
+                                            <i class="fas fa-info"></i>
+                                            Details
                                         </a>
+                                        <a class="btn btn-danger delete" data-id="@item.WatchlistId" data-controller="watchlist" data-action="delete" data-body-message="Are you sure?">
+                                            <i class="fas fa-trash alt"></i>
+                                            Remove
+                                        </a>
+
                                     </td>
                                 </tr>
                                 }
                             </tbody>
                         </table>
                         }
-                        else { <h5>You have no invoices so far ...</h5>}
+                        else
+                        {
+                            <h5>Your watchlist is empty...</h5>
+                        }
                     </div>
                 </div>
             </div>

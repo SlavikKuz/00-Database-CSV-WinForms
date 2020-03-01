@@ -117,6 +117,14 @@ namespace TubeStore.Areas.Admin.Controllers
                                                   IFormFile image, IFormFile thumb,
                                                   string price, string discount)
         {
+            //if (!ModelState.IsValid) is server validation
+            //return View(tube); -- back to form
+
+            //test data annotations in class
+            //asp-validation on front
+            
+            
+            
             decimal priceNum;
             decimal discoNum;
 
@@ -157,5 +165,6 @@ namespace TubeStore.Areas.Admin.Controllers
 
             return imagePath;
         }
+
     }
 }

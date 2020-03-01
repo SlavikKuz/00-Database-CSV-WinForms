@@ -15,7 +15,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <form role="form" method="post" asp-area="Admin" asp-controller="Tube" asp-action="Add" enctype="multipart/form-data">
-                        <div class="row">
+                        <div class="row" asp-validation-summary="All">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label asp-for="Tube.Type" class="control-label"></label>

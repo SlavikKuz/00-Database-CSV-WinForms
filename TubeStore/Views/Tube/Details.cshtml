@@ -1,5 +1,5 @@
 ﻿@model Tube
-
+@inject UserManager<Customer> userManager
 
 @{
     ViewData["Title"] = "Details";
@@ -38,11 +38,8 @@
         </div>
         <div class="btn-toolbar">
             <div class="mx-auto">
-                <div class="btn-group mt-2" role="group">
-                    <span type="button" class="btn btn-primary"><i class="fa fa-envelope mx-4"></i></span>
-                    <span type="button" class="btn btn-primary"><i class="fa fa-print mx-4"></i></span>
-                    <span type="button" class="btn btn-primary"><i class="fa fa-share mx-4"></i></span>
-                    <span type="button" class="btn btn-primary"><i class="fa fa-star mx-4"></i></span>
+                <div class="row">
+                    @await Component.InvokeAsync("AddToWatchlist", new { userName = userManager.GetUserId(User), tubeId = @Model.TubeId })
                 </div>
             </div>
         </div>

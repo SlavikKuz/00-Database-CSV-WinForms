@@ -41,10 +41,10 @@ namespace TubeStore.Controllers
             IEnumerable<Invoice> customerInvoices = await
                 invoices.FindAllAsync(x => x.CustomerId == customer.Id);
  
-            return View(customerInvoices);
+            return View(customerInvoices.Where(x=>!x.Status.Equals(EnumStatus.Cancelled)));
         }
 
-        public async Task<IActionResult> SetInactive(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
                     x => x.Customer,
@@ -62,8 +62,9 @@ namespace TubeStore.Controllers
                 tempTube.Quantity += item.Quantity;
                 await tubes.UpdateAsync(tempTube);
             }    
-            
-            return RedirectToAction("Index");
+            return Ok();
+            // return BadREquest();
+            //catched exception in deletescript
         }
 
         public async Task<IActionResult> Details(int id)

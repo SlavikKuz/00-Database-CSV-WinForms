@@ -54,6 +54,7 @@ namespace TubeStore.Models
         public string Email { get; set; }
 
         public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Watchlist> Watchlists { get; set; }
 
     }
 }

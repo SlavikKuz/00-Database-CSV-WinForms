@@ -79,7 +79,7 @@ namespace TubeStore.Controllers
         public IActionResult Search(IFormCollection form)
         {
             ISession session = this.HttpContext.Session;
-            session.SetString("Keyword", form["keyword"]);           
+            session.SetString("Search", form["search"]);           
             
             return RedirectToAction("SearchList");
         }
@@ -87,7 +87,7 @@ namespace TubeStore.Controllers
         private async Task<List<Tube>> GetSearchingResult()
         {
             ISession session = this.HttpContext.Session;
-            string[] searchKeys = session.GetString("Keyword").Split(' ');
+            string[] searchKeys = session.GetString("Search").Split(' ');
 
             IEnumerable<Tube> temp;
             List<Tube> resultTemp = new List<Tube>();

@@ -1,0 +1,12 @@
+﻿@model int
+
+@if (Model == 0)
+{
+    <p>In your watchlist</p>
+}
+else
+{
+    <a class="btn btn-primary" asp-controller="Watchlist" asp-action="Add" asp-route-tubeId="@Model">
+        <i class="fa fa-star mx-4">Add to Watchlist</i>
+    </a>
+}

@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
     <link href="~/lib/toastr.js/toastr.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
-
-    <script src="~/lib/jquery/jquery.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <script src="~/lib/toastr.js/toastr.min.js"></script>
-    <script src="~/lib/bootstrap-sweetalert/sweetalert.js"></script>
 </head>
 
 <body>
@@ -27,9 +22,9 @@
                         <img class="img-fluid" alt="Tube Store" src="~/Images/logo.jpg" />
                     </p>
                     <h3 align="center">Tube store</h3>
-                    <form role="form" method="post" asp-controller="Home" asp-action="Search">
+                    <form role="form" method="POST" asp-controller="Home" asp-action="Search">
                         <div class="input-group mt-5 mb-5">
-                            <input type="text" class="form-control" name="keyword" placeholder="Find a tube...">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Find a tube...">
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="submit">Go!</button>
                             </div>
@@ -55,6 +50,10 @@
         </div>
         <partial name="_Footer" />
     </div>
-    @RenderSection("Scripts", required: false)
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
+    <script src="~/lib/bootstrap-sweetalert/sweetalert.js"></script>
+    <script src="~/js/deleteModal.js"></script>
 </body>
 </html>

@@ -29,6 +29,7 @@ namespace TubeStore.DataLayer
         public DbSet<Tube> Tubes { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
+        public DbSet<Watchlist> Watchlists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,6 +57,15 @@ namespace TubeStore.DataLayer
                 .WithMany(x => x.Messages)
                 .HasForeignKey(x => x.ChatUserId);
 
+            modelBuilder.Entity<Tube>()
+                .HasMany(x => x.Watchlists)
+                .WithOne(z => z.Tube)
+                .IsRequired();
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(x => x.Watchlists)
+                .WithOne(z => z.Customer)
+                .IsRequired();
 
             modelBuilder.Entity<Tube>().HasData(
                 new Tube()

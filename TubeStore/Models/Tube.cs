@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,8 +16,11 @@ namespace TubeStore.Models
         [MinLength(2, ErrorMessage = "Please check the type value")]
         [Display(Name = "Tube type")]        
         public string Type { get; set; }
-        
+
+        [Remote("VerifyTubeName", "Validator", ErrorMessage = "The tube already exists!",
+        AdditionalFields = "Type")]
         public string Brand { get; set; }
+
         public string Date { get; set; } //years, era
         public string ShortDescription { get; set; } //getter, pins, plates
         public string FullDescription { get; set; } //history, sound description, electric
@@ -45,5 +49,7 @@ namespace TubeStore.Models
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public virtual ICollection<Watchlist> Watchlists { get; set; }
     }
 }
