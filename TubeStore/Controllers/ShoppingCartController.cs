@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TubeStore.DataLayer;
 using TubeStore.Models;
+using TubeStore.Models.Cart;
 using TubeStore.ViewModels;
 
 namespace TubeStore.Controllers

@@ -28,27 +28,41 @@ using TubeStore.Models;
 #nullable disable
 #nullable restore
 #line 3 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
-using TubeStore.ViewModels;
+using TubeStore.Models.Cart;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
-using Microsoft.AspNetCore.Identity;
+using TubeStore.Models.Chat;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
+using TubeStore.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
 using TubeStore.DataLayer;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee", @"/Views/Home/IndexType.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f0fd7e7b0d868ba8e8fc73ec19ed1c370f10478e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"92c1ef7f29665c97326bb0223d15fa6235355b62", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_IndexType : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PaginatedList<Tube>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "_TubeBadge", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -100,7 +114,7 @@ using TubeStore.DataLayer;
 #line hidden
 #nullable disable
             WriteLiteral("                <div class=\"col-4\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee5597", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee5937", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -140,7 +154,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = item;
 #line hidden
 #nullable disable
             WriteLiteral("                <li class=\"page-item\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee7800", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee8140", async() => {
                 WriteLiteral("&laquo;");
             }
             );
@@ -210,7 +224,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = item;
 #line hidden
 #nullable disable
             WriteLiteral("                <li class=\"page-item\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee11919", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a9ebd95f3b2e02ada2a7bca9f29ca9e6802923ee12259", async() => {
                 WriteLiteral("&raquo;");
             }
             );

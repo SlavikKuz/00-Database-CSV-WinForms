@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.Models;
+using TubeStore.Models.Cart;
+using TubeStore.Models.Chat;
+using TubeStore.Models.Notification;
 
 namespace TubeStore.DataLayer
 {
@@ -24,6 +27,8 @@ namespace TubeStore.DataLayer
         public DbSet<InvoiceInfo> InvoiceInfos { get; set; }
         public DbSet<ShippingAddress> ShippingAddresses { get; set; }
         public DbSet<Tube> Tubes { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationUser> NotificationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

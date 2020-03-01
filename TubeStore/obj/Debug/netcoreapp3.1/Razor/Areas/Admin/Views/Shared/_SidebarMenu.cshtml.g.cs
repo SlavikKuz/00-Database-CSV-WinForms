@@ -28,41 +28,55 @@ using TubeStore.Models;
 #nullable disable
 #nullable restore
 #line 3 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
-using TubeStore.ViewModels;
+using TubeStore.Models.Cart;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
-using TubeStore.Areas.Admin;
+using TubeStore.Models.Chat;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
-using TubeStore.Areas.Admin.ViewModels;
+using TubeStore.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
-using Microsoft.AspNetCore.Identity;
+using TubeStore.Areas.Admin;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
+using TubeStore.Areas.Admin.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "d:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
 using TubeStore.DataLayer;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"869ecc6535c59a80239dcce619cbe20ba40a29a0", @"/Areas/Admin/Views/Shared/_SidebarMenu.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"64a6fa4886d202cad025312cf03166a036a12792", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5063ab094c357dc6f060e5d84f0b42cab949d7b0", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Shared__SidebarMenu : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "Admin", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -102,7 +116,7 @@ using TubeStore.DataLayer;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<ul class=\"nav nav-pills nav-sidebar flex-column\" data-widget=\"treeview\" role=\"menu\" data-accordion=\"false\">\r\n    <li class=\"nav-item\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a07958", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a08322", async() => {
                 WriteLiteral("\r\n            <i class=\"nav-icon fas fa-tachometer-alt\"></i>\r\n            <p>\r\n                Dashboard\r\n            </p>\r\n        ");
             }
             );
@@ -135,7 +149,7 @@ using TubeStore.DataLayer;
         <ul class=""nav nav-treeview"">
             <li class=""nav-item"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a010124", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a010488", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Add New</p>\r\n                ");
             }
             );
@@ -156,7 +170,7 @@ using TubeStore.DataLayer;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a011961", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a012325", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Show All</p>\r\n                ");
             }
             );
@@ -191,7 +205,7 @@ using TubeStore.DataLayer;
         <ul class=""nav nav-treeview"">
             <li class=""nav-item"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a014139", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a014503", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Add New</p>\r\n                ");
             }
             );
@@ -212,7 +226,7 @@ using TubeStore.DataLayer;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a015976", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a016340", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Show All</p>\r\n                ");
             }
             );
@@ -247,7 +261,7 @@ using TubeStore.DataLayer;
         <ul class=""nav nav-treeview"">
             <li class=""nav-item"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a018149", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a018513", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Add New</p>\r\n                ");
             }
             );
@@ -268,7 +282,7 @@ using TubeStore.DataLayer;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a019986", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a020350", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Show All</p>\r\n                ");
             }
             );
@@ -303,7 +317,7 @@ using TubeStore.DataLayer;
         <ul class=""nav nav-treeview"">
             <li class=""nav-item"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a022162", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a022526", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Show All</p>\r\n                ");
             }
             );
@@ -338,7 +352,7 @@ using TubeStore.DataLayer;
         <ul class=""nav nav-treeview"">
             <li class=""nav-item"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a024336", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a024700", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Show All</p>\r\n                ");
             }
             );
@@ -373,7 +387,7 @@ using TubeStore.DataLayer;
         <ul class=""nav nav-treeview"">
             <li class=""nav-item"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a026507", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a026871", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Add New</p>\r\n                ");
             }
             );
@@ -394,7 +408,7 @@ using TubeStore.DataLayer;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a028346", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "869ecc6535c59a80239dcce619cbe20ba40a29a028710", async() => {
                 WriteLiteral("\r\n                    <i class=\"far fa-circle nav-icon\"></i>\r\n                    <p>Show All</p>\r\n                ");
             }
             );

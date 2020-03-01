@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TubeStore.Models
+namespace TubeStore.Models.Cart
 {
     public class Coupon
     {

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TubeStore.DataLayer;
 using TubeStore.Models;
+using TubeStore.Models.Chat;
 using TubeStore.ViewModels;
 
 namespace TubeStore.Controllers

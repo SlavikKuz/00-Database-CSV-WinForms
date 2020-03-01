@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using TubeStore.Models;
+using TubeStore.Models.Chat;
 using TubeStore.DataLayer;
 using Microsoft.AspNetCore.Http;
 

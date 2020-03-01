@@ -200,101 +200,7 @@ namespace TubeStore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TubeStore.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoryId");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "Pre Triodes"
-                        });
-                });
-
-            modelBuilder.Entity("TubeStore.Models.ChatGroup", b =>
-                {
-                    b.Property<long>("ChatGroupId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ChatGroupName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChatGroupId");
-
-                    b.ToTable("ChatGroups");
-                });
-
-            modelBuilder.Entity("TubeStore.Models.ChatMessage", b =>
-                {
-                    b.Property<int>("ChatMessageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ChatGroupId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChatUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("MessageDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MessageText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChatMessageId");
-
-                    b.HasIndex("ChatUserId");
-
-                    b.ToTable("ChatMessages");
-                });
-
-            modelBuilder.Entity("TubeStore.Models.ChatUser", b =>
-                {
-                    b.Property<string>("ChatUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChatUserId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ChatUsers");
-                });
-
-            modelBuilder.Entity("TubeStore.Models.Coupon", b =>
+            modelBuilder.Entity("TubeStore.Models.Cart.Coupon", b =>
                 {
                     b.Property<int>("CouponId")
                         .ValueGeneratedOnAdd()
@@ -337,6 +243,139 @@ namespace TubeStore.Migrations
                             CouponStatus = "Active",
                             CouponValue = 0.05m
                         });
+                });
+
+            modelBuilder.Entity("TubeStore.Models.Cart.ShippingAddress", b =>
+                {
+                    b.Property<int>("ShippingAdressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.HasKey("ShippingAdressId");
+
+                    b.ToTable("ShippingAddresses");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Pre Triodes"
+                        });
+                });
+
+            modelBuilder.Entity("TubeStore.Models.Chat.ChatGroup", b =>
+                {
+                    b.Property<long>("ChatGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChatGroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChatGroupId");
+
+                    b.ToTable("ChatGroups");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.Chat.ChatMessage", b =>
+                {
+                    b.Property<int>("ChatMessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChatGroupId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChatUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChatMessageId");
+
+                    b.HasIndex("ChatUserId");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("TubeStore.Models.Chat.ChatUser", b =>
+                {
+                    b.Property<string>("ChatUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChatUserId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChatUsers");
                 });
 
             modelBuilder.Entity("TubeStore.Models.Customer", b =>
@@ -505,43 +544,42 @@ namespace TubeStore.Migrations
                     b.ToTable("InvoiceInfos");
                 });
 
-            modelBuilder.Entity("TubeStore.Models.ShippingAddress", b =>
+            modelBuilder.Entity("TubeStore.Models.Notification.Notification", b =>
                 {
-                    b.Property<int>("ShippingAdressId")
+                    b.Property<int>("NotificationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddressLine1")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("CustomerId")
+                    b.Property<string>("NotificationText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                    b.HasKey("NotificationId");
 
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                    b.ToTable("Notifications");
+                });
 
-                    b.HasKey("ShippingAdressId");
+            modelBuilder.Entity("TubeStore.Models.Notification.NotificationUser", b =>
+                {
+                    b.Property<string>("NotificationUserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.ToTable("ShippingAddresses");
+                    b.Property<string>("ChatUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotificationUserId");
+
+                    b.HasIndex("ChatUserId");
+
+                    b.HasIndex("NotificationId");
+
+                    b.ToTable("NotificationUsers");
                 });
 
             modelBuilder.Entity("TubeStore.Models.Tube", b =>
@@ -769,14 +807,14 @@ namespace TubeStore.Migrations
                         .HasForeignKey("ParentId");
                 });
 
-            modelBuilder.Entity("TubeStore.Models.ChatMessage", b =>
+            modelBuilder.Entity("TubeStore.Models.Chat.ChatMessage", b =>
                 {
-                    b.HasOne("TubeStore.Models.ChatUser", "Author")
+                    b.HasOne("TubeStore.Models.Chat.ChatUser", "Author")
                         .WithMany("Messages")
                         .HasForeignKey("ChatUserId");
                 });
 
-            modelBuilder.Entity("TubeStore.Models.ChatUser", b =>
+            modelBuilder.Entity("TubeStore.Models.Chat.ChatUser", b =>
                 {
                     b.HasOne("TubeStore.Models.Customer", null)
                         .WithMany()
@@ -789,7 +827,7 @@ namespace TubeStore.Migrations
 
             modelBuilder.Entity("TubeStore.Models.Invoice", b =>
                 {
-                    b.HasOne("TubeStore.Models.Coupon", "Coupon")
+                    b.HasOne("TubeStore.Models.Cart.Coupon", "Coupon")
                         .WithMany()
                         .HasForeignKey("CouponId");
 
@@ -797,7 +835,7 @@ namespace TubeStore.Migrations
                         .WithMany("Invoices")
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("TubeStore.Models.ShippingAddress", "ShippingAddress")
+                    b.HasOne("TubeStore.Models.Cart.ShippingAddress", "ShippingAddress")
                         .WithMany()
                         .HasForeignKey("ShippingAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -813,6 +851,19 @@ namespace TubeStore.Migrations
                     b.HasOne("TubeStore.Models.Tube", "Tube")
                         .WithMany()
                         .HasForeignKey("TubeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TubeStore.Models.Notification.NotificationUser", b =>
+                {
+                    b.HasOne("TubeStore.Models.Chat.ChatUser", "ChatUser")
+                        .WithMany()
+                        .HasForeignKey("ChatUserId");
+
+                    b.HasOne("TubeStore.Models.Notification.Notification", "Notification")
+                        .WithMany("NotificationUsers")
+                        .HasForeignKey("NotificationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

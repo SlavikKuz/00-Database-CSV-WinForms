@@ -16,6 +16,7 @@ using TubeStore.DataLayer;
 using TubeStore.Hubs;
 using TubeStore.Middleware;
 using TubeStore.Models;
+using UserNotifications;
 
 namespace TubeStore
 {
@@ -51,6 +52,7 @@ namespace TubeStore
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUserNotification, UserNotification>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

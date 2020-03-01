@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.DataLayer;
 
-namespace TubeStore.Models
+namespace TubeStore.Models.Chat
 {
     public class ChatGroupStore
     {

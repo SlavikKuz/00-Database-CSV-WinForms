@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.DataLayer;
 
-namespace TubeStore.Models
+namespace TubeStore.Models.Cart
 {
     public class ShoppingCart
     {

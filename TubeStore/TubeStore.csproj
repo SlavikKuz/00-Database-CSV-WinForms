@@ -39,7 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\Admin\" />
     <Folder Include="wwwroot\admin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Notifications\UserNotifications.csproj" />
   </ItemGroup>
 
 </Project>

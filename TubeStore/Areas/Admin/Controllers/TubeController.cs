@@ -124,6 +124,7 @@ namespace TubeStore.Areas.Admin.Controllers
             bool discoParse = decimal.TryParse(discount, out discoNum);
 
             if (!priceParse || !discoParse) return RedirectToAction("Add");
+            //return Content("Fail price or discount");
 
             tube.Price = priceNum;
             tube.Discount = discoNum;

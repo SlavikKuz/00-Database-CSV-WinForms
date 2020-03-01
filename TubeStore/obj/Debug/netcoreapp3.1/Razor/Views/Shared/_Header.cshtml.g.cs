@@ -28,27 +28,41 @@ using TubeStore.Models;
 #nullable disable
 #nullable restore
 #line 3 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
-using TubeStore.ViewModels;
+using TubeStore.Models.Cart;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 4 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
-using Microsoft.AspNetCore.Identity;
+using TubeStore.Models.Chat;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
+using TubeStore.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "d:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
 using TubeStore.DataLayer;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8f342014ea9086538a80bc050d4d6c4fd69bdf42", @"/Views/Shared/_Header.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f0fd7e7b0d868ba8e8fc73ec19ed1c370f10478e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"92c1ef7f29665c97326bb0223d15fa6235355b62", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__Header : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link text-dark"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -117,7 +131,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">Home<span class=\"sr-only\">(current)</span></a>\r\n                    </li>\r\n                </ul>\r\n\r\n            </div>\r\n            <ul class=\"navbar-nav mr-auto float-right\">\r\n                <li class=\"nav-item \">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf429204", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf429544", async() => {
                 WriteLiteral("Live Chat");
             }
             );
@@ -145,7 +159,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
 #line hidden
 #nullable disable
             WriteLiteral("                    <li class=\"nav-item\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4210990", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4211330", async() => {
                 WriteLiteral("\r\n                            <i class=\"fas fa-tools\"></i>\r\n                        ");
             }
             );
@@ -198,7 +212,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
 #line hidden
 #nullable disable
             WriteLiteral("                    <li class=\"nav-item\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4213809", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4214149", async() => {
                 WriteLiteral("Register");
             }
             );
@@ -217,7 +231,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4215356", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4215696", async() => {
                 WriteLiteral("\r\n                            <span class=\"fa fa-sign-in-alt\"></span>\r\n                        ");
             }
             );
@@ -260,7 +274,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
 #line hidden
 #nullable disable
             WriteLiteral("!</strong></label></div>\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4218031", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4218371", async() => {
                 WriteLiteral("\r\n                                <span class=\"fas fa-user-alt\"></span> Edit Profile\r\n                            ");
             }
             );
@@ -279,7 +293,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4219618", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4219958", async() => {
                 WriteLiteral("\r\n                                <span class=\"fas fa-list-alt\"></span> Invoices\r\n                            ");
             }
             );
@@ -298,7 +312,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4221203", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4221543", async() => {
                 WriteLiteral("\r\n                                <span class=\"fas fa-key\"></span> Change Password\r\n                            ");
             }
             );
@@ -317,7 +331,7 @@ WriteAttributeValue("", 504, Url.Action("Index","Home"), 504, 27, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n\r\n                            <div class=\"dropdown-divider\"></div>\r\n\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4222868", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8f342014ea9086538a80bc050d4d6c4fd69bdf4223208", async() => {
                 WriteLiteral("<span class=\"fa fa-sign-out-alt\"> Logout</span>");
             }
             );

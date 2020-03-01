@@ -203,3 +203,8 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicati
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\TubeStore.MvcApplicationPartsAssemblyInfo.cache
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\Chat.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\ChatInit.cshtml.g.cs
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\UserNotifications.dll
+d:\Repos\05 - TubeStore\TubeStore\bin\Debug\netcoreapp3.1\UserNotifications.pdb
+d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\UserNotification\Notification.cshtml.g.cs
