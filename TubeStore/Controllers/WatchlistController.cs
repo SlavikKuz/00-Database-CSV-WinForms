@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ModalNofications;
 using TubeStore.DataLayer;
 using TubeStore.Models;
-using UserNotifications;
-using static UserNotifications.SupportClass;
+using static ModalNofications.SupportModalClass;
 
 namespace TubeStore.Controllers
 {
@@ -18,17 +18,17 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<Watchlist> watchlists;
         private readonly IGenericRepository<Tube> tubes;
         private readonly UserManager<Customer> userManager;
-        private readonly IUserNotification userNotifications;
+        private readonly IModalNotification modalNotification;
 
         public WatchlistController(IGenericRepository<Watchlist> watchlists,
                                    UserManager<Customer> userManager,
-                                   IUserNotification userNotifications,
+                                   IModalNotification modalNotification,
                                    IGenericRepository<Tube> tubes)
         {
             this.watchlists = watchlists;
             this.tubes = tubes;
             this.userManager = userManager;
-            this.userNotifications = userNotifications;
+            this.modalNotification = modalNotification;
         }
         
         public async Task<IActionResult> Index()
@@ -57,7 +57,7 @@ namespace TubeStore.Controllers
 
             await watchlists.AddAsync(watchlist);
 
-            userNotifications.AddNotificationSweet("Watchlist", NotificationType.success, "The tube has been added to your watchlist.");
+            modalNotification.AddNotificationSweet("Watchlist", NotificationType.success, "The tube has been added to your watchlist.");
             return RedirectToAction(nameof(Index));
         }
 
@@ -66,7 +66,7 @@ namespace TubeStore.Controllers
             Watchlist watchlist = await watchlists.GetAsync(id);
             await watchlists.DeleteAsync(watchlist);
 
-            userNotifications.AddNotificationSweet("Watchlist", NotificationType.success, "The tube has been removerd from your watchlist.");
+            modalNotification.AddNotificationSweet("Watchlist", NotificationType.success, "The tube has been removerd from your watchlist.");
 
             return RedirectToAction(nameof(Index));
         }

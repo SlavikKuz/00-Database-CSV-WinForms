@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ModalNofications;
 using TubeStore.DataLayer;
 using TubeStore.Models;
 using TubeStore.Models.Notification;
-using UserNotifications;
-using static UserNotifications.SupportClass;
+using static ModalNofications.SupportModalClass;
 
 namespace TubeStore.Controllers
 {
@@ -17,20 +17,25 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<Invoice> invoices;
         private readonly IGenericRepository<Tube> tubes;
         private readonly IGenericRepository<Notification> notifications;
+        private readonly IGenericRepository<NotificationUser> notificationUsers;
         private readonly UserManager<Customer> userManager;
-        private readonly IUserNotification userNotification;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IModalNotification modalNotification;
 
         public InvoiceController(IGenericRepository<Invoice> invoices,
                                  IGenericRepository<Tube> tubes,
                                  IGenericRepository<Notification> notifications,
+                                 IGenericRepository<NotificationUser> notificationUsers,
                                  UserManager<Customer> userManager,
-                                 IUserNotification userNotification)
+                                 RoleManager<IdentityRole> roleManager,
+                                 IModalNotification modalNotification)
         {
             this.invoices = invoices;
             this.tubes = tubes;
             this.notifications = notifications;
+            this.notificationUsers = notificationUsers;
             this.userManager = userManager;
-            this.userNotification = userNotification;
+            this.modalNotification = modalNotification;
         }
 
         public async Task<IActionResult> Index()
@@ -80,7 +85,7 @@ namespace TubeStore.Controllers
                 invoice.InvoicesInfo[i].Tube = await tubes.GetAsync(invoice.InvoicesInfo[i].TubeId);
             }
 
-            userNotification.AddNotificationSweet("Nice", NotificationType.success, "You opened your invoices");
+            modalNotification.AddNotificationSweet("Nice", NotificationType.success, "You opened your invoices");
 
 
             return View(invoice);
@@ -94,10 +99,20 @@ namespace TubeStore.Controllers
 
             Notification notification = new Notification()
             {
-                NotificationText = $"The invoice {invoice.InvoiceId.ToString()} is paid"
+                NotificationText = $"The invoice {invoice.InvoiceId.ToString()} is paid."
             };
 
             await notifications.AddAsync(notification);
+            var admins = await userManager.GetUsersInRoleAsync("Admin");
+
+            foreach (var item in admins)
+            {
+                await notificationUsers.AddAsync(new NotificationUser 
+                { 
+                    CustomerId = item.Id, 
+                    NotificationId = notification.NotificationId
+                });
+            }
 
             return RedirectToAction("Index");
         }

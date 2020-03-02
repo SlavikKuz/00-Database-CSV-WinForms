@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UserNotifications
+namespace ModalNofications
 {
-    public class SupportClass
+    public class SupportModalClass
     {
         public enum NotificationType
         {
@@ -22,7 +22,8 @@ namespace UserNotifications
             bottomRigth
         }
 
-        public Dictionary<Position, string> position() {
+        public Dictionary<Position, string> position()
+        {
             var positions = new Dictionary<Position, string>();
 
             positions.Add(Position.topLeft, "toast-top-left");

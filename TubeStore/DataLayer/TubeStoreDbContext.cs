@@ -67,6 +67,9 @@ namespace TubeStore.DataLayer
                 .WithOne(z => z.Customer)
                 .IsRequired();
 
+            modelBuilder.Entity<NotificationUser>()
+                .HasKey(x => new { x.NotificationId, x.CustomerId });
+
             modelBuilder.Entity<Tube>().HasData(
                 new Tube()
                 {

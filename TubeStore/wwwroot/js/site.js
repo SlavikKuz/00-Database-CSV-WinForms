@@ -1,4 +1,4 @@
-﻿// Write your JavaScript code.
+﻿
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover({
@@ -69,13 +69,19 @@ $(function () {
 
     getNotification();
 
-    //let connection = new signalR.HubConnection("/signalServer");
+    let hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
 
     hubConnection.on('displayNotification', () => {
         getNotification();
     });
 
-    //connection.start();
+    hubConnection.start()
+        .catch(error => {
+            console.error(error.message);
+        });
 
 });
 

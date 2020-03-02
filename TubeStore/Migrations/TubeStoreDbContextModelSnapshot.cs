@@ -561,23 +561,18 @@ namespace TubeStore.Migrations
 
             modelBuilder.Entity("TubeStore.Models.Notification.NotificationUser", b =>
                 {
-                    b.Property<string>("NotificationUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ChatUserId")
+                    b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<int>("NotificationId")
-                        .HasColumnType("int");
+                    b.HasKey("NotificationId", "CustomerId");
 
-                    b.HasKey("NotificationUserId");
-
-                    b.HasIndex("ChatUserId");
-
-                    b.HasIndex("NotificationId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("NotificationUsers");
                 });
@@ -883,9 +878,11 @@ namespace TubeStore.Migrations
 
             modelBuilder.Entity("TubeStore.Models.Notification.NotificationUser", b =>
                 {
-                    b.HasOne("TubeStore.Models.Chat.ChatUser", "ChatUser")
-                        .WithMany()
-                        .HasForeignKey("ChatUserId");
+                    b.HasOne("TubeStore.Models.Customer", "Customer")
+                        .WithMany("NotificationUsers")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TubeStore.Models.Notification.Notification", "Notification")
                         .WithMany("NotificationUsers")

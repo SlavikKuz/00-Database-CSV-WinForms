@@ -11,12 +11,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ModalNofications;
 using ReflectionIT.Mvc.Paging;
 using TubeStore.DataLayer;
 using TubeStore.Hubs;
 using TubeStore.Middleware;
 using TubeStore.Models;
-using UserNotifications;
 
 namespace TubeStore
 {
@@ -44,15 +44,18 @@ namespace TubeStore
 
             services.AddDistributedMemoryCache();
             services.AddSession();
-            
-            services.AddControllersWithViews();
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddRazorPages();
 
             services.AddSignalR();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IUserNotification, UserNotification>();
+            services.AddTransient<IModalNotification, ModalNotification>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

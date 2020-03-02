@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "D:\\Repos\\05 - TubeStore\\Notifications\\UserNotifications.csproj",
-        "projectName": "UserNotifications",
+        "projectName": "UserModalNotifications",
         "projectPath": "D:\\Repos\\05 - TubeStore\\Notifications\\UserNotifications.csproj",
         "packagesPath": "C:\\Users\\slavi\\.nuget\\packages\\",
         "outputPath": "D:\\Repos\\05 - TubeStore\\Notifications\\obj\\",
@@ -40,12 +40,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "dependencies": {
-            "Microsoft.AspNetCore.Mvc.ViewFeatures": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

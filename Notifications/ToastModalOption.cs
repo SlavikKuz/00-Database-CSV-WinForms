@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UserNotifications
+namespace UserModalNotifications
 {
-    public class ToastOption
+    public class ToastModalOption
     {
         public string PositionClass { get; set; } = "toast-top-left";
         public bool CloseButton { get; set; } = false;

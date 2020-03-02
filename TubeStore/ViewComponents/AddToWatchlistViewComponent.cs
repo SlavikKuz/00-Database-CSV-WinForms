@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.DataLayer;
 using TubeStore.Models;
-using UserNotifications;
 
 namespace TubeStore.ViewComponents
 {

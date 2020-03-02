@@ -5,11 +5,11 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static UserNotifications.SupportClass;
+using static UserModalNotifications.SupportModalClass;
 
-namespace UserNotifications
+namespace UserModalNotifications
 {
-    public class UserNotification : IUserNotification
+    public class UserModalNotification : IUserModalNotification
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly HttpContext httpContext;
@@ -31,9 +31,9 @@ namespace UserNotifications
             tempData["swalNotification"] = message;
         }
 
-        public void AddNotificationToast(string text, NotificationType type, ToastOption options)
+        public void AddNotificationToast(string text, NotificationType type, ToastModalOption options)
         {
-            var positions = new SupportClass().position();
+            var positions = new SupportModalClass().position();
 
             var JsonSerializerSettings = new JsonSerializerSettings
             {
@@ -43,7 +43,7 @@ namespace UserNotifications
             if (options == null)
             {
                 tempData["options"] = JsonConvert
-                        .SerializeObject(new ToastOption(), JsonSerializerSettings);
+                        .SerializeObject(new ToastModalOption(), JsonSerializerSettings);
             }
             else
             {

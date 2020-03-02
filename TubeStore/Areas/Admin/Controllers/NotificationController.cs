@@ -27,9 +27,10 @@ namespace TubeStore.Controllers
 
         public IActionResult GetNotification()
         {
-            string userId = userManager.GetUserId(HttpContext.User);
+            string userId = userManager.GetUserId(User);
+            
             List<NotificationUser> notification = notificationUsers.GetAllIncluding(x=>x.Notification)
-                .Where(x=>x.NotificationUserId.Equals(userId) && !x.IsRead)
+                .Where(x=>x.CustomerId.Equals(userId))
                 .ToList();
 
             return Ok(new { UserNotification = notification, Count = notification.Count });
@@ -37,8 +38,11 @@ namespace TubeStore.Controllers
 
         public async Task<IActionResult> ReadNotification(int notificationId)
         {
-            NotificationUser notification = (await notificationUsers.FindAllAsync(x=> x.NotificationId.Equals(notificationId) &&
-                x.ChatUserId.Equals(HttpContext.User))).ToList().FirstOrDefault();
+            string userId = userManager.GetUserId(User);
+
+            NotificationUser notification = (
+                await notificationUsers.FindAllAsync(x=> x.NotificationId.Equals(notificationId) &&
+                x.CustomerId.Equals(userId))).ToList().FirstOrDefault();
 
             notification.IsRead = true;
 
