@@ -1,16 +1,16 @@
 ﻿
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-    $('[data-toggle="popover"]').popover({
-        placement: 'bottom',
-        content: function () {
-            return $("#notification-content").html();
-        },
-        html: true
-    });
+    //$('[data-toggle="popover"]').popover({
+    //    placement: 'bottom',
+    //    content: function () {
+    //        return $("#notification-content").html();
+    //    },
+    //    html: true
+    //});
 
-    $('body').append(`<div id="notification-content" class="hide"></div>`)
+    //$('body').append('<div id="notification-content" class="hide"></div>')
 
+    $("#target").append('<div id="notification-content"></div>')
 
     function getNotification() {
         var res = "<ul class='list-group'>";
@@ -30,7 +30,7 @@ $(function () {
 
                 var notifications = result.userNotification;
                 notifications.forEach(element => {
-                    res = res + "<li class='list-group-item notification-text' data-id='" + element.notification.id + "'>" + element.notification.text + "</li>";
+                    res = res + "<li class='list-group-item notification-text' data-id='" + element.notification.notificationId + "'>" + element.notification.notificationText + "</li>";
                 });
 
                 res = res + "</ul>";

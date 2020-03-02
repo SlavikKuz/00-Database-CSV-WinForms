@@ -10,12 +10,12 @@ using TubeStore.Models.Cart;
 
 namespace TubeStore.ViewComponents
 {
-    [ViewComponent(Name = "UserNotification")]
-    public class UserNotificationViewComponent : ViewComponent
+    [ViewComponent(Name = "ModalNotification")]
+    public class ModalNotificationViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
-            return View("Notification");
+            return View("ModalNotification");
         }
     }
 }

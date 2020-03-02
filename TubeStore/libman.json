@@ -38,6 +38,10 @@
     {
       "library": "bootstrap-sweetalert@1.0.1",
       "destination": "wwwroot/lib/bootstrap-sweetalert/"
+    },
+    {
+      "library": "underscore.js@1.9.1",
+      "destination": "wwwroot/lib/underscore.js/"
     }
   ]
 }
