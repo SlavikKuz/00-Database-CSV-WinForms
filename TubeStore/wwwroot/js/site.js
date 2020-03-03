@@ -1,19 +1,8 @@
-﻿
-$(function () {
-    //$('[data-toggle="popover"]').popover({
-    //    placement: 'bottom',
-    //    content: function () {
-    //        return $("#notification-content").html();
-    //    },
-    //    html: true
-    //});
-
-    //$('body').append('<div id="notification-content" class="hide"></div>')
-
-    $("#target").append('<div id="notification-content"></div>')
+﻿$(function () {
+    $("#target").append('<div class="dropdown-menu" id="notification-content"></div>')
 
     function getNotification() {
-        var res = "<ul class='list-group'>";
+        var res = "";
         $.ajax({
             url: "/Notification/getNotification",
             method: "GET",
@@ -30,10 +19,8 @@ $(function () {
 
                 var notifications = result.userNotification;
                 notifications.forEach(element => {
-                    res = res + "<li class='list-group-item notification-text' data-id='" + element.notification.notificationId + "'>" + element.notification.notificationText + "</li>";
+                    res = res + "<a class='list-group-item notification-text' data-id='" + element.notification.notificationId + "'>" + element.notification.notificationText + "</a>";
                 });
-
-                res = res + "</ul>";
 
                 $("#notification-content").html(res);
 
@@ -45,7 +32,7 @@ $(function () {
         });
     }
 
-    $("ul").on('click', 'li.notification-text', function (e) {
+    $("div").on('click', 'a.notification-text', function (e) {
         var target = e.target;
         var id = $(target).data('id');
 

@@ -3664,6 +3664,7 @@ input[type="button"].btn-block {
     }
 
 .dropdown-menu {
+    width:320px;
     position: absolute;
     top: 100%;
     left: 0;

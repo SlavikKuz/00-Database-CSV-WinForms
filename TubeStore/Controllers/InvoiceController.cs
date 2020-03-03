@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using ModalNofications;
 using TubeStore.DataLayer;
+using TubeStore.Hubs;
 using TubeStore.Models;
 using TubeStore.Models.Notification;
 using static ModalNofications.SupportModalClass;
@@ -21,6 +23,7 @@ namespace TubeStore.Controllers
         private readonly UserManager<Customer> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IModalNotification modalNotification;
+        private readonly IHubContext<ChatHub> chatHub;
 
         public InvoiceController(IGenericRepository<Invoice> invoices,
                                  IGenericRepository<Tube> tubes,
@@ -28,7 +31,9 @@ namespace TubeStore.Controllers
                                  IGenericRepository<NotificationUser> notificationUsers,
                                  UserManager<Customer> userManager,
                                  RoleManager<IdentityRole> roleManager,
-                                 IModalNotification modalNotification)
+                                 IModalNotification modalNotification,
+                                 IHubContext<ChatHub> chatHub
+            )
         {
             this.invoices = invoices;
             this.tubes = tubes;
@@ -36,6 +41,7 @@ namespace TubeStore.Controllers
             this.notificationUsers = notificationUsers;
             this.userManager = userManager;
             this.modalNotification = modalNotification;
+            this.chatHub = chatHub;
         }
 
         public async Task<IActionResult> Index()
@@ -112,6 +118,7 @@ namespace TubeStore.Controllers
                     CustomerId = item.Id, 
                     NotificationId = notification.NotificationId
                 });
+                //chatHub.Clients.All.InvokeAsync("displayNotification", "");
             }
 
             return RedirectToAction("Index");
