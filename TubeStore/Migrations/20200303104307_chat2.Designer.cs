@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TubeStore.DataLayer;
 
 namespace TubeStore.Migrations
 {
     [DbContext(typeof(TubeStoreDbContext))]
-    partial class TubeStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200303104307_chat2")]
+    partial class chat2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,9 +333,9 @@ namespace TubeStore.Migrations
 
             modelBuilder.Entity("TubeStore.Models.Chat.ChatMessage", b =>
                 {
-                    b.Property<long>("ChatMessageId")
+                    b.Property<int>("ChatMessageId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("ChatGroupId")
@@ -342,13 +344,10 @@ namespace TubeStore.Migrations
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MessageDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("MessageText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ChatMessageId");
@@ -812,14 +811,14 @@ namespace TubeStore.Migrations
 
             modelBuilder.Entity("TubeStore.Models.Chat.ChatMessage", b =>
                 {
-                    b.HasOne("TubeStore.Models.Chat.ChatGroup", null)
-                        .WithMany("ChatMessages")
+                    b.HasOne("TubeStore.Models.Chat.ChatGroup", "ChatGroup")
+                        .WithMany()
                         .HasForeignKey("ChatGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TubeStore.Models.Customer", null)
-                        .WithMany("ChatMessages")
+                    b.HasOne("TubeStore.Models.Customer", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId");
                 });
 

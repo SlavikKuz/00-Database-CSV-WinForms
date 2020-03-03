@@ -8,6 +8,8 @@ namespace TubeStore.Models.Chat
     public class ChatGroup
     {
         public long ChatGroupId { get; set; }
-        public string ChatGroupName { get; set; }
+        public string CustomerId { get; set; }
+        public string AdminId { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

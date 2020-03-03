@@ -3,7 +3,10 @@
 @{
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
     var userName = User.Identity.Name;
-    var chatGroupId = Model.First().ChatGroupId;
+
+    //var chatGroupId = Model.First().ChatGroupId;
+    var chatGroupId = "10";
+
 }
 
 <html>
@@ -25,7 +28,8 @@
                                                 foreach (var item in Model.OrderBy(x => x.MessageDate))
                                                 {
                                                     string containerClass, timePosition, textAlign, contcolor, offset;
-                                                    if (userName == item.UserName)
+                                                    //if (userName == item.UserName)
+                                                    if (userName == "")
                                                     {
                                                         containerClass = "container darker";
                                                         timePosition = "time-right text-light";
@@ -45,9 +49,9 @@
                                                     <div class="row">
                                                         <div class="@offset">
                                                             <div class="@containerClass @contcolor">
-                                                                <p class="sender @textAlign">@item.UserName</p>
+                                                                <p class="sender @textAlign">@*@item.UserName*@</p>
                                                                 <p class="@textAlign">@item.MessageText</p>
-                                                                <span class="@timePosition">@item.MessageDate.ToString("M/dd/yyyy hh:MM tt")</span>
+                                                                <span class="@timePosition"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,12 +90,13 @@
 
     <script>
         const userName = '@User.Identity.Name';
-        const chatGroupId = '@Model.First().ChatGroupId';
+        const chatGroupId = '10';
+        @*const chatGroupId = '@Model.First().ChatGroupId';*@
     </script>
 
     <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
-    <script src="~/js/chatScript.js"></script>
+    @*<script src="~/js/chatScript.js"></script>*@
     <script src="~/js/signalrChat.js"></script>
 </body>
 </html>

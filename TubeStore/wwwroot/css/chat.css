@@ -1,0 +1,12 @@
+﻿.card {
+    font-size: smaller;
+}
+
+.card-header {
+    background-color: rgb(255, 255, 255);
+    font-size: large;
+}
+
+.card-body {
+    padding: 0;
+}

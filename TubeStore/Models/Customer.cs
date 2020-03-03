@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TubeStore.Models.Chat;
 using TubeStore.Models.Notification;
 
 namespace TubeStore.Models
@@ -57,6 +58,7 @@ namespace TubeStore.Models
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<Watchlist> Watchlists { get; set; }
         public virtual ICollection<NotificationUser> NotificationUsers { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
 
 
     }

@@ -21,6 +21,18 @@
     <Compile Remove="Migrations\20200225090428_inv-disc.Designer.cs" />
     <Compile Remove="Migrations\20200226164920_ca.cs" />
     <Compile Remove="Migrations\20200226164920_ca.Designer.cs" />
+    <Compile Remove="Migrations\20200303101812_chat-rebuild.cs" />
+    <Compile Remove="Migrations\20200303101812_chat-rebuild.Designer.cs" />
+    <Compile Remove="Migrations\20200303102533_chat-rebuild.cs" />
+    <Compile Remove="Migrations\20200303102533_chat-rebuild.Designer.cs" />
+    <Compile Remove="Migrations\20200303103153_chat2.cs" />
+    <Compile Remove="Migrations\20200303103153_chat2.Designer.cs" />
+    <Compile Remove="Migrations\20200303103438_chat2.cs" />
+    <Compile Remove="Migrations\20200303103438_chat2.Designer.cs" />
+    <Compile Remove="Migrations\20200303103949_chat2.cs" />
+    <Compile Remove="Migrations\20200303103949_chat2.Designer.cs" />
+    <Compile Remove="Migrations\20200303104435_chat3.cs" />
+    <Compile Remove="Migrations\20200303104435_chat3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

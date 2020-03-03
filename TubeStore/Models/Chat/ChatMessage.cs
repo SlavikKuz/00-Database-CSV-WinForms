@@ -10,17 +10,17 @@ namespace TubeStore.Models.Chat
     public class ChatMessage
     {
         [Key]
-        public int ChatMessageId { get; set; }
-
-        public string ChatGroupId { get; set; }
-
-        public string ChatUserId { get; set; }
-        public string UserName { get; set; }        
-        public virtual ChatUser Author { get; set; }
-
+        public long ChatMessageId { get; set; }
+        
         public string MessageText { get; set; }
+        
+        public long ChatGroupId { get; set; }
+        //public virtual ChatGroup ChatGroup { get; set; }
 
-        public DateTime MessageDate { get; set; } = DateTime.Now;
+        public string CustomerId { get; set; } 
+        public string UserName { get; set; }
+        //public virtual Customer Customer { get; set; }
 
+        public string MessageDate { get; set; }
     }
 }

@@ -1,0 +1,111 @@
+﻿@inject UserManager<Customer> userManger
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/style.css" rel="stylesheet" />
+    <style>
+
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        .form-container {
+            max-width: 380px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .lighter {
+            border: 2px solid #ccc;
+            background-color: white;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .darker {
+            border-color: #ccc;
+            background-color: #4169e1;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <button class="open-button" onclick="openForm()" id="joinGroup">
+        Live Chat
+    </button>
+
+    <div class="chat-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+            <div class="row">
+                <div class="col-8">
+                    <h6 class="card-title dark"><i class="fas fa-comments">Live Chat</i></h6>
+                </div>
+                <div class="col-4">
+                    <span class="badge badge-danger navbar-badge float-right" onclick="closeForm()">x</span>
+                </div>
+            </div>
+
+                <div class="col-12" style="height:380px;overflow:auto;">
+                    <div id="chat"></div>
+                </div>
+
+            <hr />
+
+            <a data-ajax-begin="clearInputField" data-ajax-complete=""
+               data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+               data-ajax="true" data-ajax-method="POST">
+
+                <div class="input-group mb-3">
+                    <input name="MessageText" class="form-control" id="messageText">
+                    <div class="input-group-append">
+                        <input type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                    </div>
+                </div>
+            </a>
+        </form>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
+    <script>
+            const userId = '@userManger.GetUserId(User)';
+    </script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/chatScript.js"></script>
+    <script src="~/js/signalrChat.js"></script>
+
+</body>
+</html>

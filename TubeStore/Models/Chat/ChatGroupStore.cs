@@ -22,15 +22,15 @@ namespace TubeStore.Models.Chat
 
         public async Task AddGroup(string group)
         {
-            await chatGroups.AddAsync(new ChatGroup { ChatGroupName = group });
+            //await chatGroups.AddAsync(new ChatGroup { ChatGroupName = group });
         }
 
         public async Task<bool> GroupExists(string group)
         {
-            var item = await chatGroups.FindAsync(x=>x.ChatGroupName==group);
+            //var item = await chatGroups.FindAsync(x=>x.ChatGroupName==group);
             
-            if (item == null)
-                return false;
+            //if (item == null)
+            //    return false;
 
             return true;
         }
@@ -66,10 +66,10 @@ namespace TubeStore.Models.Chat
         //        });
         //}
 
-        public List<string> GetAllGroups()
-        {
-            return chatGroups.GetAll().Select(x=>x.ChatGroupName).ToList();
-        }
+        //public List<string> GetAllGroups()
+        //{
+        //    return chatGroups.GetAll().Select(x=>x.ChatGroupName).ToList();
+        //}
     }
 }
 

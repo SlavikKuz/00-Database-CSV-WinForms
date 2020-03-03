@@ -17,9 +17,6 @@
 
             </div>
             <ul class="navbar-nav mr-auto float-right">
-                <li class="nav-item ">
-                    <a class="nav-link text-dark" asp-controller="Home" asp-action="ChatInit">Live Chat</a>
-                </li>
 
                 @if (User.IsInRole("Admin"))
                 {
@@ -51,6 +48,7 @@
                 }
                 else
                 {
+                    <partial name="_Chat" />
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle fa-fw"></i>

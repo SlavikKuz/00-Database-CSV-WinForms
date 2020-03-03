@@ -18,21 +18,18 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<Tube> tubes;
         private readonly IGenericRepository<Carousel> carousels;
         private readonly IGenericRepository<ChatMessage> messages;
-        private readonly IGenericRepository<ChatUser> chatUsers;
         private readonly IGenericRepository<ChatGroup> groups;
         private readonly UserManager<Customer> userManager;
 
         public HomeController(IGenericRepository<Tube> tubes,
                               IGenericRepository<Carousel> carousels,
                               IGenericRepository<ChatMessage> messages,
-                              IGenericRepository<ChatUser> chatUsers,
                               IGenericRepository<ChatGroup> groups,
                               UserManager<Customer> userManager)
         {
             this.tubes = tubes;
             this.carousels = carousels;
             this.messages = messages;
-            this.chatUsers = chatUsers;
             this.groups = groups;
             this.userManager = userManager;
         }
@@ -125,18 +122,14 @@ namespace TubeStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Chat()
         {   
-            ChatUser chatUser = new ChatUser();
-            chatUser.User = await userManager.GetUserAsync(User);
-            chatUser.ChatUserId = chatUser.User.Id;
-            chatUser.UserName = chatUser.User.UserName;
 
-            if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
-                return RedirectToAction("ChatInit", chatUser);
+            //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
+            //    return RedirectToAction("ChatInit", chatUser);
 
-            ICollection<ChatMessage> chatMessages = 
-                await messages.FindAllAsync(x => x.ChatUserId == chatUser.ChatUserId);
+            //ICollection<ChatMessage> chatMessages = 
+            //    await messages.FindAllAsync(x => x.ChatUserId == chatUser.ChatUserId);
             
-            return View(chatMessages);
+            return View();
         }
 
         [HttpPost]
@@ -147,43 +140,43 @@ namespace TubeStore.Controllers
 
         public async Task<IActionResult> ChatInit()
         {
-            ChatUser chatUser = new ChatUser();
-            chatUser.User = await userManager.GetUserAsync(User);
-            chatUser.ChatUserId = chatUser.User.Id;
-            chatUser.UserName = chatUser.User.UserName;
+            //ChatUser chatUser = new ChatUser();
+            //chatUser.User = await userManager.GetUserAsync(User);
+            //chatUser.ChatUserId = chatUser.User.Id;
+            //chatUser.UserName = chatUser.User.UserName;
 
             ChatGroup chatGroup;
 
-            if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
-            {
-                await chatUsers.AddAsync(chatUser);
+            //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
+            //{
+            //    await chatUsers.AddAsync(chatUser);
 
-                chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
-                await groups.AddAsync(chatGroup);
+            //    chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
+            //    await groups.AddAsync(chatGroup);
 
-                ChatMessage chatMessage = new ChatMessage
-                {
-                    ChatGroupId = chatGroup.ChatGroupId.ToString(),
-                    ChatUserId = chatUser.ChatUserId,
-                    UserName = chatUser.UserName,
-                    MessageText = "You started the chat"
-                };
+            //    ChatMessage chatMessage = new ChatMessage
+            //    {
+            //        ChatGroupId = chatGroup.ChatGroupId.ToString(),
+            //        ChatUserId = chatUser.ChatUserId,
+            //        UserName = chatUser.UserName,
+            //        MessageText = "You started the chat"
+            //    };
 
-                await messages.AddAsync(chatMessage);
-            }
+            //    await messages.AddAsync(chatMessage);
+            //}
 
-            ChatMessage message = (await messages.FindByAsync(x => x.ChatUserId == chatUser.ChatUserId)).First();
+            //ChatMessage message = (await messages.FindByAsync(x => x.ChatUserId == chatUser.ChatUserId)).First();
 
-        return View(message);
+        return View();
         }
 
         public async Task<IActionResult> CreateMessage(ChatMessage message)
         {
             if(ModelState.IsValid)
             {
-                message.Author = await chatUsers.FindAsync(x=>x.UserName == User.Identity.Name);
-                message.ChatUserId = message.Author.ChatUserId;
-                await messages.AddAsync(message);
+                //message.Author = await chatUsers.FindAsync(x=>x.UserName == User.Identity.Name);
+                //message.ChatUserId = message.Author.ChatUserId;
+                //await messages.AddAsync(message);
 
                 return Ok();
             }
