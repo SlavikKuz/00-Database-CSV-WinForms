@@ -11,5 +11,6 @@ namespace TubeStore.Models.Chat
         public string CustomerId { get; set; }
         public string AdminId { get; set; }
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
+        public bool IsReadAdmin { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@inject UserManager<Customer> userManger
+﻿@inject UserManager<Customer> userManager
 
 <html>
 <head>
@@ -69,9 +69,9 @@
                 </div>
             </div>
 
-                <div class="col-12" style="height:380px;overflow:auto;">
-                    <div id="chat"></div>
-                </div>
+            <div class="col-12" style="height:380px;overflow:auto;">
+                <div id="chat"></div>
+            </div>
 
             <hr />
 
@@ -99,13 +99,13 @@
         }
     </script>
     <script>
-            const userId = '@userManger.GetUserId(User)';
+            const userId = '@userManager.GetUserId(User)';
     </script>
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
-    <script src="~/js/chatScript.js"></script>
-    <script src="~/js/signalrChat.js"></script>
+    <script src="~/js/userChat.js"></script>
+    <script src="~/js/hubConnection.js"></script>
 
 </body>
 </html>

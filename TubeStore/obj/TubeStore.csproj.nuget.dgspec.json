@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj": {}
+    "D:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj": {}
   },
   "projects": {
-    "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
+    "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
+        "projectUniqueName": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
         "projectName": "ModalNofications",
-        "projectPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
+        "projectPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
         "packagesPath": "C:\\Users\\slavi\\.nuget\\packages\\",
-        "outputPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\obj\\",
+        "outputPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "d:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj": {
+    "D:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
+        "projectUniqueName": "D:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
         "projectName": "TubeStore",
-        "projectPath": "d:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
+        "projectPath": "D:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
         "packagesPath": "C:\\Users\\slavi\\.nuget\\packages\\",
-        "outputPath": "d:\\Repos\\05 - TubeStore\\TubeStore\\obj\\",
+        "outputPath": "D:\\Repos\\05 - TubeStore\\TubeStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -95,8 +95,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
-                "projectPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj"
+              "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
+                "projectPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj"
               }
             }
           }

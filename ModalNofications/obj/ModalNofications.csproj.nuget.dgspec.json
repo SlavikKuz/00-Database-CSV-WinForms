@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {}
+    "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {}
   },
   "projects": {
-    "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
+    "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
+        "projectUniqueName": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
         "projectName": "ModalNofications",
-        "projectPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
+        "projectPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
         "packagesPath": "C:\\Users\\slavi\\.nuget\\packages\\",
-        "outputPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\obj\\",
+        "outputPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -29,6 +29,11 @@ namespace TubeStore.Areas.Admin.Controllers
             this.invoices = invoices;
         }
 
+        public IActionResult ChatWindow()
+        {
+            return PartialView("_ChatWindow");
+        }
+        
         public async Task<IActionResult> Index()
         {
             ICollection<Invoice> invoicesAllPaid =

@@ -61,10 +61,6 @@
         .build();
 
 
-    hubConnection.on('displayNotification', () => {
-        getNotification();
-    });
-
     hubConnection.start()
         .catch(error => {
             console.error(error.message);

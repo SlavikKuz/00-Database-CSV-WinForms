@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TubeStore.DataLayer;
 
 namespace TubeStore.Migrations
 {
     [DbContext(typeof(TubeStoreDbContext))]
-    partial class TubeStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200304083331_adminchat")]
+    partial class adminchat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

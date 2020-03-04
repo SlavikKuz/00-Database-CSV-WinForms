@@ -1,0 +1,33 @@
+﻿
+    <div class="card direct-chat direct-chat-warning">
+        <div class="card-header">
+
+
+            <h3 class="card-title">Live Chat</h3>
+
+            <div class="card-tools" id="adminChat">
+            </div>
+            @*<button type="button" class="btn btn-tool dark" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>*@
+        </div>
+        <div class="card-body" id="adminReload">
+            <partial name="_ChatWindow" />
+        </div>
+        <div class="card-footer">
+
+
+            <a data-ajax-begin="clearInputField" data-ajax-complete=""
+               data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+               data-ajax="true" data-ajax-method="POST">
+
+                <div class="input-group">
+                    <input type="text" id="messageText" placeholder="Type Message ..." class="form-control">
+                    <span class="input-group-append">
+                        <input type="button" class="btn btn-warning" value="Send" id="submitButton" />
+                    </span>
+                </div>
+            </a>
+
+        </div>
+    </div>

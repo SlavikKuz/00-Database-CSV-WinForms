@@ -51,7 +51,10 @@ namespace TubeStore
 
             services.AddRazorPages();
 
-            services.AddSignalR();
+            services.AddSignalR(o =>
+            {
+                o.EnableDetailedErrors = true;
+            });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();

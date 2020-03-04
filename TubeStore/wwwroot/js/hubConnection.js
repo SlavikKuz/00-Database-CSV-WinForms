@@ -19,6 +19,8 @@ function sendMessageToHub(text) {
     hubConnection.invoke('sendToGroup', text);
 }
 
+
+
 //function connectUser(connectionId) {
 //    var groupElement = document.getElementById("group");
 //    var option = document.createElement("option");
