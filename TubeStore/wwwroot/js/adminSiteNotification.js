@@ -37,6 +37,7 @@
         var id = $(target).data('id');
 
         readNotification(id, target);
+        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
     })
 
     function readNotification(id, target) {

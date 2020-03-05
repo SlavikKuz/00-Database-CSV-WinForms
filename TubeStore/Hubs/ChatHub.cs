@@ -123,21 +123,15 @@ namespace TubeStore.Hubs
             await Clients.Group(longGroupId.ToString()).SendAsync("receiveAdminChatMessages", lastMessages);
         }
 
-        public async Task SendAdminToGroup(string text)
+        public async Task SendAdminToGroup(string text, long groupAdminId)
         {
             string userName = Context.User.Identity.Name;
             var customer = await userManager.FindByNameAsync(userName);
-            chatGroup = await chatGroups.FindAsync(x => x.CustomerId.Equals(customer.Id));
-
-            chatGroup.IsReadAdmin = false;
-            await chatGroups.UpdateAsync(chatGroup);
-
-            string chatGroupId = chatGroup.ChatGroupId.ToString();
 
             chatMessage = new ChatMessage
             {
                 MessageText = text,
-                ChatGroupId = chatGroup.ChatGroupId,
+                ChatGroupId = groupAdminId,
                 CustomerId = customer.Id,
                 UserName = customer.FirstName + " " + customer.LastName,
                 MessageDate = DateTime.Now.ToShortTimeString() + " " + DateTime.Now.ToShortDateString()
@@ -145,7 +139,7 @@ namespace TubeStore.Hubs
 
             await chatMessages.AddAsync(chatMessage);
 
-            await Clients.Group(chatGroupId).SendAsync("receiveAdminChatMessage", chatMessage);
+            await Clients.Group(groupAdminId.ToString()).SendAsync("receiveChatMessage", chatMessage);
         }
     }
 }

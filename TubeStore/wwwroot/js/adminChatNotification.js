@@ -6,7 +6,7 @@
         success: function (result) {
             var notifications = result.chatGroups;
             notifications.forEach(element => {
-                res = res + "<span class='badge badge-primary group-id' data-id='" + element + "'>" + "id=" + element + "</span>";
+                res = res + "<span class='badge badge-primary group-id mx-1' data-id='" + element + "'>" + "id=" + element + "</span>";
             });
 
             $("#adminChat").html(res);
@@ -19,12 +19,15 @@
     });
 }
 
+var groupAdminId;
+
 $("div").on('click', 'span.group-id', function (e) {
     var target = e.target;
     var id = $(target).data('id');
+    groupAdminId = id;
     readChatNotification(id);
+    e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
 })
-
 
 function readChatNotification(id) {
     $.ajax({
@@ -33,6 +36,7 @@ function readChatNotification(id) {
         data: { groupId: id },
         success: function () {
             getChatNotification();
+            reloadPartial();
             sendGroupidToHub(id);
         },
         error: function (error) {
@@ -43,7 +47,6 @@ function readChatNotification(id) {
 
 getChatNotification();
 
-
 const hubConnection = new signalR.HubConnectionBuilder()
       .withUrl("/chatHub")
       .build();
@@ -53,21 +56,24 @@ hubConnection.start()
         console.error(error.message);
     });
 
-
 hubConnection.on('receiveAdminChatMessages', addMessagesToAdminChat);
-hubConnection.on('receiveAdminChatMessage', addMessageToAdminChat);
+hubConnection.on('receiveChatMessage', addMessageToAdminChat);
 
 function sendGroupidToHub(id) {
     hubConnection.invoke('getChatMessagesAdmin', id);
 }
 
-function sendAdminMessageToHub(text) {
-    hubConnection.invoke('sendAdminToGroup', text);
+function sendAdminMessageToHub(text, groupAdminId) {
+    hubConnection.invoke('sendAdminToGroup', text, groupAdminId);
 }
 
-const chatAdmin = document.getElementById('adminChatMessages');
-const messageText = document.getElementById('messageText');
-const messagesQueue = [];
+document.getElementById('submitButton').addEventListener('click', () => {
+    clearInputField();
+    sendMessage();
+});
+
+var messageText = document.getElementById('messageText');
+var messagesQueue = [];
 
 function clearInputField() {
     messagesQueue.push(messageText.value);
@@ -77,7 +83,8 @@ function clearInputField() {
 function sendMessage() {
     let text = messagesQueue.shift() || "";
     if (text.trim() === "") return;
-    sendAdminMessageToHub(text);
+
+    sendAdminMessageToHub(text, groupAdminId);
 }
 
 
@@ -86,7 +93,8 @@ function reloadPartial() {
 }
 
 function addMessagesToAdminChat(lastMessages) {
-    //reloadPartial();
+    var chatAdmin = document.getElementById('adminChatMessages');
+
     for (i = 0; i < lastMessages.length; i++) {
 
         let isCurrentUserMessage = lastMessages[i].customerId === userId;
@@ -118,6 +126,7 @@ function addMessagesToAdminChat(lastMessages) {
 }
 
 function addMessageToAdminChat(adminMessage) {
+    var chatAdmin = document.getElementById('adminChatMessages');
 
     let isCurrentUserMessage = adminMessage.customerId === userId;
 

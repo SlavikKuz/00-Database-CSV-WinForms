@@ -33,15 +33,15 @@ namespace TubeStore.Controllers
             this.groups = groups;
             this.userManager = userManager;
         }
-     
+
         public IActionResult Index()
         {
             HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
             {
                 Tubes = tubes.GetAll(),
                 Carousels = carousels.GetAll()
-            };       
-            
+            };
+
             return View(homeIndexViewModel);
         }
 
@@ -49,7 +49,7 @@ namespace TubeStore.Controllers
         {
             ICollection<Tube> tubesInCategory;
 
-            if (categoryId!=null)
+            if (categoryId != null)
                 tubesInCategory = await tubes.FindAllAsync(x => x.Category.CategoryId == categoryId);
             else
                 tubesInCategory = await tubes.FindAllAsync(x => x.Category.CategoryName == category);
@@ -76,8 +76,8 @@ namespace TubeStore.Controllers
         public IActionResult Search(IFormCollection form)
         {
             ISession session = this.HttpContext.Session;
-            session.SetString("Search", form["search"]);           
-            
+            session.SetString("Search", form["search"]);
+
             return RedirectToAction("SearchList");
         }
 
@@ -119,81 +119,82 @@ namespace TubeStore.Controllers
                                                            pageSize));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Chat()
-        {   
+        //[HttpGet]
+        //public async Task<IActionResult> Chat()
+        //{   
 
-            //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
-            //    return RedirectToAction("ChatInit", chatUser);
+        //    //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
+        //    //    return RedirectToAction("ChatInit", chatUser);
 
-            //ICollection<ChatMessage> chatMessages = 
-            //    await messages.FindAllAsync(x => x.ChatUserId == chatUser.ChatUserId);
-            
-            return View();
-        }
+        //    //ICollection<ChatMessage> chatMessages = 
+        //    //    await messages.FindAllAsync(x => x.ChatUserId == chatUser.ChatUserId);
 
-        [HttpPost]
-        public IActionResult Chat([FromBody] AjaxChatModel model)
-        {
-            return Json(new { newUrl = Url.Action("Chat", "Home") });
-        }
+        //    return View();
+        //}
 
-        public async Task<IActionResult> ChatInit()
-        {
-            //ChatUser chatUser = new ChatUser();
-            //chatUser.User = await userManager.GetUserAsync(User);
-            //chatUser.ChatUserId = chatUser.User.Id;
-            //chatUser.UserName = chatUser.User.UserName;
+        //[HttpPost]
+        //public IActionResult Chat([FromBody] AjaxChatModel model)
+        //{
+        //    return Json(new { newUrl = Url.Action("Chat", "Home") });
+        //}
 
-            ChatGroup chatGroup;
+        //public async Task<IActionResult> ChatInit()
+        //{
+        //    //ChatUser chatUser = new ChatUser();
+        //    //chatUser.User = await userManager.GetUserAsync(User);
+        //    //chatUser.ChatUserId = chatUser.User.Id;
+        //    //chatUser.UserName = chatUser.User.UserName;
 
-            //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
-            //{
-            //    await chatUsers.AddAsync(chatUser);
+        //    ChatGroup chatGroup;
 
-            //    chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
-            //    await groups.AddAsync(chatGroup);
+        //    //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
+        //    //{
+        //    //    await chatUsers.AddAsync(chatUser);
 
-            //    ChatMessage chatMessage = new ChatMessage
-            //    {
-            //        ChatGroupId = chatGroup.ChatGroupId.ToString(),
-            //        ChatUserId = chatUser.ChatUserId,
-            //        UserName = chatUser.UserName,
-            //        MessageText = "You started the chat"
-            //    };
+        //    //    chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
+        //    //    await groups.AddAsync(chatGroup);
 
-            //    await messages.AddAsync(chatMessage);
-            //}
+        //    //    ChatMessage chatMessage = new ChatMessage
+        //    //    {
+        //    //        ChatGroupId = chatGroup.ChatGroupId.ToString(),
+        //    //        ChatUserId = chatUser.ChatUserId,
+        //    //        UserName = chatUser.UserName,
+        //    //        MessageText = "You started the chat"
+        //    //    };
 
-            //ChatMessage message = (await messages.FindByAsync(x => x.ChatUserId == chatUser.ChatUserId)).First();
+        //    //    await messages.AddAsync(chatMessage);
+        //    //}
 
-        return View();
-        }
+        //    //ChatMessage message = (await messages.FindByAsync(x => x.ChatUserId == chatUser.ChatUserId)).First();
 
-        public async Task<IActionResult> CreateMessage(ChatMessage message)
-        {
-            if(ModelState.IsValid)
-            {
-                //message.Author = await chatUsers.FindAsync(x=>x.UserName == User.Identity.Name);
-                //message.ChatUserId = message.Author.ChatUserId;
-                //await messages.AddAsync(message);
+        //    //return View();
+        //    //}
 
-                return Ok();
-            }
-            return Error();
-        }
+        //    public async Task<IActionResult> CreateMessage(ChatMessage message)
+        //    {
+        //        if(ModelState.IsValid)
+        //        {
+        //            //message.Author = await chatUsers.FindAsync(x=>x.UserName == User.Identity.Name);
+        //            //message.ChatUserId = message.Author.ChatUserId;
+        //            //await messages.AddAsync(message);
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //            return Ok();
+        //        }
+        //        return Error();
+        //    }
 
-    }
+        //    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //    public IActionResult Error()
+        //    {
+        //        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //    }
 
-    public class AjaxChatModel
-    {
-        public string name { get; set; }
-        public string group { get; set; }
+        //}
+
+        //public class AjaxChatModel
+        //{
+        //    public string name { get; set; }
+        //    public string group { get; set; }
+        //}
     }
 }
