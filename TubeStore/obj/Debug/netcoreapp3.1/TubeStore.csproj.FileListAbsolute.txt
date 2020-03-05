@@ -147,7 +147,6 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\ShoppingCa
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_AdminLayout.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_Notifications.cshtml.g.cs
-d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_Messages.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_SidebarMenu.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Tube\Index.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Tube\Edit.cshtml.g.cs
@@ -212,3 +211,6 @@ d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Com
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Chat.cshtml.g.cs
 d:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_AdminChat.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_ChatWindow.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Carousel\EditCarousels.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\TopTube\TopTube.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\NewArrivals\NewArrivals.cshtml.g.cs

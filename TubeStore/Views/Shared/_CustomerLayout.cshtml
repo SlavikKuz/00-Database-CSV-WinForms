@@ -14,12 +14,16 @@
 <body>
     <div>
         @await Component.InvokeAsync("ModalNotification")
+        
         <partial name="_Header" />
+        
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
                     <p class="lead mt-2 mb-0">
-                        <img class="img-fluid" alt="Tube Store" src="~/Images/logo.jpg" />
+                        <a asp-controller="Home" asp-action="Index">
+                            <img class="img-fluid" alt="Tube Store" src="~/Images/logo.jpg" />
+                        </a>
                     </p>
                     <h3 align="center">Tube store</h3>
                     <form role="form" method="POST" asp-controller="Home" asp-action="Search">
@@ -32,9 +36,10 @@
                     </form>
                     <hr>
                     <div class="container mt-4">
-                        @RenderSection("TopTube", required: false)
+                        @await Component.InvokeAsync("TopTube")
                     </div>
                 </div>
+
                 <div class="col-md-9">
                     <div class="container mb-2">
                         <partial name="_Navigation" />
@@ -42,10 +47,8 @@
                     <main role="main" class="pb-3">
                         @RenderBody()
                     </main>
-                    <div class="container">
-                        @RenderSection("NewArrivals", required: false)
-                    </div>
                 </div>
+
             </div>
         </div>
         <partial name="_Footer" />

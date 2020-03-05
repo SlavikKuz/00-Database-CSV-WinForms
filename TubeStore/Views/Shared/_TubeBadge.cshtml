@@ -2,8 +2,9 @@
 @*<div class="col-sm-4 col-lg-3 col-md-4">*@
 <div class="img-thumbnail">
     <figure class="figure">
-        <img src="@Model.ImageThumbnailUrl" class="figure-img img-fluid rounded" alt="">
-        <figcaption class="figure-caption">
+        <a asp-controller="Tube" asp-action="Details" asp-route-tubeId="@Model.TubeId">
+            <img src="@Model.ImageThumbnailUrl" class="figure-img img-fluid rounded" alt="">
+        </a><figcaption class="figure-caption">
             <h6 class="float-right">
                 @Model.Price.ToString("c")            
                 @if (Model.Discount != 0)

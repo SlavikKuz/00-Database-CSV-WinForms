@@ -63,20 +63,27 @@ using TubeStore.Areas.Admin.ViewModels;
 #nullable disable
 #nullable restore
 #line 8 "D:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
-using Microsoft.AspNetCore.Identity;
+using TubeStore.ViewModels.Admin;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "D:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "D:\Repos\05 - TubeStore\TubeStore\Areas\Admin\Views\_ViewImports.cshtml"
 using TubeStore.DataLayer;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8cfdc43284cf40ff8e7962ace03042cb4e93e3dc", @"/Areas/Admin/Views/Tube/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5063ab094c357dc6f060e5d84f0b42cab949d7b0", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"393714c0089c41708b2c9b08c3d4b711890e044c", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Tube_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PaginatedList<Tube>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("type", new global::Microsoft.AspNetCore.Html.HtmlString("button"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -132,7 +139,7 @@ using TubeStore.DataLayer;
                 <div class=""card"">
                     <div class=""card-header"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc8209", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc8397", async() => {
                 WriteLiteral("\r\n                            Tube Stock\r\n                        ");
             }
             );
@@ -154,7 +161,7 @@ using TubeStore.DataLayer;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc10024", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc10212", async() => {
                 WriteLiteral("\r\n                            <i class=\"fas fa-plus-circle\"></i> New Tube\r\n                        ");
             }
             );
@@ -240,7 +247,7 @@ WriteAttributeValue("", 2125, tube.ImageThumbnailUrl, 2125, 23, false);
 #line hidden
 #nullable disable
             WriteLiteral("</p>\r\n\r\n                                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc14600", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc14788", async() => {
                 WriteLiteral("\r\n                                            <i class=\"fas fa-edit\"></i>Edit\r\n                                        ");
             }
             );
@@ -446,7 +453,7 @@ WriteAttributeValue("", 2125, tube.ImageThumbnailUrl, 2125, 23, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                <li class=\"page-item\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc24038", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc24226", async() => {
                 WriteLiteral("&laquo;");
             }
             );
@@ -507,7 +514,7 @@ WriteAttributeValue("", 2125, tube.ImageThumbnailUrl, 2125, 23, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                <li class=\"page-item\">\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc27767", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cfdc43284cf40ff8e7962ace03042cb4e93e3dc27955", async() => {
                 WriteLiteral("&raquo;");
             }
             );

@@ -19,7 +19,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <style> .direct-chat-messages { height: 560px;} </style>
+    <style> .direct-chat-messages { height: 556px;} </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -35,7 +35,7 @@
             </ul>
 
 
-            <form class="form-inline ml-3">
+            @*<form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
@@ -44,18 +44,16 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form>*@
             @await Component.InvokeAsync("ModalNotification")
 
             <ul class="navbar-nav ml-auto">
                 <li class="dropdown show">
-                    <a class="btn" role="button" data-toggle="dropdown">
+                    <a class="btn mx-4" role="button" data-toggle="dropdown">
                         New Invoices <span class="badge badge-danger navbar-badge ml-1" id="notificationCount"></span>
                     </a>
                     <div id="target"></div>
                 </li>
-                <li>|</li>
-                <partial name="_Messages" />
             </ul>
         </nav>
 

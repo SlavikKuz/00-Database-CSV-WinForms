@@ -169,6 +169,9 @@ namespace TubeStore.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TubeReferenceId")
+                        .HasColumnType("int");
+
                     b.HasKey("CarouselId");
 
                     b.ToTable("Carousels");
@@ -180,7 +183,8 @@ namespace TubeStore.Migrations
                             Description = "Premium selected",
                             ImageUrl = "/Images/Carousel/carousel_01.jpg",
                             Status = true,
-                            Title = "ECC82"
+                            Title = "ECC82",
+                            TubeReferenceId = 0
                         },
                         new
                         {
@@ -188,7 +192,8 @@ namespace TubeStore.Migrations
                             Description = "Platinum matched quad",
                             ImageUrl = "/Images/Carousel/carousel_02.jpg",
                             Status = true,
-                            Title = "6P14P"
+                            Title = "6P14P",
+                            TubeReferenceId = 0
                         },
                         new
                         {
@@ -196,7 +201,8 @@ namespace TubeStore.Migrations
                             Description = "Tested pre-amp set",
                             ImageUrl = "/Images/Carousel/carousel_03.jpg",
                             Status = true,
-                            Title = "6N6P"
+                            Title = "6N6P",
+                            TubeReferenceId = 0
                         });
                 });
 

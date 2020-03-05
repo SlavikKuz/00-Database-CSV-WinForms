@@ -163,7 +163,7 @@ namespace TubeStore.Areas.Admin.Controllers
             var fileStream = new FileStream(imagePath, FileMode.Create);
             await image.CopyToAsync(fileStream);
 
-            return imagePath;
+            return Path.Combine("/Images", category.CategoryName, tube.Type, image.FileName).Replace("\\", "/");
         }
 
     }

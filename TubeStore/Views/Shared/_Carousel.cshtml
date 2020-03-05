@@ -25,7 +25,7 @@
                             <h1>@item.Title</h1>
                             <h2>@item.Description</h2>
                             <p>
-                                <a class="btn btn-lg btn-primary" href="/home/details/@item.CarouselId" role="button">
+                                <a class="btn btn-lg btn-primary" asp-controller="Tube" asp-action="Details" asp-route-tubeId="@item.TubeReferenceId" role="button">
                                     Read more
                                 </a>
                             </p>

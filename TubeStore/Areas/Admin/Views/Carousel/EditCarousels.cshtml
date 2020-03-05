@@ -1,0 +1,128 @@
+﻿@model CarouselViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="row">
+                            <form asp-action="EditCarousels" enctype="multipart/form-data">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.NewCarousel.Title" class="control-label"></label>
+                                            <input asp-for="@Model.NewCarousel.Title" class="form-control" />
+                                            <span asp-validation-for="@Model.NewCarousel.Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.NewCarousel.Description" class="control-label"></label>
+                                            <input asp-for="@Model.NewCarousel.Description" class="form-control" />
+                                            <span asp-validation-for="@Model.NewCarousel.Description" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.NewCarousel.TubeReferenceId" class="control-label"></label>
+                                            <input asp-for="@Model.NewCarousel.TubeReferenceId" class="form-control" min="0"/>
+                                            <span asp-validation-for="@Model.NewCarousel.TubeReferenceId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.NewCarousel.ImageUrl" class="control-label"></label>
+                                            <div class="custom-file">
+                                                <label class="custom-file-label" for="imageFile">Slide Image</label>
+                                                <input type="file" class="custom-file-input" id="imageFile" name="imageFile" accept="image/*">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Add New Slide" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NewCarousel.CarouselId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NewCarousel.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NewCarousel.ImageUrl)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NewCarousel.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NewCarousel.TubeReferenceId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NewCarousel.Status)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Carousels)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CarouselId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    <img src="@item.ImageUrl" class="figure-img img-fluid rounded" width="80">
+                                    File Path:
+                                    "@Html.DisplayFor(modelItem => item.ImageUrl)"
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TubeReferenceId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @if (item.Status)
+                                    {
+                                        @Html.ActionLink("Set Hide", "SetShow", new { id = item.CarouselId })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Set Show", "SetShow", new { id = item.CarouselId })
+                                    } |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.CarouselId })
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+

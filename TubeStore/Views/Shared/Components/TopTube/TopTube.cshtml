@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Tube>
+
+<h4 align="center">Tube of the Week:</h4>
+
+@{ int counter = 0;
+    foreach (var tube in Model)
+    {
+        if (tube.IsTubeOfTheWeek)
+        {
+            <partial name="_TubeBadge" model="tube" />
+            counter++;
+        }
+    };
+
+    if (counter == 0)
+    {
+        <h4>We love all our tubes!</h4>
+    }
+}

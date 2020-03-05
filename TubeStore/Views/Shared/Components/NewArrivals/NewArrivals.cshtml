@@ -1,0 +1,24 @@
+﻿@model  IEnumerable<Tube>
+
+<h5>New Arrivals</h5>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            @foreach (var tube in Model)
+            {
+                if (tube.IsNewArrival)
+                {
+                    <figure class="card ml-3 mr-3">
+                        <a asp-controller="Tube" asp-action="Details" asp-route-tubeId="@tube.TubeId">
+                            <img src="@tube.ImageThumbnailUrl" class="figure-img img-fluid rounded" alt="" width="120">
+                        </a><figcaption class="figure-caption" align="center">
+                            <a asp-controller="Tube" asp-action="Details" asp-route-tubeid="@tube.TubeId">
+                                @tube.Brand @tube.Type
+                            </a>
+                        </figcaption>
+                    </figure>
+                }
+            }
+        </div>
+    </div>
+</div>

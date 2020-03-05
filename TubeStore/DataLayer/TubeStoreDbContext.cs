@@ -182,6 +182,7 @@ namespace TubeStore.DataLayer
                     ImageUrl = "/Images/Carousel/carousel_01.jpg",
                     Title = "ECC82",
                     Description = "Premium selected",
+                    TubeReferenceId = 5,
                     Status = true
                 },
                 new Carousel()
@@ -190,6 +191,7 @@ namespace TubeStore.DataLayer
                     ImageUrl = "/Images/Carousel/carousel_02.jpg",
                     Title = "6P14P",
                     Description = "Platinum matched quad",
+                    TubeReferenceId = 1,
                     Status = true,
                 },
                 new Carousel()
@@ -198,6 +200,7 @@ namespace TubeStore.DataLayer
                     ImageUrl = "/Images/Carousel/carousel_03.jpg",
                     Title = "6N6P",
                     Description = "Tested pre-amp set",
+                    TubeReferenceId = 3,
                     Status = true,
                 }
             );

@@ -39,7 +39,7 @@ namespace TubeStore.Controllers
             HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
             {
                 Tubes = tubes.GetAll(),
-                Carousels = carousels.GetAll()
+                Carousels = carousels.GetAll().Where(x=>x.Status)
             };
 
             return View(homeIndexViewModel);
