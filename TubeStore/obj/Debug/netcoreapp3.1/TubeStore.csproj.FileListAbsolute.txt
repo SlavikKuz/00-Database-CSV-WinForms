@@ -214,3 +214,15 @@ D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\View
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Carousel\EditCarousels.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\TopTube\TopTube.cshtml.g.cs
 D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\NewArrivals\NewArrivals.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\AccessDenied.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ConfirmEmail.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ExternalLogin.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScripts.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ForgotPassword.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ForgotPasswordConfirmation.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Lockout.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\LoginTwoFactor.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\LoginWithRecoveryCode.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ResetPassword.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ResetPasswordConfirmation.cshtml.g.cs
+D:\Repos\05 - TubeStore\TubeStore\obj\Debug\netcoreapp3.1\Razor\Views\Customer\SignedOut.cshtml.g.cs

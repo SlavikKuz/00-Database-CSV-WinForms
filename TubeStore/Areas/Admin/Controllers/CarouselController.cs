@@ -51,14 +51,13 @@ namespace TubeStore.Areas.Admin.Controllers
         public async Task<string> UploadFile(IFormFile imageFile)
         {
             string path = Path.Combine("Images\\Carousel", imageFile.FileName);
-            string rootPath = hostEnvironment.WebRootPath;
-            string fullPath = Path.Combine(rootPath, path);
+            string fullPath = Path.Combine(hostEnvironment.WebRootPath, path);
             
             using (var fileStream = new FileStream(fullPath, FileMode.Create))
             {
                 await imageFile.CopyToAsync(fileStream);
             }
-            return string.Concat("/",path.Replace("\\","/"));
+            return string.Concat("\\",path);
         }
 
         public async Task<IActionResult> SetShow(int id)
@@ -73,7 +72,14 @@ namespace TubeStore.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Carousel carousel = await carousels.GetAsync(id);
-            await carousels.DeleteAsync(carousel);
+            string path = Path.Combine(hostEnvironment.WebRootPath, carousel.ImageUrl.Remove(0, 1));
+            
+            //non safe method
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+                await carousels.DeleteAsync(carousel);
+            }
 
             return RedirectToAction("EditCarousels");
         }

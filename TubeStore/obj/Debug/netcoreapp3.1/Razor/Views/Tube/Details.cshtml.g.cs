@@ -42,7 +42,7 @@ using TubeStore.Models.Chat;
 #nullable disable
 #nullable restore
 #line 5 "D:\Repos\05 - TubeStore\TubeStore\Views\_ViewImports.cshtml"
-using TubeStore.ViewModels;
+using TubeStore.ViewModels.Customer;
 
 #line default
 #line hidden
@@ -62,7 +62,7 @@ using TubeStore.DataLayer;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"26bdaf54b84383b7f3a6642d59fc935c3f3cc05c", @"/Views/Tube/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"92c1ef7f29665c97326bb0223d15fa6235355b62", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"34640e6a5cb5451b7b12a69159fe8c762beeb64b", @"/Views/_ViewImports.cshtml")]
     public class Views_Tube_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Tube>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -110,7 +110,7 @@ using TubeStore.DataLayer;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n    <ol class=\"breadcrumb bg-transparent\">\r\n        <li class=\"breadcrumb-item\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c6771", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c6780", async() => {
                 WriteLiteral("Home");
             }
             );
@@ -128,7 +128,7 @@ using TubeStore.DataLayer;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" \r\n        </li>\r\n        <li class=\"breadcrumb-item\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c8202", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c8211", async() => {
                 WriteLiteral("\r\n                ");
 #nullable restore
 #line 15 "D:\Repos\05 - TubeStore\TubeStore\Views\Tube\Details.cshtml"
@@ -261,7 +261,7 @@ WriteAttributeValue("", 1097, Model.ImageThumbnailUrl, 1097, 24, false);
 #line hidden
 #nullable disable
             WriteLiteral("</h4>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c14745", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c14754", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -309,7 +309,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = Model;
 #line hidden
 #nullable disable
             WriteLiteral("            <hr class=\"soft my-4\" />\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c17072", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26bdaf54b84383b7f3a6642d59fc935c3f3cc05c17081", async() => {
                 WriteLiteral("\r\n                <div class=\"form-group\">\r\n                    <label class=\"mr-4\">\r\n                        <h4>");
 #nullable restore
 #line 60 "D:\Repos\05 - TubeStore\TubeStore\Views\Tube\Details.cshtml"

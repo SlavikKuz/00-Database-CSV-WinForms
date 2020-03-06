@@ -14,15 +14,7 @@
                             <p class="login-box-msg">Register a new account</p>
 
                             <form asp-controller="Customer" asp-action="Register" method="post">
-                                <div class="input-group mb-3">
-                                    <input asp-for="Login" type="text" class="form-control" placeholder="Login">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
-                                        </div>
-                                    </div>
-                                    <span asp-validation-for="Login" class="text-danger"></span>
-                                </div>
+
                                 <div class="input-group mb-3">
                                     <input asp-for="Email" type="email" class="form-control" placeholder="Email">
                                     <div class="input-group-append">
@@ -68,21 +60,11 @@
                                 </div>
                             </form>
 
-                            <div class="social-auth-links text-center">
-                                <p>- OR -</p>
-                                <a href="#" class="btn btn-block btn-primary">
-                                    <i class="fab fa-facebook mr-2"></i>
-                                    Sign up using Facebook
-                                </a>
-                                <a href="#" class="btn btn-block btn-danger">
-                                    <i class="fab fa-google-plus mr-2"></i>
-                                    Sign up using Google+
-                                </a>
-                            </div>
-                            <a href="login.html" class="text-center">I already have an account</a>
+                            <a asp-controller="Customer" asp-action="Login" class="text-center">I already have an account</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <partial name="_ValidationScripts" />
     </body>
