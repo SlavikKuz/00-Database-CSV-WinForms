@@ -1,8 +1,0 @@
-D:\Repos\05 - TubeStore\Notifications\bin\Debug\netcoreapp3.1\UserNotifications.deps.json
-D:\Repos\05 - TubeStore\Notifications\bin\Debug\netcoreapp3.1\UserNotifications.dll
-D:\Repos\05 - TubeStore\Notifications\obj\Debug\netcoreapp3.1\UserNotifications.csprojAssemblyReference.cache
-D:\Repos\05 - TubeStore\Notifications\obj\Debug\netcoreapp3.1\UserNotifications.AssemblyInfoInputs.cache
-D:\Repos\05 - TubeStore\Notifications\obj\Debug\netcoreapp3.1\UserNotifications.AssemblyInfo.cs
-D:\Repos\05 - TubeStore\Notifications\bin\Debug\netcoreapp3.1\UserNotifications.pdb
-D:\Repos\05 - TubeStore\Notifications\obj\Debug\netcoreapp3.1\UserNotifications.dll
-D:\Repos\05 - TubeStore\Notifications\obj\Debug\netcoreapp3.1\UserNotifications.pdb
