@@ -42,6 +42,19 @@
     {
       "library": "underscore.js@1.9.1",
       "destination": "wwwroot/lib/underscore.js/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery-validation@1.19.1",
+      "destination": "wwwroot/lib/jquery-validation/",
+      "files": [
+        "dist/jquery.validate.js",
+        "dist/jquery.validate.min.js"
+      ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
     }
   ]
 }

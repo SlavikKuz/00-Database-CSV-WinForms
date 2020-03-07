@@ -10324,11 +10324,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
+      "projectUniqueName": "d:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
       "projectName": "TubeStore",
-      "projectPath": "D:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
+      "projectPath": "d:\\Repos\\05 - TubeStore\\TubeStore\\TubeStore.csproj",
       "packagesPath": "C:\\Users\\slavi\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\05 - TubeStore\\TubeStore\\obj\\",
+      "outputPath": "d:\\Repos\\05 - TubeStore\\TubeStore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10347,8 +10347,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
-              "projectPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj"
+            "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj": {
+              "projectPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj"
             }
           }
         }

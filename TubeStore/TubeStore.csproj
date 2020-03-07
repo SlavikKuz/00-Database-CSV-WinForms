@@ -33,6 +33,8 @@
     <Compile Remove="Migrations\20200303103949_chat2.Designer.cs" />
     <Compile Remove="Migrations\20200303104435_chat3.cs" />
     <Compile Remove="Migrations\20200303104435_chat3.Designer.cs" />
+    <Compile Remove="Migrations\20200307093536_login2.cs" />
+    <Compile Remove="Migrations\20200307093536_login2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

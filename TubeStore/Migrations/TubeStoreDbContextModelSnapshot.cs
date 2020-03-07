@@ -184,7 +184,7 @@ namespace TubeStore.Migrations
                             ImageUrl = "/Images/Carousel/carousel_01.jpg",
                             Status = true,
                             Title = "ECC82",
-                            TubeReferenceId = 0
+                            TubeReferenceId = 5
                         },
                         new
                         {
@@ -193,7 +193,7 @@ namespace TubeStore.Migrations
                             ImageUrl = "/Images/Carousel/carousel_02.jpg",
                             Status = true,
                             Title = "6P14P",
-                            TubeReferenceId = 0
+                            TubeReferenceId = 1
                         },
                         new
                         {
@@ -202,7 +202,7 @@ namespace TubeStore.Migrations
                             ImageUrl = "/Images/Carousel/carousel_03.jpg",
                             Status = true,
                             Title = "6N6P",
-                            TubeReferenceId = 0
+                            TubeReferenceId = 3
                         });
                 });
 
@@ -430,8 +430,7 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");

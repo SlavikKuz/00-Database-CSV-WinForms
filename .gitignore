@@ -1,4 +1,5 @@
 /.vs
 /.git
 /SqlDatabase
-diary.docx
+/TubeStore/TubeStore/bin
+/TubeStore/TubeStore/obj

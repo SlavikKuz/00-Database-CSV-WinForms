@@ -59,8 +59,7 @@ namespace TubeStore.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(
-                    model.Email, model.Password, model.RememberMe, false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
@@ -213,7 +212,7 @@ namespace TubeStore.Controllers
         public async Task<IActionResult> Register(CustomerRegistrationViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.Agreement)
             {
                 var customer = new Customer()
                 {
@@ -231,7 +230,7 @@ namespace TubeStore.Controllers
                     var callBackUrl = Url.EmailConfirmationLink(customer.Id, code, Request.Scheme);
                     await emailSender.SendEmailConfirmationAsync(model.Email, callBackUrl);
 
-                    await signInManager.SignInAsync(customer, false);
+                    await signInManager.SignInAsync(customer, isPersistent: false);
                     logger.LogInformation("User created a new account with password.");
 
                     await userManager.AddToRoleAsync(customer, "User");
@@ -245,8 +244,7 @@ namespace TubeStore.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             if (User.Identity.IsAuthenticated)
@@ -256,7 +254,7 @@ namespace TubeStore.Controllers
                 logger.LogInformation("User logged out.");
                 HttpContext.Session.Remove("ShoppingCartItems");
             }
-            return RedirectToAction(nameof(Index), nameof(HomeController));
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         [HttpPost]
@@ -286,7 +284,7 @@ namespace TubeStore.Controllers
             }
 
             // if the user already has login
-            var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false, true);
+            var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
                 logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
@@ -324,7 +322,7 @@ namespace TubeStore.Controllers
                     result = await userManager.AddLoginAsync(customer, info);
                     if (result.Succeeded)
                     {
-                        await signInManager.SignInAsync(customer, false);                        
+                        await signInManager.SignInAsync(customer, isPersistent: false);                        
                         logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
                         await userManager.AddToRoleAsync(customer, "User");
@@ -345,7 +343,7 @@ namespace TubeStore.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             var user = await userManager.FindByIdAsync(userId);
             if (user == null)
@@ -459,7 +457,7 @@ namespace TubeStore.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
 

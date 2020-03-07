@@ -1,8 +1,0 @@
-D:\Repos\05 - TubeStore\ModalNofications\bin\Release\netcoreapp3.1\ModalNofications.deps.json
-D:\Repos\05 - TubeStore\ModalNofications\bin\Release\netcoreapp3.1\ModalNofications.dll
-D:\Repos\05 - TubeStore\ModalNofications\bin\Release\netcoreapp3.1\ModalNofications.pdb
-D:\Repos\05 - TubeStore\ModalNofications\obj\Release\netcoreapp3.1\ModalNofications.csprojAssemblyReference.cache
-D:\Repos\05 - TubeStore\ModalNofications\obj\Release\netcoreapp3.1\ModalNofications.AssemblyInfoInputs.cache
-D:\Repos\05 - TubeStore\ModalNofications\obj\Release\netcoreapp3.1\ModalNofications.AssemblyInfo.cs
-D:\Repos\05 - TubeStore\ModalNofications\obj\Release\netcoreapp3.1\ModalNofications.dll
-D:\Repos\05 - TubeStore\ModalNofications\obj\Release\netcoreapp3.1\ModalNofications.pdb
