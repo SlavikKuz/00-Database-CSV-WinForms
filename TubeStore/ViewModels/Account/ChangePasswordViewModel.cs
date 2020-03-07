@@ -27,4 +27,3 @@ namespace TubeStore.ViewModels.Account
         public string StatusMessage { get; set; }
     }
 }
-}
