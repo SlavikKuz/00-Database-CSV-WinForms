@@ -70,6 +70,7 @@ namespace TubeStore.Controllers
                 State = user.State,
                 Country = user.Country
             };
+
             return View(model);
         }
 
