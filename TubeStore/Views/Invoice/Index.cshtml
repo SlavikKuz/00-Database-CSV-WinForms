@@ -55,7 +55,6 @@
                                     <td>
                                         @Html.ActionLink("Pay", "PayInvoce", new { id = item.InvoiceId }) |
                                         @Html.ActionLink("Details", "Details", new { id = item.InvoiceId }) |
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.InvoiceId })*@
                                         <a class="btn btn-danger delete" data-id="@item.InvoiceId" data-controller="invoice" data-action="delete" data-body-message="Are you sure?">
                                             <i class="fas fa-trash alt"></i>
                                             Delete

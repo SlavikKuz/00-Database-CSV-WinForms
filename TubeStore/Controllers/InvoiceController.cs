@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using ModalNofications;
 using TubeStore.DataLayer;
 using TubeStore.Hubs;
@@ -14,6 +16,8 @@ using static ModalNofications.SupportModalClass;
 
 namespace TubeStore.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class InvoiceController : Controller
     {
         private readonly IGenericRepository<Invoice> invoices;
@@ -21,18 +25,16 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<Notification> notifications;
         private readonly IGenericRepository<NotificationUser> notificationUsers;
         private readonly UserManager<Customer> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IModalNotification modalNotification;
-        private readonly IHubContext<ChatHub> chatHub;
+        private readonly ILogger<InvoiceController> logger;
 
         public InvoiceController(IGenericRepository<Invoice> invoices,
                                  IGenericRepository<Tube> tubes,
                                  IGenericRepository<Notification> notifications,
                                  IGenericRepository<NotificationUser> notificationUsers,
                                  UserManager<Customer> userManager,
-                                 RoleManager<IdentityRole> roleManager,
                                  IModalNotification modalNotification,
-                                 IHubContext<ChatHub> chatHub
+                                 ILogger<InvoiceController> logger
             )
         {
             this.invoices = invoices;
@@ -41,29 +43,41 @@ namespace TubeStore.Controllers
             this.notificationUsers = notificationUsers;
             this.userManager = userManager;
             this.modalNotification = modalNotification;
-            this.chatHub = chatHub;
+            this.logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
-
             Customer customer = userManager.Users.First(x => x.UserName == User.Identity.Name);
 
             IEnumerable<Invoice> customerInvoices = await
                 invoices.FindAllAsync(x => x.CustomerId == customer.Id);
- 
-            return View(customerInvoices.Where(x=>!x.Status.Equals(EnumStatus.Cancelled)));
+
+            customerInvoices = customerInvoices.Where(x => !x.Status.Equals(EnumStatus.Cancelled));
+
+            return View(customerInvoices);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
-                    x => x.Customer,
-                    x => x.ShippingAddress,
-                    x => x.InvoicesInfo).First();
+                                                    x => x.InvoicesInfo)
+                                                    .First();
 
             invoice.Status = EnumStatus.Cancelled;
-            await invoices.UpdateAsync(invoice);
+
+            try
+            {
+                var result = await invoices.UpdateAsync(invoice);
+                logger.LogInformation($"Invoice {id} cancelled");
+            }
+            catch (Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+                modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.warning, "Not cancelled!");
+                return RedirectToAction(nameof(Index));
+            }
 
             Tube tempTube;
 
@@ -72,38 +86,62 @@ namespace TubeStore.Controllers
                 tempTube = await tubes.GetAsync(item.TubeId);
                 tempTube.Quantity += item.Quantity;
                 await tubes.UpdateAsync(tempTube);
-            }    
+                logger.LogInformation($"Tube {tempTube.TubeId} returned {item.Quantity} to stock.");
+            }
+
+            modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.success, "Invoice cancelled!");
+
             return Ok();
-            // return BadREquest();
-            //catched exception in deletescript
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
                     x => x.Customer,
                     x => x.ShippingAddress,
                     x => x.Coupon,
-                    x => x.InvoicesInfo).First();
+                    x => x.InvoicesInfo
+                    ).First();
 
-            for (int i = 0; i < invoice.InvoicesInfo.Count; i++)
-            {
-                invoice.InvoicesInfo[i].Tube = await tubes.GetAsync(invoice.InvoicesInfo[i].TubeId);
-            }
-
-            modalNotification.AddNotificationSweet("Nice", NotificationType.success, "You opened your invoices");
-
+            ICollection<Tube> tubeList = await tubes.GetAllAsync();
 
             return View(invoice);
         }
 
+        [HttpGet]
         public async Task<IActionResult> PayInvoce(int id)
         {
             Invoice invoice = await invoices.GetAsync(id);
-            invoice.Status = EnumStatus.Paid;
-            await invoices.UpdateAsync(invoice);
+            Notification notification;
 
-            Notification notification = new Notification()
+            if (invoice==null)
+            {
+                logger.LogInformation($"Invoice {id} not found for payment");
+                return RedirectToAction(nameof(Index));
+            }
+            else if (invoice.Status.Equals(EnumStatus.Paid))
+            {
+                modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.warning, "It is already paid!");
+                logger.LogInformation($"User tried to pay Invoice {id} again");
+                return RedirectToAction(nameof(Index));
+            }
+            
+            invoice.Status = EnumStatus.Paid;
+
+            try
+            {
+                var result = await invoices.UpdateAsync(invoice);
+                logger.LogInformation($"Invoice {id} paid");
+            }
+            catch (Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+                modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.error, "Nor paid :(");
+                return RedirectToAction(nameof(Index));
+            }
+
+            notification = new Notification()
             {
                 NotificationText = $"The invoice {invoice.InvoiceId.ToString()} is paid."
             };
@@ -118,7 +156,6 @@ namespace TubeStore.Controllers
                     CustomerId = item.Id, 
                     NotificationId = notification.NotificationId
                 });
-                //chatHub.Clients.All.InvokeAsync("displayNotification", "");
             }
 
             return RedirectToAction("Index");
