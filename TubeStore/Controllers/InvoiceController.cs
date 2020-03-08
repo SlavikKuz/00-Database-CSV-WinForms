@@ -46,6 +46,7 @@ namespace TubeStore.Controllers
             this.logger = logger;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             Customer customer = userManager.Users.First(x => x.UserName == User.Identity.Name);
@@ -76,7 +77,6 @@ namespace TubeStore.Controllers
             {
                 logger.LogInformation(ex.Message);
                 modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.warning, "Not cancelled!");
-                return RedirectToAction(nameof(Index));
             }
 
             Tube tempTube;
@@ -137,8 +137,7 @@ namespace TubeStore.Controllers
             catch (Exception ex)
             {
                 logger.LogInformation(ex.Message);
-                modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.error, "Nor paid :(");
-                return RedirectToAction(nameof(Index));
+                modalNotification.AddNotificationSweet("Invoice" + id.ToString(), NotificationType.error, "Not paid :(");
             }
 
             notification = new Notification()

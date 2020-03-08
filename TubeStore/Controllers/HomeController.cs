@@ -25,6 +25,7 @@ namespace TubeStore.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -61,8 +62,9 @@ namespace TubeStore.Controllers
                                                            pageSize));
         }
 
+        [AllowAnonymous]        
         [HttpPost]
-        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public IActionResult Search(IFormCollection form)
         {
             ISession session = HttpContext.Session;
@@ -72,6 +74,7 @@ namespace TubeStore.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> SearchList(int? page)
         {
             int pageSize = 3;

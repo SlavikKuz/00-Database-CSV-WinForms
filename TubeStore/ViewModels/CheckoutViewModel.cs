@@ -11,8 +11,7 @@ namespace TubeStore.ViewModels
     {
         public ShippingAddress BillingAddress { get; set; }
         public ShippingAddress ShippingAddress { get; set; }
-        public bool IsTheSame { get; set; }
-
         public CustomerViewModel Customer { get; set; }
+        public bool IsTheSame { get; set; }
     }
 }

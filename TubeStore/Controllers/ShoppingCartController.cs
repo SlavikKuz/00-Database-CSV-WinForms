@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using ModalNofications;
 using Newtonsoft.Json;
 using TubeStore.DataLayer;
 using TubeStore.Models;
 using TubeStore.Models.Cart;
 using TubeStore.ViewModels;
+using static ModalNofications.SupportModalClass;
 
 namespace TubeStore.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class ShoppingCartController : Controller
     {
         private readonly IGenericRepository<Tube> tubes;
@@ -21,28 +27,33 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<ShippingAddress> shippingAddresses;
         private readonly IGenericRepository<Coupon> coupons;
         private readonly UserManager<Customer> userManager;
+        private readonly IModalNotification modalNotification;
+        private readonly ILogger<InvoiceController> logger;
 
         public ShoppingCartController(IGenericRepository<Tube> tubes, 
                                       IGenericRepository<Invoice> invoices,
                                       IGenericRepository<ShippingAddress> shippingAddresses,
                                       IGenericRepository<Coupon> coupons,
-                                      UserManager<Customer> userManager)
+                                      UserManager<Customer> userManager,
+                                      IModalNotification modalNotification,
+                                      ILogger<InvoiceController> logger)
         {
             this.tubes = tubes;
             this.invoices = invoices;
             this.shippingAddresses = shippingAddresses;
             this.coupons = coupons;
             this.userManager = userManager;
+            this.modalNotification = modalNotification;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public async Task<ActionResult<ShoppingCart>> ReturnCart()
         {
-            ISession session = HttpContext.Session;
-
             ShoppingCart shoppingCart = new ShoppingCart();
-            shoppingCart.ShoppingCartId = session.GetString("ShoppingCartId");
+            shoppingCart.ShoppingCartId = HttpContext.Session.GetString("ShoppingCartId");
             List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
-                    session.GetString("ShoppingCartItems"));
+                    HttpContext.Session.GetString("ShoppingCartItems"));
 
             Tube tempTube;
 
@@ -63,24 +74,21 @@ namespace TubeStore.Controllers
             }
 
             shoppingCart.Coupon = await coupons.FindAsync(x => 
-                                            x.CouponName == session.GetString("Coupon"));
+                                x.CouponName == HttpContext.Session.GetString("Coupon"));
 
             foreach (var item in shoppingCart.ShoppingCartItems)
             {
                 shoppingCart.GrandTotal += item.Total - item.Total*item.Discount;
             }
-
-            shoppingCart.Coupon = await coupons.FindAsync(x =>
-                                x.CouponName == session.GetString("Coupon"));
             
             return View(shoppingCart);
         }
-                
-        public async Task<ActionResult<ShoppingCart>> AddToCart(int TubeId, int Quantity)
+        
+        public IActionResult AddToCart(int tubeId, int quantity)
         {
-            ISession session = this.HttpContext.Session;
+            ISession session = HttpContext.Session;
 
-            string cartId = null;
+            string cartId;
             List<ShoppingCartItem> sessionList = new List<ShoppingCartItem>();
 
             if (session.GetString("ShoppingCartId") == null)
@@ -88,6 +96,7 @@ namespace TubeStore.Controllers
                 cartId = Guid.NewGuid().ToString();
                 session.SetString("ShoppingCartId", cartId);
                 session.SetString("Coupon", string.Empty);
+                logger.LogInformation($"New Cart {cartId} created");
             }
             else
             {
@@ -96,24 +105,28 @@ namespace TubeStore.Controllers
                 if (session.GetString("ShoppingCartItems") != null)
                     sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
                     session.GetString("ShoppingCartItems"));
+
+                logger.LogInformation($"Cart picked up {cartId} and items");
             }
 
-            if(sessionList.FindIndex(x => x.TubeId == TubeId) == -1)
+            if(sessionList.FindIndex(x => x.TubeId == tubeId) == -1)
             {
                 sessionList.Add(new ShoppingCartItem()
                 {
-                    TubeId = TubeId,
-                    Quantity = Quantity
+                    TubeId = tubeId,
+                    Quantity = quantity
                 });
+                logger.LogInformation($"New item {tubeId} added to cart");
             }
             else
             {
                 for (int i = 0; i < sessionList.Count(); i++)
                 {
-                    if (sessionList[i].TubeId == TubeId)
+                    if (sessionList[i].TubeId == tubeId)
                     {
-                        sessionList[i].Quantity += Quantity;
+                        sessionList[i].Quantity += quantity;
                     }
+                    logger.LogInformation($"{tubeId} added {quantity}");
                 }
             }
 
@@ -122,13 +135,12 @@ namespace TubeStore.Controllers
             return RedirectToAction("ReturnCart");
         }
 
-        public async Task<ActionResult<ShoppingCart>> Update(int[] quantity, string couponName)
+        [HttpPost]
+        public IActionResult Update(int[] quantity, string couponName)
         {
             ISession session = HttpContext.Session;
 
-            List<ShoppingCartItem> sessionList = new List<ShoppingCartItem>();
-
-            sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
+            List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
                 session.GetString("ShoppingCartItems"));
 
             for (int i = 0; i < quantity.Count(); i++)
@@ -138,26 +150,28 @@ namespace TubeStore.Controllers
 
             session.SetString("ShoppingCartItems", JsonConvert.SerializeObject(sessionList));
 
-            if (String.IsNullOrEmpty(couponName)) couponName = string.Empty;
+            if (String.IsNullOrEmpty(couponName))
+                { couponName = string.Empty; }
+            else
+                { logger.LogInformation($"Coupon {couponName} applied"); }
 
             session.SetString("Coupon", couponName);
 
             return RedirectToAction("ReturnCart");
         }
 
-        public async Task<ActionResult<ShoppingCart>> Remove(int tubeId)
+        [HttpGet]
+        public IActionResult Remove(int tubeId)
         {
-            ISession session = this.HttpContext.Session;
-            List<ShoppingCartItem> sessionList = new List<ShoppingCartItem>();
-
-            sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
-                session.GetString("ShoppingCartItems"));
+            List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
+                HttpContext.Session.GetString("ShoppingCartItems"));
 
             int index = sessionList.FindIndex(x => x.TubeId == tubeId);
 
             sessionList.RemoveAt(index);
+            logger.LogInformation($"Tube {tubeId} removed");
 
-            session.SetString("ShoppingCartItems", JsonConvert.SerializeObject(sessionList));
+            HttpContext.Session.SetString("ShoppingCartItems", JsonConvert.SerializeObject(sessionList));
 
             return RedirectToAction("ReturnCart");
         }
@@ -165,28 +179,33 @@ namespace TubeStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
-            Customer customer = userManager.Users.First(x => x.UserName == User.Identity.Name);
+            Customer customer = await userManager.GetUserAsync(User);
 
             if (customer == null)
-                return RedirectToAction("Login", "Home"); 
-                                
-            CheckoutViewModel checkoutViewModel = new CheckoutViewModel();
+            {
+                logger.LogInformation($"Checkout failed");
+                modalNotification.AddNotificationSweet("Fail", NotificationType.error, "Please try later!");
+                return RedirectToAction(nameof(ReturnCart));
+            }
 
-            checkoutViewModel.BillingAddress = new ShippingAddress()
+            ShippingAddress billingAddress = new ShippingAddress()
             {
                 AddressLine1 = customer.AddressLine1,
                 AddressLine2 = customer.AddressLine2,
                 ZipCode = customer.ZipCode,
                 City = customer.City,
                 State = customer.State,
-                Country = customer.Country,
-                CustomerId = customer.Id
+                Country = customer.Country
             };
 
-            checkoutViewModel.ShippingAddress = 
-                await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) ?? new ShippingAddress();
+            ShippingAddress shippingAddress = await shippingAddresses.FindAsync(
+                x => x.CustomerId.Equals(customer.Id)) ?? new ShippingAddress();
+            
+            CheckoutViewModel model = new CheckoutViewModel();
 
-            checkoutViewModel.Customer = new CustomerViewModel()
+            model.BillingAddress = billingAddress;
+            model.ShippingAddress = shippingAddress;
+            model.Customer = new CustomerViewModel()
             {
                 CustomerId = customer.Id,
                 FirstName = customer.FirstName,
@@ -195,87 +214,85 @@ namespace TubeStore.Controllers
                 Phone = customer.PhoneNumber
             };
 
-            return View(checkoutViewModel);
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CheckOut(CheckoutViewModel checkoutViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckOut(CheckoutViewModel model)
         {
             ISession session = HttpContext.Session;
+            Customer customer = await userManager.GetUserAsync(User);
+            Tube tubeTemp;
+            int adressId = 0;
 
-            Customer customer = await userManager.FindByIdAsync(checkoutViewModel.Customer.CustomerId);
-            customer.Id = checkoutViewModel.Customer.CustomerId;
-            customer.AddressLine1 = checkoutViewModel.BillingAddress.AddressLine1;
-            customer.AddressLine2 = checkoutViewModel.BillingAddress.AddressLine2;
-            customer.ZipCode = checkoutViewModel.BillingAddress.ZipCode;
-            customer.City = checkoutViewModel.BillingAddress.City;
-            customer.State = checkoutViewModel.BillingAddress.State;
-            customer.Country = checkoutViewModel.BillingAddress.Country;
-            
-            var result = await userManager.UpdateAsync(customer);
-
-            if (!result.Succeeded) return RedirectToAction("ReturnCart");
-
-            ShippingAddress shippingAddress = await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id) ?? new ShippingAddress();
-
-            if (checkoutViewModel.IsTheSame)
+            //update shipping, billing address in customer
+            try
             {
-                shippingAddress.AddressLine1 = checkoutViewModel.BillingAddress.AddressLine1;
-                shippingAddress.AddressLine2 = checkoutViewModel.BillingAddress.AddressLine2;
-                shippingAddress.ZipCode = checkoutViewModel.BillingAddress.ZipCode;
-                shippingAddress.City = checkoutViewModel.BillingAddress.City;
-                shippingAddress.State = checkoutViewModel.BillingAddress.State;
-                shippingAddress.Country = checkoutViewModel.BillingAddress.Country;
-                shippingAddress.CustomerId = customer.Id;
+                adressId = await UpdateCustomerAndAddresses(model);
             }
-            else
+            catch(Exception ex)
             {
-                shippingAddress.AddressLine1 = checkoutViewModel.ShippingAddress.AddressLine1;
-                shippingAddress.AddressLine2 = checkoutViewModel.ShippingAddress.AddressLine2;
-                shippingAddress.ZipCode = checkoutViewModel.ShippingAddress.ZipCode;
-                shippingAddress.City = checkoutViewModel.ShippingAddress.City;
-                shippingAddress.State = checkoutViewModel.ShippingAddress.State;
-                shippingAddress.Country = checkoutViewModel.ShippingAddress.Country;
-                shippingAddress.CustomerId = customer.Id;
+                logger.LogInformation(ex.Message);
+                logger.LogInformation($"Failed updating customer and adresses");
             }
 
-            if (shippingAddress.ShippingAdressId == 0)
-                await shippingAddresses.AddAsync(shippingAddress);
-            else
-                await shippingAddresses.UpdateAsync(shippingAddress);
+            if (adressId == 0)
+            {
+                logger.LogInformation($"Failed updating customer and adresses");
+                return RedirectToAction(nameof(ReturnCart));
+            }
 
-            Coupon coupon = await coupons.FindAsync(x => x.CouponName.Equals(session.GetString("Coupon"))) ?? new Coupon();
-
+            //new invoice
             Invoice invoice = new Invoice()
             {
                 OrderDate = DateTime.Now,
                 CustomerId = customer.Id,
-                ShippingAddressId = shippingAddress.ShippingAdressId,
-                CouponId = coupon.CouponId
+                ShippingAddressId = adressId,
             };
 
+            //get coupon
+            string couponName = session.GetString("Coupon");
+            Coupon coupon = await coupons.FindAsync(x => x.CouponName.Equals(couponName)) ?? new Coupon();
+            if (coupon.CouponId != 0)
+                invoice.CouponId = coupon.CouponId;
+
+            //get shoppingcart items
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartId = session.GetString("ShoppingCartId");
             List<ShoppingCartItem> sessionList = JsonConvert.DeserializeObject<List<ShoppingCartItem>>(
                     session.GetString("ShoppingCartItems"));
 
-            Tube tubeTemp;
-
-            foreach (var item in sessionList)
+            if(sessionList.Count()==0)
             {
-                tubeTemp = await tubes.GetAsync(item.TubeId);
-
-                invoice.InvoicesInfo.Add(new InvoiceInfo()
-                {
-                    TubeId = item.TubeId,
-                    Price = tubeTemp.Price,
-                    Quantity = item.Quantity,
-                    Discount = tubeTemp.Discount
-                });
-                tubeTemp.Quantity -= item.Quantity;
-                await tubes.UpdateAsync(tubeTemp);
+                logger.LogInformation($"List in cart is empty???");
+                return RedirectToAction(nameof(ReturnCart));
             }
 
+            //get cartitems => to invoiceinfo in new invoice
+            try
+            {
+                foreach (var item in sessionList)
+                {
+                    tubeTemp = await tubes.GetAsync(item.TubeId);
+
+                    invoice.InvoicesInfo.Add(new InvoiceInfo()
+                    {
+                        TubeId = item.TubeId,
+                        Price = tubeTemp.Price,
+                        Quantity = item.Quantity,
+                        Discount = tubeTemp.Discount
+                    });
+                }
+            }
+            catch(Exception ex)
+            {
+                logger.LogInformation($"Adding tubes to order failed");
+                logger.LogInformation(ex.Message);
+                modalNotification.AddNotificationSweet("Fail", NotificationType.error, "Please try later!");
+            }
+
+            //total cost for invoice
             foreach (var item in invoice.InvoicesInfo)
             {
                 invoice.Total += item.Quantity * item.Price * (1 - item.Discount);
@@ -283,11 +300,96 @@ namespace TubeStore.Controllers
 
             invoice.Total *= (1 - coupon.CouponValue);
 
-            await invoices.AddAsync(invoice);
+            //saving invoice
+            try
+            {
+            var invoiceResult = await invoices.AddAsync(invoice);
+            }
+            catch(Exception ex)
+            {
+                logger.LogInformation($"Inovice saving failed");
+                logger.LogInformation(ex.Message);
+                modalNotification.AddNotificationSweet("Fail", NotificationType.error, "Please try later!");
+            }
+
+            //decrease number of tubes in stock
+            try
+            {
+                foreach (var item in invoice.InvoicesInfo)
+                {
+                    tubeTemp = await tubes.GetAsync(item.TubeId);
+                    tubeTemp.Quantity -= item.Quantity;
+                    var tubeResult = await tubes.UpdateAsync(tubeTemp);
+                }
+            }
+            catch(Exception ex)
+            {
+                logger.LogInformation($"Tube minus quantity failed");
+                logger.LogInformation(ex.Message);
+                modalNotification.AddNotificationSweet("Fail", NotificationType.error, "Please try later!");
+            }
+
+            //clear shoppingcart 
             HttpContext.Session.Remove("ShoppingCartId");
             HttpContext.Session.Remove("ShoppingCartItems");
 
-            return RedirectToAction("Index", "Invoice");
+            modalNotification.AddNotificationSweet("Invoice", NotificationType.success, "Invoice created. Now you can pay it");
+
+            return RedirectToAction(nameof(InvoiceController.Index), "Invoice");
+        }
+
+        public async Task<int> UpdateCustomerAndAddresses(CheckoutViewModel model)
+        {
+            Customer customer = await userManager.GetUserAsync(User);
+
+            customer.AddressLine1 = model.BillingAddress.AddressLine1;
+            customer.AddressLine2 = model.BillingAddress.AddressLine2;
+            customer.ZipCode = model.BillingAddress.ZipCode;
+            customer.City = model.BillingAddress.City;
+            customer.State = model.BillingAddress.State;
+            customer.Country = model.BillingAddress.Country;
+
+            var result = await userManager.UpdateAsync(customer);
+
+            if (!result.Succeeded)
+            {
+                logger.LogInformation($"Checkout failed");
+                modalNotification.AddNotificationSweet("Fail", NotificationType.error, "Please try later!");
+                return 0;
+            }
+
+            ShippingAddress shippingAddress = await shippingAddresses.FindAsync(x => x.CustomerId == customer.Id)
+                ?? new ShippingAddress();
+
+            if (model.IsTheSame)
+            {
+                shippingAddress.AddressLine1 = model.BillingAddress.AddressLine1;
+                shippingAddress.AddressLine2 = model.BillingAddress.AddressLine2;
+                shippingAddress.ZipCode = model.BillingAddress.ZipCode;
+                shippingAddress.City = model.BillingAddress.City;
+                shippingAddress.State = model.BillingAddress.State;
+                shippingAddress.Country = model.BillingAddress.Country;
+            }
+            else
+            {
+                shippingAddress.AddressLine1 = model.ShippingAddress.AddressLine1;
+                shippingAddress.AddressLine2 = model.ShippingAddress.AddressLine2;
+                shippingAddress.ZipCode = model.ShippingAddress.ZipCode;
+                shippingAddress.City = model.ShippingAddress.City;
+                shippingAddress.State = model.ShippingAddress.State;
+                shippingAddress.Country = model.ShippingAddress.Country;
+            }
+
+            if (shippingAddress.CustomerId == null)
+            {
+                shippingAddress.CustomerId = customer.Id;
+                await shippingAddresses.AddAsync(shippingAddress);
+            }
+            else
+            {
+                await shippingAddresses.UpdateAsync(shippingAddress);
+            }
+            return shippingAddress.ShippingAdressId;
         }
     }
 }
