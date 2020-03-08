@@ -252,7 +252,7 @@ namespace TubeStore.Controllers
                 await signInManager.SignOutAsync();
 
                 logger.LogInformation("User logged out.");
-                HttpContext.Session.Remove("ShoppingCartItems");
+                HttpContext.Session.Remove("ShoppingCartId");
             }
             return RedirectToAction(nameof(Index), "Home");
         }

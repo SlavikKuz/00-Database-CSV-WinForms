@@ -12,12 +12,16 @@ namespace TubeStore.Models
     {
         [Key]
         public int InvoiceId { get; set; }
+
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
+
+        [Display(Name = "Status")]
         public EnumStatus Status { get; set; }
 
         [ForeignKey("Customers")]
         public string CustomerId { get; set; }
-        public virtual Customer Customer { get; set; } 
+        public virtual Customer Customer { get; set; }
 
         public int ShippingAddressId { get; set; }
         public virtual ShippingAddress ShippingAddress { get; set; }
@@ -28,6 +32,8 @@ namespace TubeStore.Models
 
         public virtual List<InvoiceInfo> InvoicesInfo { get; set; } = new List<InvoiceInfo>();
 
+        [Display(Name = "Total")]
+        [Column(TypeName = "decimal(7,2)")]
         public decimal Total { get; set; }
     }
 }

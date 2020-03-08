@@ -46,6 +46,17 @@ namespace TubeStore.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            // Clear the existing external cookie
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            return RedirectToAction(nameof(CustomerController.Login), "Customer", new { returnUrl });
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await userManager.GetUserAsync(User);
@@ -482,91 +493,6 @@ namespace TubeStore.Controllers
 
             return View(model);
         }
-
-
-
-
-
-
-
-        //[HttpGet]
-        //[Authorize(Roles = "User, Admin")]
-        //public IActionResult Profile()
-        //{
-        //    var user = userManager.Users.First(x => x.UserName == User.Identity.Name);
-        //    return View(new CustomerViewModel
-        //    {
-        //        CustomerId = user.Id,
-        //        Email = user.Email,
-        //        FirstName = user.FirstName,
-        //        LastName = user.LastName,
-        //        Phone = user.PhoneNumber
-        //    });
-        //}
-
-        //[HttpPost]
-        //[Authorize(Roles = "User, Admin")]
-        //public async Task<IActionResult> Profile(CustomerViewModel customerViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = userManager.Users.First(x => x.UserName == User.Identity.Name);
-        //        user.FirstName = customerViewModel.FirstName;
-        //        user.LastName = customerViewModel.LastName;
-        //        user.Email = customerViewModel.Email;
-        //        user.NormalizedEmail = customerViewModel.Email.ToUpper();
-        //        user.PhoneNumber = customerViewModel.Phone;
-
-        //        var result = await userManager.UpdateAsync(user);
-        //        if (result.Succeeded)
-        //        {
-        //            ViewData["Message"] = "Profile updated";
-        //        }
-        //        else
-        //        {
-        //            ViewData["Message"] = "Updating Error";
-        //        }
-        //    }
-        //    return View();
-        //}
-
-        //[HttpGet]
-        //[Authorize(Roles = "User, Admin")]
-        //public IActionResult ChangePassword()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[Authorize(Roles = "User, Admin")]
-        //public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var user = await userManager.FindByNameAsync(User.Identity.Name);
-        //            var result = await userManager.ChangePasswordAsync(user,
-        //                changePasswordViewModel.OldPassword, changePasswordViewModel.NewPassword);
-
-        //            if (result.Succeeded)
-        //                return RedirectToAction("Index", "Home");
-
-        //            ModelState.AddModelError("", "Password can not be changed");
-        //            return View();
-        //        }
-        //        ModelState.AddModelError("", "Invalid data");
-        //        return View();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ModelState.AddModelError("", "Error. Password was not changed");
-        //        return View(); ;
-        //    }
-
-        //}
-
-
 
 
         private void AddErrors(IdentityResult result)

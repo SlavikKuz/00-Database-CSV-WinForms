@@ -14,11 +14,16 @@ namespace TubeStore.Models
         
         [ForeignKey("Tubes")]
         public int TubeId { get; set; }
-        
+
+        [Display(Name = "Price")]
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
-        public decimal Discount { get; set; }   
-        
+
+        [Display(Name = "Discount")]
+        [Column(TypeName = "decimal(6,2)")]
+        public decimal Discount { get; set; }
+
+        [Display(Name = "Quantity")]
         public int Quantity { get; set; }
 
         public virtual Invoice Invoice { get; set; }

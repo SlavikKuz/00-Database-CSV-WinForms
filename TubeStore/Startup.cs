@@ -34,6 +34,7 @@ namespace TubeStore
         {
 
             services.AddAuthentication();
+
             services.AddIdentity<Customer, IdentityRole>(x=>
             {
                 x.Lockout.MaxFailedAccessAttempts = 3;

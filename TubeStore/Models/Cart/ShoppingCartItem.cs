@@ -9,13 +9,19 @@ namespace TubeStore.Models.Cart
 {
     public class ShoppingCartItem
     {
+        [Key]
         public int ShoppingCartItemId { get; set; }
         
         public int TubeId { get; set; }
+        
         public string ImageThumbnailUrl { get; set; }
+        
         public string TypeBrandDate { get; set; }
+        
         public int Quantity { get; set; }
+        
         public int QuantityLimit { get; set; }
+        
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }

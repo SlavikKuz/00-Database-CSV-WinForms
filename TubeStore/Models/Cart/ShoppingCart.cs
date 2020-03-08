@@ -12,7 +12,9 @@ namespace TubeStore.Models.Cart
 {
     public class ShoppingCart
     {
+        [Key]
         public string ShoppingCartId { get; set; }
+        
         public List<ShoppingCartItem> ShoppingCartItems { get; set; } 
             = new List<ShoppingCartItem>();
 

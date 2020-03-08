@@ -49,7 +49,7 @@ namespace TubeStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Customer customer = userManager.Users.First(x => x.UserName == User.Identity.Name);
+            Customer customer = await userManager.GetUserAsync(User);
 
             IEnumerable<Invoice> customerInvoices = await
                 invoices.FindAllAsync(x => x.CustomerId == customer.Id);

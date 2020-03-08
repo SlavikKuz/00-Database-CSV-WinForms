@@ -15,11 +15,9 @@ namespace TubeStore.Models.Chat
         public string MessageText { get; set; }
         
         public long ChatGroupId { get; set; }
-        //public virtual ChatGroup ChatGroup { get; set; }
 
         public string CustomerId { get; set; } 
         public string UserName { get; set; }
-        //public virtual Customer Customer { get; set; }
 
         public string MessageDate { get; set; }
     }

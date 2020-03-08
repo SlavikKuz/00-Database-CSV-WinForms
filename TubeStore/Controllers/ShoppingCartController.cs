@@ -28,7 +28,7 @@ namespace TubeStore.Controllers
         private readonly IGenericRepository<Coupon> coupons;
         private readonly UserManager<Customer> userManager;
         private readonly IModalNotification modalNotification;
-        private readonly ILogger<InvoiceController> logger;
+        private readonly ILogger<ShoppingCartController> logger;
 
         public ShoppingCartController(IGenericRepository<Tube> tubes, 
                                       IGenericRepository<Invoice> invoices,
@@ -36,7 +36,7 @@ namespace TubeStore.Controllers
                                       IGenericRepository<Coupon> coupons,
                                       UserManager<Customer> userManager,
                                       IModalNotification modalNotification,
-                                      ILogger<InvoiceController> logger)
+                                      ILogger<ShoppingCartController> logger)
         {
             this.tubes = tubes;
             this.invoices = invoices;
