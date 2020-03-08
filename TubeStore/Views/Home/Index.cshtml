@@ -1,11 +1,10 @@
-﻿@model TubeStore.ViewModels.HomeIndexViewModel
-
+﻿
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
-<partial name="_Carousel" model="Model.Carousels" />
+@await Component.InvokeAsync("Carousel")
 
 <div class="container">
     @await Component.InvokeAsync("NewArrivals")

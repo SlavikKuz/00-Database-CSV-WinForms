@@ -1,9 +1,5 @@
 ﻿@inject UserManager<Customer> userManager
 
-@{
-    var user = userManager.Users.FirstOrDefault(x => x.Email == User.Identity.Name);
-}
-
 <header>
     <div class="container card bg-light mt-2 mb-2">
         <nav class="navbar navbar-expand-md navbar-dark bg-light">
@@ -65,12 +61,7 @@
                             <a class="dropdown-item" asp-action="Index" asp-controller="Watchlist">
                                 <span class="fas fa-star"></span> Watchlist
                             </a>
-                            <a class="dropdown-item" asp-action="ResetPassword" asp-controller="Customer">
-                                <span class="fas fa-key"></span> Change Password
-                            </a>
-
                             <div class="dropdown-divider"></div>
-
                             <a class="dropdown-item" asp-controller="Customer" asp-action="Logout" onclick="return confirm('Are you sure?')"><span class="fa fa-sign-out-alt"> Logout</span></a>
 
                         </div>

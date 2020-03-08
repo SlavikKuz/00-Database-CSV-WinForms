@@ -12,7 +12,6 @@ using TubeStore.ViewModels;
 
 namespace TubeStore.Areas.Admin.Controllers
 {
-
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("Admin/[controller]/[action]")]

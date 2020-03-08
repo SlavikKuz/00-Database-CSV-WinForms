@@ -13,7 +13,7 @@ namespace TubeStore.Extensions
         {
             return urlHelper.Action(
                 action: nameof(CustomerController.ConfirmEmail),
-                controller: "Account",
+                controller: "Customer",
                 values: new { userId, code },
                 protocol: scheme);
         }
@@ -22,7 +22,7 @@ namespace TubeStore.Extensions
         {
             return urlHelper.Action(
                 action: nameof(CustomerController.ResetPassword),
-                controller: "Account",
+                controller: "Customer",
                 values: new { userId, code },
                 protocol: scheme);
         }

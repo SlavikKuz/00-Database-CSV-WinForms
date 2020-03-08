@@ -14,9 +14,9 @@
 <body>
     <div>
         @await Component.InvokeAsync("ModalNotification")
-        
+
         <partial name="_Header" />
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -58,5 +58,6 @@
     <script src="~/lib/toastr.js/toastr.min.js"></script>
     <script src="~/lib/bootstrap-sweetalert/sweetalert.js"></script>
     <script src="~/js/deleteModal.js"></script>
+    <partial name="_ValidationScripts" />
 </body>
 </html>

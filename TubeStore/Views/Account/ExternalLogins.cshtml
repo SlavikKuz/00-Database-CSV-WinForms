@@ -2,10 +2,11 @@
 @model TubeStore.ViewModels.Account.ExternalLoginViewModel
 @{
     ViewData["Title"] = "Manage your external logins";
+    Layout = "~/Views/Account/_Main.cshtml";
     ViewData.AddActivePage(ManageNavPages.ExternalLogins);
 }
 
-@Html.Partial("_StatusMessage", Model.StatusMessage)
+@await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
 @if (Model.CurrentLogins?.Count > 0)
 {
     <h4>Registered Logins</h4>
@@ -22,7 +23,7 @@
                                 <div>
                                     <input asp-for="@login.LoginProvider" name="LoginProvider" type="hidden" />
                                     <input asp-for="@login.ProviderKey" name="ProviderKey" type="hidden" />
-                                    <button type="submit" class="btn btn-default" title="Remove this @login.LoginProvider login from your account">Remove</button>
+                                    <button type="submit" class="btn btn-danger" title="Remove this @login.LoginProvider login from your account">Remove</button>
                                 </div>
                             </form>
                         }
@@ -45,7 +46,7 @@
             <p>
                 @foreach (var provider in Model.OtherLogins)
                 {
-                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                    <button type="submit" class="btn btn-danger" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                 }
             </p>
         </div>

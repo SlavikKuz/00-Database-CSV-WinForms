@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -13,6 +14,9 @@ using TubeStore.Models.Notification;
 
 namespace TubeStore.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class NotificationController : Controller
     {
         private readonly IGenericRepository<Notification> notifications;

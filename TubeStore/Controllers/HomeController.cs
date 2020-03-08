@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,38 +14,24 @@ using TubeStore.ViewModels;
 
 namespace TubeStore.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IGenericRepository<Tube> tubes;
-        private readonly IGenericRepository<Carousel> carousels;
-        private readonly IGenericRepository<ChatMessage> messages;
-        private readonly IGenericRepository<ChatGroup> groups;
-        private readonly UserManager<Customer> userManager;
 
-        public HomeController(IGenericRepository<Tube> tubes,
-                              IGenericRepository<Carousel> carousels,
-                              IGenericRepository<ChatMessage> messages,
-                              IGenericRepository<ChatGroup> groups,
-                              UserManager<Customer> userManager)
+        public HomeController(IGenericRepository<Tube> tubes)
         {
             this.tubes = tubes;
-            this.carousels = carousels;
-            this.messages = messages;
-            this.groups = groups;
-            this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
-            HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
-            {
-                Tubes = tubes.GetAll(),
-                Carousels = carousels.GetAll().Where(x=>x.Status)
-            };
-
-            return View(homeIndexViewModel);
+            return View();
         }
 
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> IndexCategory(string category, int? page, int? categoryId)
         {
             ICollection<Tube> tubesInCategory;
@@ -61,6 +48,8 @@ namespace TubeStore.Controllers
                                                            pageSize));
         }
 
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> IndexType(string type, int? page)
         {
             ICollection<Tube> tubesInCategory = await tubes.FindAllAsync(x => x.Type == type);
@@ -73,12 +62,23 @@ namespace TubeStore.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Search(IFormCollection form)
         {
-            ISession session = this.HttpContext.Session;
+            ISession session = HttpContext.Session;
             session.SetString("Search", form["search"]);
 
             return RedirectToAction("SearchList");
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> SearchList(int? page)
+        {
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(PaginatedList<Tube>.CreateNonAsync(await GetSearchingResult(),
+                                                           pageNumber,
+                                                           pageSize));
         }
 
         private async Task<List<Tube>> GetSearchingResult()
@@ -110,91 +110,5 @@ namespace TubeStore.Controllers
             return resultTemp.Distinct().ToList();
         }
 
-        public async Task<IActionResult> SearchList(int? page)
-        {
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(PaginatedList<Tube>.CreateNonAsync(await GetSearchingResult(),
-                                                           pageNumber,
-                                                           pageSize));
-        }
-
-        //[HttpGet]
-        //public async Task<IActionResult> Chat()
-        //{   
-
-        //    //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
-        //    //    return RedirectToAction("ChatInit", chatUser);
-
-        //    //ICollection<ChatMessage> chatMessages = 
-        //    //    await messages.FindAllAsync(x => x.ChatUserId == chatUser.ChatUserId);
-
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult Chat([FromBody] AjaxChatModel model)
-        //{
-        //    return Json(new { newUrl = Url.Action("Chat", "Home") });
-        //}
-
-        //public async Task<IActionResult> ChatInit()
-        //{
-        //    //ChatUser chatUser = new ChatUser();
-        //    //chatUser.User = await userManager.GetUserAsync(User);
-        //    //chatUser.ChatUserId = chatUser.User.Id;
-        //    //chatUser.UserName = chatUser.User.UserName;
-
-        //    ChatGroup chatGroup;
-
-        //    //if ((await chatUsers.FindAsync(x => x.ChatUserId == chatUser.ChatUserId)) == null)
-        //    //{
-        //    //    await chatUsers.AddAsync(chatUser);
-
-        //    //    chatGroup = new ChatGroup { ChatGroupName = chatUser.UserName };
-        //    //    await groups.AddAsync(chatGroup);
-
-        //    //    ChatMessage chatMessage = new ChatMessage
-        //    //    {
-        //    //        ChatGroupId = chatGroup.ChatGroupId.ToString(),
-        //    //        ChatUserId = chatUser.ChatUserId,
-        //    //        UserName = chatUser.UserName,
-        //    //        MessageText = "You started the chat"
-        //    //    };
-
-        //    //    await messages.AddAsync(chatMessage);
-        //    //}
-
-        //    //ChatMessage message = (await messages.FindByAsync(x => x.ChatUserId == chatUser.ChatUserId)).First();
-
-        //    //return View();
-        //    //}
-
-        //    public async Task<IActionResult> CreateMessage(ChatMessage message)
-        //    {
-        //        if(ModelState.IsValid)
-        //        {
-        //            //message.Author = await chatUsers.FindAsync(x=>x.UserName == User.Identity.Name);
-        //            //message.ChatUserId = message.Author.ChatUserId;
-        //            //await messages.AddAsync(message);
-
-        //            return Ok();
-        //        }
-        //        return Error();
-        //    }
-
-        //    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //    public IActionResult Error()
-        //    {
-        //        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //    }
-
-        //}
-
-        //public class AjaxChatModel
-        //{
-        //    public string name { get; set; }
-        //    public string group { get; set; }
-        //}
     }
 }
