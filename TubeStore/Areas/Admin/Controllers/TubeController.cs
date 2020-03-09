@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using TubeStore.Areas.Admin.ViewModels;
 using TubeStore.DataLayer;
 using TubeStore.Models;
@@ -19,19 +20,23 @@ namespace TubeStore.Areas.Admin.Controllers
     [Route("Admin/[controller]/[action]")]
     public class TubeController : Controller
     {
-        private IGenericRepository<Tube> tubes;
-        private IGenericRepository<Category> categories;
-        private IWebHostEnvironment hostEnvironment;
+        private readonly IGenericRepository<Tube> tubes;
+        private readonly IGenericRepository<Category> categories;
+        private readonly IWebHostEnvironment hostEnvironment;
+        private readonly ILogger<TubeController> logger;
 
         public TubeController(IGenericRepository<Tube> tubes,
-            IGenericRepository<Category> categories,
-            IWebHostEnvironment hostEnvironment)
+                              IGenericRepository<Category> categories,
+                              IWebHostEnvironment hostEnvironment,
+                              ILogger<TubeController> logger)
         {
             this.tubes = tubes;
             this.categories = categories;
             this.hostEnvironment = hostEnvironment;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(int? page)
         {
             IQueryable<Tube> allTubes = tubes.GetAllIncluding(x => x.Category);
@@ -44,17 +49,16 @@ namespace TubeStore.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("Edit")]
         public async Task<ActionResult<TubeViewModel>> Edit(int tubeId)
         {
-            TubeViewModel tubeViewModel = new TubeViewModel();
-            tubeViewModel.Tube = await tubes.GetAsync(tubeId);
-            tubeViewModel.CategoriesList = await GetCategoriesList();
-            return View(tubeViewModel);
+            TubeViewModel model = new TubeViewModel();
+            model.Tube = await tubes.GetAsync(tubeId);
+            model.CategoriesList = await GetCategoriesList();
+            return View(model);
         }
 
         [HttpPost]
-        [Route("Edit")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<Tube>> Edit(Tube tube, string price, string discount)
         {
             decimal priceNum;
@@ -82,20 +86,28 @@ namespace TubeStore.Areas.Admin.Controllers
             tempTube.Price = priceNum;
             tempTube.Discount = discoNum;
 
-            await tubes.UpdateAsync(tempTube);
+            try
+            {
+                await tubes.UpdateAsync(tempTube);
+            }
+            catch(Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+            }
+
             return RedirectToAction("Index"); 
         }
 
         [HttpGet]
-        [Route("Add")]
         public async Task<ActionResult<TubeViewModel>> Add()
         {
-            TubeViewModel tubeViewModel = new TubeViewModel();
-            tubeViewModel.Tube = new Tube();
-            tubeViewModel.CategoriesList = await GetCategoriesList();
-            return View(tubeViewModel);
+            TubeViewModel model = new TubeViewModel();
+            model.Tube = new Tube();
+            model.CategoriesList = await GetCategoriesList();
+            return View(model);
         }
 
+        [HttpGet]
         private async Task<List<SelectListItem>> GetCategoriesList ()
         {
             List<SelectListItem> categoriesList = new List<SelectListItem>();
@@ -112,7 +124,7 @@ namespace TubeStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Route("Add")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<Tube>> Add(Tube tube, 
                                                   IFormFile image, IFormFile thumb,
                                                   string price, string discount)
@@ -122,8 +134,6 @@ namespace TubeStore.Areas.Admin.Controllers
 
             //test data annotations in class
             //asp-validation on front
-            
-            
             
             decimal priceNum;
             decimal discoNum;
@@ -137,11 +147,17 @@ namespace TubeStore.Areas.Admin.Controllers
             tube.Price = priceNum;
             tube.Discount = discoNum;
 
-            tube.ImageUrl = await UploadAndGetPath(tube, image);
-            tube.ImageThumbnailUrl = await UploadAndGetPath(tube, thumb);
-
-            await tubes.AddAsync(tube);
-
+            try 
+            {
+                tube.ImageUrl = await UploadAndGetPath(tube, image);
+                tube.ImageThumbnailUrl = await UploadAndGetPath(tube, thumb);
+                await tubes.AddAsync(tube);
+            }
+            catch (Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+            }
+            
             return RedirectToAction("Index");
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TubeStore.Areas.Admin.ViewModels;
 using TubeStore.DataLayer;
 using TubeStore.Models;
@@ -19,13 +20,18 @@ namespace TubeStore.Areas.Admin.Controllers
     {
         private readonly UserManager<Customer> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly ILogger<CustomerController> logger;
 
-        public CustomerController(UserManager<Customer> userManager, RoleManager<IdentityRole> roleManager)
+        public CustomerController(UserManager<Customer> userManager, 
+                                  RoleManager<IdentityRole> roleManager,
+                                  ILogger<CustomerController> logger)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.logger = logger;
         }
-              
+        
+        [HttpGet]
         public async Task<IActionResult> Index(int? page)
         {
             var customers = userManager.Users.Select(
@@ -52,7 +58,7 @@ namespace TubeStore.Areas.Admin.Controllers
             List<IdentityRole> roles = roleManager.Roles.ToList();
             List<string> userRoles = (await userManager.GetRolesAsync(customer)).ToList();
 
-            CustomerViewModel customerViewModel = new CustomerViewModel()
+            CustomerViewModel model = new CustomerViewModel()
             {
                 CustomerId = customer.Id,
                 Login = customer.UserName,
@@ -69,26 +75,35 @@ namespace TubeStore.Areas.Admin.Controllers
                 ).ToList()
             };
 
-            return View(customerViewModel);
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Details(CustomerViewModel customerViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Details(CustomerViewModel model)
         {
-            Customer customer = userManager.Users.First(x => x.Id == customerViewModel.CustomerId);
+            Customer customer = userManager.Users.First(x => x.Id == model.CustomerId);
             List<IdentityRole> roles = roleManager.Roles.ToList();
-            
-            foreach (var item in customerViewModel.CustomerInRoles)
+
+            try
             {
-                if (item.Selected)
+                foreach (var item in model.CustomerInRoles)
                 {
-                    await userManager.AddToRoleAsync(customer, roles.First(x => x.Id == item.RoleId).Name);
-                }
-                else
-                {
-                    await userManager.RemoveFromRoleAsync(customer, roles.First(x => x.Id == item.RoleId).Name);
+                    if (item.Selected)
+                    {
+                        await userManager.AddToRoleAsync(customer, roles.First(x => x.Id == item.RoleId).Name);
+                    }
+                    else
+                    {
+                        await userManager.RemoveFromRoleAsync(customer, roles.First(x => x.Id == item.RoleId).Name);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+            }
+
             return RedirectToAction("Details", new { customer.Id });
         }
 
@@ -96,7 +111,15 @@ namespace TubeStore.Areas.Admin.Controllers
         public async Task<ActionResult> LockOut(string id)
         {          
             Customer customer = userManager.Users.First(x => x.Id == id);
-            await userManager.SetLockoutEnabledAsync(customer, false);
+            try 
+            { 
+                await userManager.SetLockoutEnabledAsync(customer, false);
+            }
+            catch(Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }

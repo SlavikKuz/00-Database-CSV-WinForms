@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using TubeStore.DataLayer;
 using TubeStore.Hubs;
 using TubeStore.Models;
@@ -19,28 +20,26 @@ namespace TubeStore.Controllers
     [Route("Admin/[controller]/[action]")]
     public class NotificationController : Controller
     {
-        private readonly IGenericRepository<Notification> notifications;
         private readonly IGenericRepository<NotificationUser> notificationUsers;
         private readonly IGenericRepository<ChatGroup> chatGroups;
         private readonly IGenericRepository<ChatMessage> chatMessages;
         private readonly UserManager<Customer> userManager;
-        private readonly IHubContext<ChatHub> hubContext;
-        
-        public NotificationController(IGenericRepository<Notification> notifications,
-                                      IGenericRepository<NotificationUser> notificationUsers,
+        private readonly ILogger<NotificationController> logger;
+
+        public NotificationController(IGenericRepository<NotificationUser> notificationUsers,
                                       IGenericRepository<ChatGroup> chatGroups,
                                       IGenericRepository<ChatMessage> chatMessages,
                                       UserManager<Customer> userManager,
-                                      IHubContext<ChatHub> hubContext)
+                                      ILogger<NotificationController> logger)
         {
-            this.notifications = notifications;
             this.notificationUsers = notificationUsers;
             this.userManager = userManager;
             this.chatGroups = chatGroups;
             this.chatMessages = chatMessages;
-            this.hubContext = hubContext;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public IActionResult GetNotification()
         {
             string userId = userManager.GetUserId(User);
@@ -52,6 +51,7 @@ namespace TubeStore.Controllers
             return Ok(new { UserNotification = notification, Count = notification.Count });
         }
 
+        [HttpGet]
         public async Task<IActionResult> ReadNotification(int notificationId)
         {
             string userId = userManager.GetUserId(User);
@@ -62,11 +62,18 @@ namespace TubeStore.Controllers
 
             notification.IsRead = true;
 
-            await notificationUsers.UpdateAsync(notification);
-
+            try
+            {
+                await notificationUsers.UpdateAsync(notification);
+            }
+            catch(Exception ex)
+            {
+                logger.LogInformation(ex.Message);
+            }
             return Ok();
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetChatNotification()
         {
             //any admin can answer
@@ -89,6 +96,7 @@ namespace TubeStore.Controllers
             return Ok(new { ChatGroups = adminGrouspIds });
         }
 
+        [HttpGet]
         public async Task<IActionResult> ReadChatNotification(long groupId)
         {
             ChatGroup chatGroup = chatGroups.Find(x => x.ChatGroupId.Equals(groupId));

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TubeStore.DataLayer;
 using TubeStore.Models;
 
@@ -16,14 +17,18 @@ namespace TubeStore.Areas.Admin.Controllers
     {
         private readonly IGenericRepository<Invoice> invoices;
         private readonly IGenericRepository<Tube> tubes;
+        private readonly ILogger<InvoiceController> logger;
 
         public InvoiceController(IGenericRepository<Invoice> invoices,
-                                 IGenericRepository<Tube> tubes)
+                                 IGenericRepository<Tube> tubes,
+                                 ILogger<InvoiceController> logger)
         {
             this.invoices = invoices;
             this.tubes = tubes;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(int? page)
         {
             IQueryable<Invoice> invoiceList = invoices.GetAllIncluding(x => x.Customer);
@@ -35,6 +40,7 @@ namespace TubeStore.Areas.Admin.Controllers
                                                                  pageSize));
         }
 
+        [HttpGet]
         public async Task<IActionResult> SetInactive(int id)
         {
             Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
@@ -57,6 +63,7 @@ namespace TubeStore.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             Invoice invoice = invoices.GetIncluding(x => x.InvoiceId == id,
@@ -72,6 +79,7 @@ namespace TubeStore.Areas.Admin.Controllers
             return View(invoice);
         }
 
+        [HttpGet]
         public async Task<IActionResult> SetPayed(int id)
         {
             Invoice invoice = await invoices.GetAsync(id);

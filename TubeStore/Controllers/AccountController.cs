@@ -529,49 +529,5 @@ namespace TubeStore.Controllers
                 unformattedKey);
         }
 
-
-        //[HttpGet]
-        //public IActionResult CompleteRegisration(string username)
-        //{
-        //    CustomerDetailsViewModel customerDetails = new CustomerDetailsViewModel() { UserName = username };
-        //    return View(customerDetails);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> CompleteRegisration(string username, CustomerDetailsViewModel customerDetails)
-        //{
-
-        //    if (!ModelState.IsValid)
-        //        return RedirectToAction("CompleteRegisration");
-
-        //    Customer customer = await userManager.FindByNameAsync(username);
-
-        //    customer.FirstName = customerDetails.FirstName;
-        //    customer.LastName = customerDetails.LastName;
-        //    customer.AddressLine1 = customerDetails.AddressLine1;
-        //    customer.AddressLine2 = customerDetails.AddressLine2;
-        //    customer.ZipCode = customerDetails.ZipCode;
-        //    customer.City = customerDetails.City;
-        //    customer.State = customerDetails.State;
-        //    customer.Country = customerDetails.Coutry;
-        //    customer.PhoneNumber = customerDetails.PhoneNumber;
-
-        //    var result = await userManager.UpdateAsync(customer);
-
-        //    if (result.Succeeded)
-        //    {
-        //        return RedirectToAction("Login", "Customer");
-        //    }
-        //    else
-        //    {
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.TryAddModelError("", error.Description);
-        //        }
-        //    }
-        //    return View();
-        //}
-
-
     }
 }

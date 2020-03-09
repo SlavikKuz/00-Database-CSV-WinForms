@@ -16,7 +16,7 @@ namespace TubeStore.Models
         public string ImageUrl { get; set; }
 
         [Required]
-        [Display(Name = "Slide Title")]
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
         [Required]

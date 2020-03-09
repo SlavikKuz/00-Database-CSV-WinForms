@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TubeStore.DataLayer;
 using TubeStore.Models;
 using TubeStore.ViewModels;
@@ -19,20 +20,24 @@ namespace TubeStore.Areas.Admin.Controllers
     {
         private readonly IGenericRepository<Tube> tubes;
         private readonly IGenericRepository<Invoice> invoices;
-        
+        private readonly ILogger<HomeController> logger;
 
         public HomeController(IGenericRepository<Tube> tubes,
-                              IGenericRepository<Invoice> invoices)
+                              IGenericRepository<Invoice> invoices,
+                              ILogger<HomeController> logger)
         {
             this.tubes = tubes;
             this.invoices = invoices;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public IActionResult ChatWindow()
         {
             return PartialView("_ChatWindow");
         }
         
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             ICollection<Invoice> invoicesAllPaid =
@@ -43,7 +48,7 @@ namespace TubeStore.Areas.Admin.Controllers
             DashboardViewModel model = new DashboardViewModel();
             model.CountProducts = await tubes.CountAsync();
             model.CountInvoices = invoicesAllPaid.Count();
-            model.CountVisitors = Int32.Parse(this.HttpContext.Session.GetString("Counter"));
+            model.CountVisitors = int.Parse(HttpContext.Session.GetString("Counter"));
 
             foreach (var invoice in invoicesAllPaid)
             {

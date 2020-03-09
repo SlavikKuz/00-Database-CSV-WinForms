@@ -25,7 +25,6 @@ namespace TubeStore.Controllers
         private readonly IEmailSender emailSender;
         private readonly ILogger<CustomerController> logger;
 
-
         public CustomerController(UserManager<Customer> userManager,
                                   SignInManager<Customer> signInManager,
                                   ILogger<CustomerController> logger,

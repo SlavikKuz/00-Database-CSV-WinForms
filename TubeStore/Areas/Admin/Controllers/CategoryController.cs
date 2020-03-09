@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,16 @@ namespace TubeStore.Areas.Admin.Controllers
     public class CategoryController:Controller
     {
         private readonly IGenericRepository<Category> categories;
-        
-        public CategoryController(IGenericRepository<Category> categories)
+        private readonly ILogger<CategoryController> logger;
+
+        public CategoryController(IGenericRepository<Category> categories,
+                                  ILogger<CategoryController> logger)
         {
             this.categories = categories;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Index(int? page)
         {
             var roughList = await categories.GetAllAsync();
@@ -72,8 +77,9 @@ namespace TubeStore.Areas.Admin.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                logger.LogInformation(ex.Message);
                 return View();
             }
         }
@@ -86,6 +92,7 @@ namespace TubeStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddSub(int categoryId, Category subCategory)
         {
             await categories.AddAsync(subCategory);
@@ -100,9 +107,9 @@ namespace TubeStore.Areas.Admin.Controllers
             Category category = await categories.FindAsync(x => x.CategoryId == id);
             await categories.DeleteAsync(category);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                //TO DO: logging
+                logger.LogInformation(ex.Message);
             }
             return RedirectToAction("Index");
         }
@@ -114,6 +121,7 @@ namespace TubeStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Category category)
         {
             Category update = await categories.FindAsync(x => x.CategoryId == category.CategoryId);

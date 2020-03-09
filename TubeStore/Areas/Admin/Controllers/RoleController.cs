@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TubeStore.Areas.Admin.ViewModels;
 
 namespace TubeStore.Areas.Admin.Controllers
@@ -15,13 +16,17 @@ namespace TubeStore.Areas.Admin.Controllers
     [Route("Admin/[controller]/[action]")]
     public class RoleController : Controller
     {
-        RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly ILogger<RoleController> logger;
 
-        public RoleController(RoleManager<IdentityRole> roleManager)
+        public RoleController(RoleManager<IdentityRole> roleManager,
+                              ILogger<RoleController> logger)
         {
             this.roleManager = roleManager;
+            this.logger = logger;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             IEnumerable<RoleViewModel> roleViewModel = roleManager.Roles.Select(
@@ -49,12 +54,14 @@ namespace TubeStore.Areas.Admin.Controllers
                 await roleManager.CreateAsync(new IdentityRole() { Name = roleViewModel.RoleName });
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                logger.LogInformation(ex.Message);
                 return View();
             }
         }
 
+        [HttpGet]
         public async Task<ActionResult> Edit(string RoleName)
         {
             var result = await roleManager.FindByNameAsync(RoleName);
@@ -96,12 +103,14 @@ namespace TubeStore.Areas.Admin.Controllers
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                logger.LogInformation(ex.Message);
                 return View();
             }
         }
 
+        [HttpGet]
         public async Task<ActionResult> Delete(string RoleName)
         {
             try
@@ -117,9 +126,9 @@ namespace TubeStore.Areas.Admin.Controllers
                     return View(new RoleViewModel() { RoleName = role.Name, RoleId = role.Id });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TO DO: log here
+                logger.LogInformation(ex.Message);
             }        
             return RedirectToAction(nameof(Index));
         }
@@ -144,8 +153,9 @@ namespace TubeStore.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                logger.LogInformation(ex.Message);
                 return View();
             }
         }
