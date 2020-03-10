@@ -158,15 +158,18 @@ namespace TubeStore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TubeReferenceId")
@@ -214,14 +217,15 @@ namespace TubeStore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CouponName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("CouponStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("CouponValue")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(3,2)");
 
                     b.HasKey("CouponId");
 
@@ -298,7 +302,9 @@ namespace TubeStore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
@@ -466,6 +472,24 @@ namespace TubeStore.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TubeStore.Models.EmailSubscription", b =>
+                {
+                    b.Property<int>("EmailSubscriptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("EmailSubscriptionId");
+
+                    b.ToTable("EmailSubscriptions");
+                });
+
             modelBuilder.Entity("TubeStore.Models.Invoice", b =>
                 {
                     b.Property<int>("InvoiceId")
@@ -490,7 +514,7 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(7,2)");
 
                     b.HasKey("InvoiceId");
 
@@ -511,7 +535,7 @@ namespace TubeStore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(3,2)");
 
                     b.Property<int?>("InvoiceId")
                         .HasColumnType("int");
@@ -584,7 +608,7 @@ namespace TubeStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(3,2)");
 
                     b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");

@@ -56,12 +56,14 @@
                     </div>
                     <div class="col-md-4 mt-4">
                         <p>Get the latest news and deals</p>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter your email here ..." aria-label="Subscribe" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-danger" type="submit">Subscribe</button>
+                        <form role="form" method="POST" asp-controller="Email" asp-action="AddEmail">
+                            <div class="input-group">
+                                <input asp-route="" type="text" name="email" class="form-control" placeholder="Enter your email here ..." aria-label="Subscribe" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-danger" type="submit">Subscribe</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                         <div class="text-center mt-2">
                             <img class="rounded" alt="Payments" src="~/Images/payment.jpg" />
                         </div>

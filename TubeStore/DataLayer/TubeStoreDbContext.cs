@@ -31,6 +31,7 @@ namespace TubeStore.DataLayer
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
+        public DbSet<EmailSubscription> EmailSubscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

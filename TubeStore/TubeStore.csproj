@@ -37,6 +37,12 @@
     <Compile Remove="Migrations\20200307093536_login2.Designer.cs" />
     <Compile Remove="Migrations\20200308152049_tester.cs" />
     <Compile Remove="Migrations\20200308152049_tester.Designer.cs" />
+    <Compile Remove="Migrations\20200310093828_emails.cs" />
+    <Compile Remove="Migrations\20200310093828_emails.Designer.cs" />
+    <Compile Remove="Migrations\20200310094418_emails.cs" />
+    <Compile Remove="Migrations\20200310094418_emails.Designer.cs" />
+    <Compile Remove="Migrations\20200310094748_emais.cs" />
+    <Compile Remove="Migrations\20200310094748_emais.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -44,7 +44,7 @@ namespace TubeStore.Models
 
         [Display(Name = "Discount (0.01 = 1%)")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Valid Decimal number with maximum 2 decimal places.")]
-        [Column(TypeName = "decimal(1,2)")]
+        [Column(TypeName = "decimal(3,2)")]
         [Range(0, 0.99)]
         public decimal Discount { get; set; }
         

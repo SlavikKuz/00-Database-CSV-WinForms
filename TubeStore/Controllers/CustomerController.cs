@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TubeStore.DataLayer;
 using TubeStore.Extensions;
 using TubeStore.Models;
 using TubeStore.Services;
@@ -22,16 +23,19 @@ namespace TubeStore.Controllers
     {
         private readonly UserManager<Customer> userManager;
         private readonly SignInManager<Customer> signInManager;
+        private readonly IGenericRepository<EmailSubscription> emailSubscriptions;
         private readonly IEmailSender emailSender;
         private readonly ILogger<CustomerController> logger;
 
         public CustomerController(UserManager<Customer> userManager,
                                   SignInManager<Customer> signInManager,
+                                  IGenericRepository<EmailSubscription> emailSubscriptions,
                                   ILogger<CustomerController> logger,
                                   IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.emailSubscriptions = emailSubscriptions;
             this.logger = logger;
             this.emailSender = emailSender;
         }
@@ -234,6 +238,13 @@ namespace TubeStore.Controllers
 
                     await userManager.AddToRoleAsync(customer, "User");
                     logger.LogInformation("User was assigned role USER.");
+
+                    await emailSubscriptions.AddAsync(new EmailSubscription()
+                    {
+                        Email = model.Email,
+                        Status = true
+                    });
+                    logger.LogInformation("User was added to mail list.");
 
                     return RedirectToLocal(returnUrl);
                 }

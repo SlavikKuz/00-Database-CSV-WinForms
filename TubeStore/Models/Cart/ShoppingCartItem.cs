@@ -26,6 +26,7 @@ namespace TubeStore.Models.Cart
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
 
+        [Column(TypeName = "decimal(3,2)")]
         public decimal Discount { get; set; }
 
         [DataType(DataType.Currency)]

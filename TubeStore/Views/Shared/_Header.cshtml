@@ -63,6 +63,8 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" asp-controller="Customer" asp-action="Logout" onclick="return confirm('Are you sure?')"><span class="fa fa-sign-out-alt"> Logout</span></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Email" asp-action="Unsubscribe" asp-route-email="@User.Identity.Name" onclick="return confirm('Are you sure?')"><span class="fa fa-mail-bulk"> Unsubscribe</span></a>
 
                         </div>
                     </li>

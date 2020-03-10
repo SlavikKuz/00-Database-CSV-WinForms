@@ -20,7 +20,7 @@ namespace TubeStore.Models
         public decimal Price { get; set; }
 
         [Display(Name = "Discount")]
-        [Column(TypeName = "decimal(6,2)")]
+        [Column(TypeName = "decimal(3,2)")]
         public decimal Discount { get; set; }
 
         [Display(Name = "Quantity")]
