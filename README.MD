@@ -1,6 +1,6 @@
 <h5>Hi!</h5>
-<p>This is a full working demo for a web store. Backend only, UI was created with simple Razor pages to only show functionality.</p>
-<p>The site was intended for use and frontend developing, however it did not happen. Demo was reworked for demostration purpose. </p>
+<p>This is a complete working demo for an online store. Backend only, UI was created with simple Razor pages to show functionality.</p>
+<p>The site was intended for use and further frontend developing, bit it did not happen. Project has been reworked for demostration purpose.</p>
 
 <p><i>Keywords:</i> ASP.Net Core, EF Core, C#, SQL, jQuery, MVC, API, xUnit, identity, roles, signalr/Websockets, areas, async, generic repository, unit of work, widdleware, viewModels, viewComponents, layout/partial views.</p>
 
