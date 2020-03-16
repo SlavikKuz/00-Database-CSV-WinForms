@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using TubeStore.Areas.Admin.ViewModels;
+using TubeStore.ViewModels.Admin;
 
 namespace TubeStore.ViewModels
 {

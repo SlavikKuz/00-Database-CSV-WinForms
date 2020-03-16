@@ -15,9 +15,8 @@ using TubeStore.Models.Notification;
 
 namespace TubeStore.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
-    [Route("Admin/[controller]/[action]")]
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class NotificationController : Controller
     {
         private readonly IGenericRepository<NotificationUser> notificationUsers;

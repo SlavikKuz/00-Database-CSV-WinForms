@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TubeStore.DataLayer;
 using TubeStore.Models;
-using TubeStore.ViewModels;
+using TubeStore.ViewModels.Admin;
 
 namespace TubeStore.Areas.Admin.Controllers
 {

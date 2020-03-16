@@ -1,4 +1,5 @@
 /.vs
+/text.txt
 /.git
 /SqlDatabase
 /TubeStore/bin

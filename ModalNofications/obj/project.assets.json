@@ -6360,11 +6360,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
+      "projectUniqueName": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
       "projectName": "ModalNofications",
-      "projectPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
+      "projectPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\ModalNofications.csproj",
       "packagesPath": "C:\\Users\\slavi\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\05 - TubeStore\\ModalNofications\\obj\\",
+      "outputPath": "d:\\Repos\\05 - TubeStore\\ModalNofications\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
