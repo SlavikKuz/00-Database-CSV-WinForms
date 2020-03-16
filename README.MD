@@ -4,7 +4,7 @@
 
 <p><i>Keywords:</i> ASP.Net Core, EF Core, C#, SQL, jQuery, MVC, API, xUnit, identity, roles, signalr/Websockets, areas, async, generic repository, unit of work, widdleware, viewModels, viewComponents, layout/partial views.</p>
 
-<img src="https://github.com/SlavikKuz/05-demoprosjekt-for-CV/blob/master/Description/user_view_1024.gif"  alt="User View" width ="420" hspace="20"/><img src="https://github.com/SlavikKuz/05-demoprosjekt-for-CV/blob/master/Description/admin_view_1024.gif"  alt="Admin View" width ="420" hspace="20"/>
+<img src="https://github.com/SlavikKuz/05-demoprosjekt-for-CV/blob/master/Description/user_view_1024.gif"  alt="User View" width ="400" hspace="20"/><img src="https://github.com/SlavikKuz/05-demoprosjekt-for-CV/blob/master/Description/admin_view_1024.gif"  alt="Admin View" width ="400" hspace="20"/>
   
 
 </br>
