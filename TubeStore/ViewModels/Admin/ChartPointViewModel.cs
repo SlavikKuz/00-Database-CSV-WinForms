@@ -1,4 +1,5 @@
-﻿namespace TubeStore.ViewModels
+﻿
+namespace TubeStore.ViewModels.Admin
 {
     public class ChartPointViewModel
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TubeStore.Areas.Admin.ViewModels
+namespace TubeStore.ViewModels.Admin
 {
     public class CategoryViewModel
     {

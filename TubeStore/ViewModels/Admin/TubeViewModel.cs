@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TubeStore.Models;
 
-namespace TubeStore.Areas.Admin.ViewModels
+namespace TubeStore.ViewModels.Admin
 {
     public class TubeViewModel
     {
